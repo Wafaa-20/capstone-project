@@ -1,0 +1,69 @@
+name: taleq
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  get_it: ^8.0.3
+  supabase_flutter: ^2.9.1
+  flutter_dotenv: ^5.2.1
+  flutter_bloc: ^9.1.1
+  go_router: ^15.2.4
+  smooth_page_indicator: ^1.2.1
+  easy_localization: ^3.0.7+1
+  blocy: ^1.0.10
+  dartz: ^0.10.1
+  equatable: ^2.0.7
+  shared_preferences: ^2.5.3
+  dart_mappable: ^4.5.0
+  lottie: ^3.3.1
+  pinput: ^5.0.1
+  otp_timer_button: ^1.1.1
+  flutter_svg: ^2.2.0
+  timelines_plus: ^1.0.7
+  easy_date_timeline: ^2.0.9
+ 
+
+  google_sign_in: ^7.0.0
+  app_links: ^6.4.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+  build_runner: ^2.5.4
+  dart_mappable_builder: ^4.5.0
+
+
+
+# The following section is specific to Flutter packages.
+flutter:
+
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/image/
+    - .env
+    - lib/core/text/translations/
+    - assets/json/
+    - assets/icon/
+
+  fonts:
+    - family: SFArabicRounded
+      fonts:
+        - asset: assets/font/SFArabicRounded-Regular.ttf
+    

@@ -1,0 +1,120 @@
+class AppText {
+  // Common
+  static const String continueAsGuest = "الاستمرار كضيف";
+  static const String orRegisterWith = "التسجيل من خلال";
+  static const String forgotPassword = "نسيت كلمة المرور؟";
+
+  // Login Screen
+  static const String welcomeBack = "مرحباً بعودتك!";
+  static const String loginTitle = "تسجيل الدخول";
+  static const String email = "البريد الإلكتروني";
+  static const String password = "كلمة المرور";
+  static const String login = "تسجيل الدخول";
+  static const String username = " اسم المستخدم";
+  static const String noAccount = "ليس لديك حساب؟ ";
+  static const String signupNow = "سجل الان";
+  static const String loginby = "الدخول من خلال ";
+
+  // Signup Screen
+  static const String welcome = "أهلاً بك !";
+  static const String createAccount = "إنشاء حساب";
+  static const String forgetMyPassword = "نسيت كلمة المرور؟";
+  static const String registertion = "تسجيل";
+  static const String doYouHaveAccount = "لديك حساب؟";
+  static const String registertionBy = "التسجيل من خلال";
+  static const String otpTitle = "تحقق من بريدك الألكتروني";
+  static const String otpSubTitle =
+      """تم إرسال رمز التحقق لمرة واحدة إلى بريدك الإلكتروني .يرجى إدخاله لإكمال عملية التحقق""";
+  static const String resend = "إعادة إرسال الرمز";
+  // Login Screen
+  static const String resetPassword = "إعادة تعين كلمة المرور";
+  static const String resetPasswordInfo =
+      "سنرسل رقم التحقق الى بريدك الإلكتروني.";
+
+  //
+  static const String start = "ابدأ";
+  static const String back = "عودة";
+  static const String skip = "تخطي";
+  static const String next = "التالي";
+  static const String ok = "تأكيد";
+  static const String startTest = "ابدأ الأختبار";
+  static const String done = "إنهاء";
+  static const String startExercises = "ابدأ التمارين الآن";
+  static const String gotoHome = "اذهب للصفحة الرئيسية";
+
+  //onbording
+  static const String onbordingTitle1 = "مرحبًا بك في طَلِق!";
+  static const String onbordingSubTitle1 =
+      "رحلتك نحو طلاقة أكبر تبدأ من هنا.نحن معك لنساعدك على تجاوز التأتأة بخطوات مدروسة وأدوات عملية.";
+  static const String onbordingTitle2 = "رحلتك نحو الطلاقة";
+  static const String onbordingSubTitle2 =
+      " في طَلِق، نوفر لك تمارين وتقنيات عملية لمساعدتك على التحدث بسلاسة وثقة، خطوة بخطوة.";
+  static const String onbordingTitle3 = "الاستعداد لرحلة طلاقة جديدة!";
+  static const String onbordingSubTitle3 =
+      "سنطرح بعض الأسئلة واختبار الكاميرا لنحدد لك خطة تدريبية تناسبك تمامًا. جاهز للانطلاق؟";
+
+  //Questionnaire Page
+  static const String questionnaireTitle = "جاهز؟ نبدأ رحلة التقييم";
+  static const String questionnaireSubTitle =
+      """قبل البدء، نود إعلامك أن التقييم يتكون من مرحلتين: إجابة على استبيان، يتبعها تحليل منطوق عبر الكاميرا. تأكد من توفر بيئة هادئة قبل البدء""";
+  static const String startNow = "ابدأ الآن";
+
+  static const String questionnaire1 = "كم عمرك؟";
+  static const String questionnaire1Answer1 = "أقل من 12 سنة";
+  static const String questionnaire1Answer2 = "12 - 19 سنة";
+  static const String questionnaire1Answer3 = "20 سنة فأكثر";
+
+  static const String questionnaire2 = "متى بدأت التأتأة لديك؟";
+  static const String questionnaire2Answer1 = "منذ الطفولة";
+  static const String questionnaire2Answer2 = "في مرحلة المراهقة";
+  static const String questionnaire2Answer3 = "20 سنة فأكثر";
+
+  static const String questionnaire3 =
+      "هل جربت أي تمارين أو طرق لتحسين طلاقتك؟";
+  static const String questionnaire3Answer1 = "نعم، ولي تجربة سابقة";
+  static const String questionnaire3Answer2 = "لا، هذه أول مرة";
+
+  static const String questionnaire4 = "ما هدفك من استخدام طليق؟";
+  static const String questionnaire4Answer1 =
+      "تحسين طلاقي في المحادثات اليومية";
+  static const String questionnaire4Answer2 = "الاستعداد للتحدث أمام جمهور";
+  static const String questionnaire4Answer3 = "تقليل التوتر عند التحدث";
+
+  //cam test
+  static const String cameraTestTitle = "حان وقت اختبار الكاميرا";
+  static const String cameraTestSubTitle =
+      """بعد الإجابة على الأسئلة، سنقوم بتحليل طريقة حديثك عبر الكاميرا لنحدد الخطة الأنسب لك.
+تأكد من أنك في مكان هادئ ومضاء جيدًا وأمام الكاميرا بشكل جيد.""";
+
+  static const String cameraRule = "• تأكد من أن وجهك في الصورة بالكامل.";
+  static const String micRule = "• تأكد من أن الميكروفون مفعل.";
+  static const String readRule = "اقرأ النص التالي بصوت واضح";
+  static const String reading =
+      "أنا هنا لأتحدث بكل ثقة. أواجه تحديات أحيانًا، لكنني أؤمن بأنني أستطيع التغلب عليها.";
+
+  static const String testDoneTitle1 = "تم التقييم بنجاح!";
+  static const String testDoneSubTitle1 =
+      """رائع! لقد أكملت التقييم بنجاح. نستخدم إجاباتك الآن لإنشاء خطة تدريبية مخصصة لك. استعد للخطوة التالية في رحلتك نحو الطلاقة!""";
+  static const String testResultTitle = "مستوى طلاقتك الحالي: ";
+  static const String testResult = "متوسط";
+
+  //Plan
+
+  static const String homeAppBar = "تدريباتي اليومية";
+
+  static const String today = "اليوم";
+  static const String tomorrow = "غدًا";
+
+  // العناوين داخل اليوم
+  static const String introTitle = "المقدمة";
+
+  static const String exercise1Title = "التنفس البطني";
+  static const String exercise1Description =
+      "التنفس العميق باستخدام الحجاب الحاجز بدلاً من الصدر.";
+
+  static const String exercise2Title = "تحدث";
+  static const String exercise2Description =
+      "تمرين يركز على نطق الكلمات بوضوح وتحسين مخارج الحروف.";
+
+  static const String conclusionTitle = "الخاتمة";
+}

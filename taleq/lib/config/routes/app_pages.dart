@@ -1,0 +1,129 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:taleq/features/auth/presentation/pages/forget_password_page.dart';
+import 'package:taleq/features/auth/presentation/pages/login_page.dart';
+import 'package:taleq/features/auth/presentation/pages/signup_page.dart';
+import 'package:taleq/features/exercises/presentation/pages/exercises_page.dart';
+import 'package:taleq/features/home/presentation/pages/home_page.dart';
+import 'package:taleq/features/navigation/presentation/pages/navigation_page.dart';
+import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:taleq/features/plan/presentation/pages/plan_page.dart';
+import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
+import 'package:taleq/features/splash/presentation/pages/splash_page.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/presentation/pages/assessment_result_page.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/presentation/pages/camera_start_page.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/presentation/pages/camera_test_page.dart';
+import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/pages/questionnaire_page.dart';
+import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/pages/questionnaire_start_page.dart';
+
+import 'app_routes.dart';
+
+final router = GoRouter(
+  initialLocation: '/login',
+  navigatorKey: GlobalNavigation.instance.navigatorKey,
+  routes: [
+    GoRoute(
+      name: Names.splash,
+      path: Routes.splash,
+      builder: (context, state) {
+        return BlocProvider(
+          create: (_) => SplashBloc(),
+          child: const SplashPage(),
+        );
+      },
+    ),
+
+    GoRoute(
+      name: Names.questionnaire,
+      path: Routes.questionnaire,
+      builder: (context, state) => const QuestionnairePage(),
+    ),
+    GoRoute(
+      name: Names.startQuestionnaire,
+      path: Routes.startQuestionnaire,
+      builder: (context, state) => const QuestionnaireStartPage(),
+    ),
+
+    GoRoute(
+      name: Names.cameraAnalysis,
+      path: Routes.cameraAnalysis,
+      builder: (context, state) => const CameraTestPage(),
+    ),
+    GoRoute(
+      name: Names.startCamera,
+      path: Routes.startCamera,
+      builder: (context, state) => const CameraStartPage(),
+    ),
+    GoRoute(
+      name: Names.assessmentResult,
+      path: Routes.assessmentResult,
+      builder: (context, state) => const AssessmentResultPage(),
+    ),
+    GoRoute(
+      path: '/',
+      builder: (context, state) {
+        return BlocProvider(
+          create: (_) => SplashBloc(),
+          child: const SplashPage(),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/login-callback',
+      builder: (context, state) => const HomePage(),
+    ),
+
+    GoRoute(
+      name: Names.navigation,
+      path: Routes.navigation,
+      builder: (context, state) => const NavigationPage(),
+    ),
+
+    GoRoute(
+      name: Names.home,
+      path: Routes.home,
+      builder: (context, state) => const HomePage(),
+    ),
+
+    GoRoute(
+      name: Names.exercises,
+      path: Routes.exercises,
+      builder: (context, state) => const ExercisesPage(),
+    ),
+    GoRoute(
+      name: Names.onboarding,
+      path: Routes.onboarding,
+      builder: (context, state) => const OnboardingPage(),
+    ),
+
+    GoRoute(
+      name: Names.login,
+      path: Routes.login,
+      builder: (context, state) => const LoginPage(),
+    ),
+
+    GoRoute(
+      name: Names.signup,
+      path: Routes.signup,
+      builder: (context, state) => const SignupPage(),
+    ),
+    GoRoute(
+      name: Names.plan,
+      path: Routes.plan,
+      builder: (context, state) => const PlanPage(),
+    ),
+    GoRoute(
+      name: Names.forgetPassword,
+      path: Routes.forgetPassword,
+      builder: (context, state) => const ForgetPasswordPage(),
+    ),
+  ],
+);
+
+class GlobalNavigation {
+  static final GlobalNavigation instance = GlobalNavigation._internal();
+  GlobalNavigation._internal();
+
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+}
