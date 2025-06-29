@@ -1,6 +1,6 @@
 class QuestionModel {
   final String question;
-  final List<String> options;
+  final List<Map<String, dynamic>> options;
 
   QuestionModel({required this.question, required this.options});
 }

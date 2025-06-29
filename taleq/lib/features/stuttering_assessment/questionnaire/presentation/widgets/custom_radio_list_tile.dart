@@ -18,22 +18,21 @@ class CustomRadioListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: questionnaire.options.asMap().entries.map((option) {
-        final indexQuestion = option.key;
         final answer = option.value;
         return Container(
           margin: const EdgeInsets.all(5),
           width: context.getWidth(),
           height: 58,
           decoration: BoxDecoration(
-            color: bloc.userAnswers[questionnaire.question] == indexQuestion
+            color: bloc.userAnswers[questionnaire.question] == answer['value']
                 ? AppPalette.blueLight
                 : AppPalette.whitePrimary,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: AppPalette.greyLight, width: 2),
           ),
-          child: RadioListTile<int>(
-            title: Text(answer),
-            value: indexQuestion,
+          child: RadioListTile(
+            title: Text(answer['key'].toString()),
+            value: answer['value'],
             groupValue: bloc.userAnswers[questionnaire.question],
             onChanged: (value) {
               bloc.add(
@@ -43,7 +42,6 @@ class CustomRadioListTile extends StatelessWidget {
                 ),
               );
               print("The answer : $value");
-         
             },
             activeColor: AppPalette.bluePrimary,
           ),

@@ -27,36 +27,42 @@ class ListConstants {
     ),
   ];
   static List<QuestionModel> questionnaireData = [
-    //Q1
+    // Q1
     QuestionModel(
       question: AppText.questionnaire1,
       options: [
-        AppText.questionnaire1Answer1,
-        AppText.questionnaire1Answer2,
-        AppText.questionnaire1Answer3,
+        {"key": AppText.questionnaire1Answer1, "value": 1},
+        {"key": AppText.questionnaire1Answer2, "value": 2},
+        {"key": AppText.questionnaire1Answer3, "value": 3},
       ],
     ),
-    //Q2
+
+    // Q2
     QuestionModel(
       question: AppText.questionnaire2,
       options: [
-        AppText.questionnaire2Answer1,
-        AppText.questionnaire2Answer2,
-        AppText.questionnaire2Answer3,
+        {"key": AppText.questionnaire2Answer1, "value": 4},
+        {"key": AppText.questionnaire2Answer2, "value": 5},
+        {"key": AppText.questionnaire2Answer3, "value": 6},
       ],
     ),
-    //Q3
+
+    // Q3
     QuestionModel(
       question: AppText.questionnaire3,
-      options: [AppText.questionnaire3Answer1, AppText.questionnaire3Answer2],
+      options: [
+        {"key": AppText.questionnaire3Answer1, "value": 7},
+        {"key": AppText.questionnaire3Answer2, "value": 8},
+      ],
     ),
-    //Q5
+
+    // Q4
     QuestionModel(
       question: AppText.questionnaire4,
       options: [
-        AppText.questionnaire4Answer1,
-        AppText.questionnaire4Answer2,
-        AppText.questionnaire4Answer3,
+        {"key": AppText.questionnaire4Answer1, "value": 9},
+        {"key": AppText.questionnaire4Answer2, "value": 10},
+        {"key": AppText.questionnaire4Answer3, "value": 11},
       ],
     ),
   ];

@@ -57,7 +57,7 @@ class QuestionnaireBloc extends Bloc<QuestionnaireEvent, QuestionnaireState> {
     Emitter<QuestionnaireState> emit,
   ) {
     userAnswers[event.question] = event.answerIndex;
-    emit(AnswerSelectedState(answers: Map.from(userAnswers)));
+    emit(AnswerSelectedState(answers: userAnswers));
   }
 
   FutureOr<void> submitAnswers(

@@ -22,19 +22,17 @@ class QuestionnaireDatasourceImpl implements QuestionnaireDatasource {
       if (userId == null) {
         throw FormatException("Current user not found");
       }
-      await supabase.from('stuttering_condition').insert({
+      await supabase.from('stuttering_condition').upsert({
         'user_id': userId,
-        'when_stuttering_start': answerModel.answers[AppText.questionnaire1],
-        'is_fristtering_app': answerModel.answers[AppText.questionnaire2],
-        'age': answerModel.answers[AppText.questionnaire3],
+        'when_stuttering_start': answerModel.answers[AppText.questionnaire2],
+        'is_frist_stuttering_app': answerModel.answers[AppText.questionnaire3],
+        'age': answerModel.answers[AppText.questionnaire1],
         'goal_of_use_taleq': answerModel.answers[AppText.questionnaire4],
       });
       return UserAnswerModel(answers: answerModel.answers);
     } on AuthException catch (e) {
-      print("AuthException: $e");
       throw FormatException(e.message);
     } catch (e) {
-      print("FormatException: $e");
       throw FormatException("There is error with save answer");
     }
   }
