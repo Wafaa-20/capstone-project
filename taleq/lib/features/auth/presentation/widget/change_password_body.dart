@@ -13,7 +13,11 @@ import 'package:taleq/features/auth/presentation/bloc/auth_event.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_state.dart';
 
 class ChangePasswordBody extends StatelessWidget {
-  const ChangePasswordBody({super.key,required this.bloc, required this.email});
+  const ChangePasswordBody({
+    super.key,
+    required this.bloc,
+    required this.email,
+  });
   final AuthBloc bloc;
   final String email;
   @override
@@ -66,7 +70,7 @@ class ChangePasswordBody extends StatelessWidget {
                       bloc.passwordInputRules.tr(),
                     );
                   },
-                  onChange: (p0) {
+                  onChanged: (p0) {
                     if (bloc.changePasswordPasswordKey.currentState!
                         .validate()) {}
                   },
@@ -99,7 +103,7 @@ class ChangePasswordBody extends StatelessWidget {
                       patternRules: bloc.passwordInputRules.tr(),
                     );
                   },
-                  onChange: (p0) {
+                  onChanged: (p0) {
                     if (bloc.changePasswordConfrimKey.currentState!
                         .validate()) {}
                   },

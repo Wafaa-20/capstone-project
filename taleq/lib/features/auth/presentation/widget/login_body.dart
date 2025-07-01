@@ -72,7 +72,7 @@ class LoginBody extends StatelessWidget {
                         );
                       },
                       fieldKey: bloc.loginEmailKey,
-                      onChange: (p0) {
+                      onChanged: (p0) {
                         if (bloc.loginEmailKey.currentState!.validate()) {}
                       },
                     ),
@@ -105,7 +105,7 @@ class LoginBody extends StatelessWidget {
                               bloc.passwordInputRules.tr(),
                             );
                           },
-                          onChange: (p0) {
+                          onChanged: (p0) {
                             if (bloc.loginPasswordKey.currentState!
                                 .validate()) {}
                           },

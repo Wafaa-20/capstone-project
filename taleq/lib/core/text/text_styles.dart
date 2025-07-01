@@ -122,4 +122,10 @@ class TextStyles {
     fontSize: 16,
     color: AppPalette.blackPrimary,
   );
+  static final sf30014 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w300,
+    fontSize: 14,
+    color: AppPalette.blackPrimary,
+  );
 }

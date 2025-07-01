@@ -100,6 +100,34 @@ class AppText {
   static const String testResultTitle = "مستوى طلاقتك الحالي: ";
   static const String testResult = "متوسط";
 
+  //exer
+
+  static const String exrIsDone = "أتممت التمرين بنجاح!";
+  static const String talkExr = "تمرين التحدث";
+
+  static const String talkExr1 = "سماء";
+  static const String talkExr2 = "السماء زرقاء";
+  static const String talkExr3 = "السماء زرقاء ومليئة بالغيوم البيضاء";
+
+  //Groups
+  static const String groupTitle = "مجموعات الدعم";
+  static const String myGroup = "مجموعاتي";
+  static const String avilableGroup = "المجموعات المتاحة";
+  static const String addGroup = "إقتراح موضوع لمجموعات الدعم";
+  static const String story = "قصص ملهمة";
+  static const String now = "يحدث الآن";
+  static const String groupSuggestionTitle = "اقتراح مجموعة";
+  static const String groupSuggestionSubTitle =
+      """اقترح موضوع لمجموعة دعم مع ذكر أهم المحاور التي ترغب في
+ الحديث عنها""";
+
+  static const String talkFree = "طريقك للتحدث بطلاقة";
+  static const String groupTitle1 = "رحلة التعافي";
+  static const String groupDate1 = "الأربعاء, 18 مارس";
+  static const String groupTitle2 = "الخطوة الأولى";
+  static const String groupDate2 = "الخميس, 19 مارس";
+  static const String groupTitle3 = "مساحة تجارب";
+  static const String join = "انضمام";
   //Plan
 
   static const String homeAppBar = "تدريباتي اليومية";
@@ -160,4 +188,10 @@ class AppText {
   static const String hintCvv = "000";
   static const String holderName = "اسم حامل البطاقة";
   static const String hintHolderName = 'الاسم';
+  static const String suggestTitle = "الموضوع المقترح";
+  static const String extraDetail = "تفاصيل إضافية";
+  static const String suggestGroup = "اقترح مجموعة";
+  static const String groupDec = "وصف المجموعة";
+  static const String groupGole = "أهداف المجموعة";
+  static const String joinGroup = "انضم للمجموعة";
 }

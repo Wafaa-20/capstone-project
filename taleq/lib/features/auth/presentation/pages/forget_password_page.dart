@@ -115,7 +115,7 @@ class ForgetPasswordPage extends StatelessWidget {
                                       color: AppPalette.grayPrimary,
                                     ),
                                     hintText: AppText.email.tr(),
-                                    onChange: (p0) {
+                                    onChanged: (p0) {
                                       if (bloc.forgetPasswordkey.currentState!
                                           .validate()) {}
                                     },

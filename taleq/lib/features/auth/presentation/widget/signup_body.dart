@@ -71,7 +71,7 @@ class SignUpBody extends StatelessWidget {
                         );
                       },
                       fieldKey: bloc.signUpNameKey,
-                      onChange: (p0) {
+                      onChanged: (p0) {
                         if (bloc.signUpNameKey.currentState!.validate()) {}
                       },
                     ),
@@ -95,7 +95,7 @@ class SignUpBody extends StatelessWidget {
                         );
                       },
                       fieldKey: bloc.signUpEmailKey,
-                      onChange: (p0) {
+                      onChanged: (p0) {
                         if (bloc.signUpEmailKey.currentState!.validate()) {}
                       },
                     ),
@@ -128,7 +128,7 @@ class SignUpBody extends StatelessWidget {
                               bloc.passwordInputRules.tr(),
                             );
                           },
-                          onChange: (p0) {
+                          onChanged: (p0) {
                             if (bloc.signUpPasswordKey.currentState!
                                 .validate()) {}
                           },
