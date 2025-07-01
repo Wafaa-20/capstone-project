@@ -11,6 +11,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.sideColor,
     this.padding,
+    this.radius,
   });
   final void Function()? onPressed;
   final Widget child;
@@ -19,6 +20,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final double? height;
   final EdgeInsetsGeometry? padding;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(30),
+          borderRadius: BorderRadiusGeometry.circular(radius ?? 30),
           side: BorderSide(
             color: sideColor ?? AppPalette.bluePrimary,
             width: 2,

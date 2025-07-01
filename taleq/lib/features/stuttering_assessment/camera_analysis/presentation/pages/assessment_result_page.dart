@@ -63,7 +63,9 @@ class AssessmentResultPage extends StatelessWidget {
               SizedBox(height: 52),
               CustomButton(
                 width: 265,
-                onPressed: () {},
+                onPressed: () {
+                  context.go('/plan');
+                },
                 child: Text(AppText.startExercises, style: TextStyles.sf70020),
               ),
               SizedBox(height: 13),
@@ -72,7 +74,7 @@ class AssessmentResultPage extends StatelessWidget {
                 color: AppPalette.whitePrimary,
                 sideColor: AppPalette.grayPrimary,
                 onPressed: () {
-                  context.go('/navigation');
+                  context.go('/home');
                 },
                 child: Text(
                   AppText.gotoHome,

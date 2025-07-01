@@ -41,7 +41,6 @@ class CustomRadioListTile extends StatelessWidget {
                   answerIndex: value!,
                 ),
               );
-              print("The answer : $value");
             },
             activeColor: AppPalette.bluePrimary,
           ),

@@ -1,17 +1,24 @@
+import 'package:camera/camera.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/data/models/camera_analysis_model.dart';
 
-abstract class Camera_analysisDatasource {
-  Future<Camera_analysisModel> getCamera_analysis();
+abstract class CameraAnalysisDatasource {
+  Future<CameraAnalysisModel> getCameraAnalysis();
 }
 
-class Camera_analysisDatasourceImpl implements Camera_analysisDatasource {
+class CameraAnalysisDatasourceImpl implements CameraAnalysisDatasource {
   @override
-  Future<Camera_analysisModel> getCamera_analysis() async {
-    // TODO: implement actual data source logic
-    // This is just a placeholder implementation
-    return Camera_analysisModel(
-      id: '1',
-      name: 'Camera_analysis Name',
-    );
+  Future<CameraAnalysisModel> getCameraAnalysis() async {
+    try {
+      final List<CameraDescription> cameras = await availableCameras();
+      final CameraDescription cam = cameras.first;
+      return CameraAnalysisModel(
+        name: cam.name,
+        sensorOrientation: cam.sensorOrientation,
+      );
+    } on CameraException catch (e) {
+      throw FormatException(e.toString());
+    } catch (e) {
+      throw FormatException("There is error with save answer");
+    }
   }
 }

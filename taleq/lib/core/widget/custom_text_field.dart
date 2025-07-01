@@ -16,6 +16,7 @@ class CustomTextField extends StatelessWidget {
     this.textstyle,
     this.onChange,
     this.fieldKey,
+    this.keyboardType,
   });
   final TextEditingController controller;
   final String? hintText;
@@ -29,6 +30,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? textstyle;
   final void Function(String)? onChange;
   final Key? fieldKey;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {

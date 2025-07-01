@@ -10,6 +10,7 @@ class PlanDetailsModel {
   final Color color;
   final double width;
   final double height;
+  final String route;
   final double? top;
   final double? left;
   final double? bottom;
@@ -22,6 +23,7 @@ class PlanDetailsModel {
     required this.color,
     required this.width,
     required this.height,
+    required this.route,
     this.top,
     this.left,
     this.bottom,
@@ -39,6 +41,7 @@ List<PlanDetailsModel> planDetails = [
     height: 127,
     top: -29.6,
     left: 112.3,
+    route: '/srartexercise',
   ),
   PlanDetailsModel(
     title: AppText.exercise1Title.tr(),
@@ -49,6 +52,7 @@ List<PlanDetailsModel> planDetails = [
     height: 442,
     top: 12.6,
     left: -66,
+    route: '/breathing',
   ),
   PlanDetailsModel(
     title: AppText.exercise2Title.tr(),
@@ -59,6 +63,7 @@ List<PlanDetailsModel> planDetails = [
     height: 108.89,
     bottom: -10,
     right: -5,
+    route: '/srartwords',
   ),
   PlanDetailsModel(
     title: AppText.conclusionTitle.tr(),
@@ -69,5 +74,6 @@ List<PlanDetailsModel> planDetails = [
     height: 169.47,
     top: 40.3,
     left: 97.3,
+    route: '/payment',
   ),
 ];

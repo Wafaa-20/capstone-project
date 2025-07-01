@@ -16,6 +16,7 @@ class AppPalette {
   //white
   static const Color whitePrimary = Color(0xffFFFFFF);
   static const Color whiteLight = Color(0xFFF7F7F7);
+  static const Color whiteLight2 = Color(0xFFE5E7EB);
   static const Color whiteTransparent20 = Color(0x33FFFFFF);
 
   //gray
@@ -52,6 +53,7 @@ class AppPalette {
   static const Color greenTransparent = Color(0x8046AC75);
   static const Color greenSuccess = Color(0xFF53BF85);
   static const Color greenSuccessLight = Color(0xFF9ADDB9);
+  static const Color greenSuccessLight2 = Color(0xFFE5F2EB);
   static const Color greenSuccessLightTransparent = Color(0x339ADDB9);
 
   //Bruno

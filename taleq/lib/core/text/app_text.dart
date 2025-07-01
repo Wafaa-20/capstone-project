@@ -117,4 +117,45 @@ class AppText {
       "تمرين يركز على نطق الكلمات بوضوح وتحسين مخارج الحروف.";
 
   static const String conclusionTitle = "الخاتمة";
+
+  //Words Exercise Start Page
+  static const String readyToStart = "جاهز للانطلاق؟";
+  static const String readyToStartSub =
+      """قبل أن نبدأ الرحلة، جرب هذا التحدي البسيط: اضغط على زر التسجيل، وقل “أنا جاهز”""";
+
+  //Words Exercise Page
+  static const String talkExrTitle = 'تمرين التحدث';
+  static const String talkExrSub =
+      'في هذا التمرين ستتدرب على كلمات وجمل مختلفة. اضغط على زر التسجيل وأقرأ بصوت عالٍ';
+
+  static const String phrase1 = 'سماء';
+  static const String phrase2 = 'السماء زرقاء';
+  static const String phrase3 = 'السماء زرقاء ومليئة بالغيوم البيضاء';
+
+  //Task Success Page
+  static const String taskSuccessTitle = "أتممت التمرين بنجاح!";
+
+  //Payment Page
+  static const String todayTaskTitle = 'رائع، أكملت تمارين اليوم بنجاح!';
+  static const String todayTaskSubtitle =
+      'استمر في التمرين يوميًا لتصل إلى أقصى إمكانياتك، اشترك الآن واحصل على الخطة العلاجية كاملة!';
+  static const String taskSuccessPrice = '47.99﷼';
+  static const String taskSuccessBilling = 'شهريًا';
+  static const String taskSuccessTrial = 'تجربة مجانية لمدة 7 أيام.';
+  static const String startFree = 'ابدأ الفترة المجانية';
+  static const String backHome = 'العودة إلى الصفحة الرئيسية';
+
+  static const String selectPaymentMethod = "اختر وسيلة الدفع";
+  static const String applePay = "Apple Pay";
+  static const String addNewCard = "إضافة بطاقة جديدة";
+  static const String payNow = " ادفع 47.99";
+  static const String cardNumber = "رقم البطاقة";
+  static const String hintCardNumber = "0000 0000 0000 0000";
+  static const String expirationDate = "تاريخ انتهاء البطاقة";
+  static const String hintexpirDate = "MM/YY";
+  static const String code = " رمز";
+  static const String cvv = "CVV";
+  static const String hintCvv = "000";
+  static const String holderName = "اسم حامل البطاقة";
+  static const String hintHolderName = 'الاسم';
 }

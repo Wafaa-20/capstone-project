@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-class Camera_analysis extends Equatable {
-  final String id;
+class CameraAnalysisEntity extends Equatable {
   final String name;
+  final int sensorOrientation;
 
-  const Camera_analysis({
-    required this.id,
+  const CameraAnalysisEntity({
     required this.name,
+    required this.sensorOrientation,
   });
 
   @override
-  List<Object> get props => [id, name];
+  List<Object> get props => [name, sensorOrientation];
 }

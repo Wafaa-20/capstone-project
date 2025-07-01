@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-sealed class Camera_analysisEvent extends Equatable {
-  const Camera_analysisEvent();
+sealed class CameraAnalysisEvent extends Equatable {
+  const CameraAnalysisEvent();
 
   @override
   List<Object> get props => [];
 }
+
+class StartCameraAnalysis extends CameraAnalysisEvent {}

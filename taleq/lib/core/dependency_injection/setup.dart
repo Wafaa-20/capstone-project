@@ -11,6 +11,10 @@ import 'package:taleq/features/auth/domain/usecases/signup_use_case%20.dart';
 import 'package:taleq/features/auth/domain/usecases/signup_with_apple_usecase.dart';
 import 'package:taleq/features/auth/domain/usecases/signup_with_google_usecase.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/data/datasources/camera_analysis_datasource.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/data/repositories/camera_analysis_repository_impl.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/domain/repositories/camera_analysis_repository.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/domain/usecases/get_camera_analysis.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/data/datasources/questionnaire_datasource.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/data/repositories/questionnaire_repository_impl.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/domain/repositories/questionnaire_repository.dart';
@@ -39,6 +43,9 @@ Future<void> setup() async {
   GetIt.I.registerLazySingleton(
     () => SaveAnswersUseCase(repository: GetIt.I()),
   );
+  GetIt.I.registerLazySingleton(
+    () => CameraAnalysisUseCase(repository: GetIt.I()),
+  );
   //===================================================
   GetIt.I.registerLazySingleton(
     () => SignupWithGoogleUseCase(repository: GetIt.I()),
@@ -56,11 +63,18 @@ Future<void> setup() async {
   GetIt.I.registerLazySingleton<QuestionnaireRepository>(
     () => QuestionnaireRepositoryImpl(datasource: GetIt.I()),
   );
+  GetIt.I.registerLazySingleton<CameraAnalysisRepository>(
+    () => CameraAnalysisRepositoryImpl(datasource: GetIt.I()),
+  );
   // Data sources
   GetIt.I.registerLazySingleton<AuthRemoteDatasource>(
     () => SupabaseDatasource(supabase: GetIt.I()),
   );
   GetIt.I.registerLazySingleton<QuestionnaireDatasource>(
     () => QuestionnaireDatasourceImpl(supabase: GetIt.I()),
+  );
+
+  GetIt.I.registerLazySingleton<CameraAnalysisDatasource>(
+    () => CameraAnalysisDatasourceImpl(),
   );
 }

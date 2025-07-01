@@ -10,6 +10,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await SupabaseConnect.init();
   await setup();
+  
 
   runApp(
     EasyLocalization(

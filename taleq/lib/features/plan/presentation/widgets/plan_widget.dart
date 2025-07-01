@@ -8,9 +8,15 @@ import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/features/plan/data/models/plan_details/plan_details_model.dart';
 
 class PlanWidget extends StatelessWidget {
-  const PlanWidget({super.key, required this.color, required this.detail});
+  const PlanWidget({
+    super.key,
+    required this.color,
+    required this.detail,
+    this.onPressed,
+  });
   final Color? color;
   final PlanDetailsModel detail;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +71,7 @@ class PlanWidget extends StatelessWidget {
               height: 2,
               color: AppPalette.whiteLight,
               sideColor: AppPalette.whiteLight,
-              onPressed: () {},
+              onPressed: onPressed,
               child: Text(
                 AppText.start,
                 style: TextStyles.sf40016.copyWith(color: AppPalette.black),

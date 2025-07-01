@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/theme/app_theme.dart';
 import 'package:taleq/features/plan/data/models/plan_details/plan_details_model.dart';
 import 'package:taleq/features/plan/presentation/widgets/plan_widget.dart';
@@ -37,11 +38,13 @@ class CustomTimeLine extends StatelessWidget {
             );
           },
 
+          //Content of TimeLine Is here
           contentsBuilder: (ctx, index) => Padding(
             padding: const EdgeInsets.all(24),
             child: PlanWidget(
               detail: planDetails[index],
               color: planDetails[index].color,
+              onPressed: () => ctx.go(planDetails[index].route),
             ),
           ),
 

@@ -4,10 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:taleq/features/auth/presentation/pages/forget_password_page.dart';
 import 'package:taleq/features/auth/presentation/pages/login_page.dart';
 import 'package:taleq/features/auth/presentation/pages/signup_page.dart';
-import 'package:taleq/features/exercises/presentation/pages/exercises_page.dart';
+import 'package:taleq/features/exercises/Breathe_Excercise/presentation/page/breathing_excercise_page.dart';
+import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_page.dart';
+import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_start_page.dart';
+import 'package:taleq/features/exercises/Words_Excercise_start/presentation/page/intro_words_excercise_page.dart';
+import 'package:taleq/features/exercises/presentation/page/task_success_page.dart';
 import 'package:taleq/features/home/presentation/pages/home_page.dart';
 import 'package:taleq/features/navigation/presentation/pages/navigation_page.dart';
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:taleq/features/payment/presentation/pages/payment_page.dart';
 import 'package:taleq/features/plan/presentation/pages/plan_page.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:taleq/features/splash/presentation/pages/splash_page.dart';
@@ -20,7 +25,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/payment',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     GoRoute(
@@ -85,11 +90,40 @@ final router = GoRouter(
       path: Routes.home,
       builder: (context, state) => const HomePage(),
     ),
+    GoRoute(
+      name: Names.success,
+      path: Routes.success,
+      builder: (context, state) => const TaskSuccessPage(),
+    ),
+
+    //EX 1
+    GoRoute(
+      name: Names.srartexercise,
+      path: Routes.srartexercise,
+      builder: (context, state) => const IntroWordsExercisePage(),
+    ),
+    //Ex 2
+    GoRoute(
+      name: Names.breathing,
+      path: Routes.breathing,
+      builder: (context, state) => const BreathingExercisePage(),
+    ),
+    //Ex 3
+    GoRoute(
+      name: Names.words,
+      path: Routes.words,
+      builder: (context, state) => const WordsExercisePage(),
+    ),
+    GoRoute(
+      name: Names.srartwords,
+      path: Routes.srartwords,
+      builder: (context, state) => const WordsExerciseStartPage(),
+    ),
 
     GoRoute(
-      name: Names.exercises,
-      path: Routes.exercises,
-      builder: (context, state) => const ExercisesPage(),
+      name: Names.payment,
+      path: Routes.payment,
+      builder: (context, state) => const PaymentPage(),
     ),
     GoRoute(
       name: Names.onboarding,

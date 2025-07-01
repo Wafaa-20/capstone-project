@@ -37,4 +37,4 @@ final class SubmitFailureState extends QuestionnaireState {
   List<Object> get props => [message];
 }
 
-final class QuestionnaireCompleted extends QuestionnaireState {}
+

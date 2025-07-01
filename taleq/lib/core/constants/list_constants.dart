@@ -66,4 +66,9 @@ class ListConstants {
       ],
     ),
   ];
+  static List<String> words = [
+    AppText.phrase1,
+    AppText.phrase2,
+    AppText.phrase3,
+  ];
 }
