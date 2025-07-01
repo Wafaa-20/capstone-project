@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:gotrue/src/types/user.dart';
 
 sealed class AuthEvent extends Equatable {
   const AuthEvent();
@@ -18,6 +17,20 @@ class ValidateFormEvent extends AuthEvent {
 }
 
 class SignUpEvent extends AuthEvent {}
+
+class ResendOTPEvent extends AuthEvent {
+  final String email;
+  const ResendOTPEvent(this.email);
+}
+
+class ChangePasswordEvent extends AuthEvent {
+  final String email;
+  const ChangePasswordEvent({required this.email});
+}
+
+class ForgetPasswordEvent extends AuthEvent {
+  const ForgetPasswordEvent();
+}
 
 class LogInEvent extends AuthEvent {}
 

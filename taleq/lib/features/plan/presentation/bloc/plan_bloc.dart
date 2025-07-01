@@ -5,7 +5,7 @@ import 'package:taleq/features/plan/presentation/bloc/plan_state.dart';
 class PlanBloc extends Bloc<PlanEvent, PlanState> {
   PlanBloc() : super(PlanInitial()) {
     on<PlanEvent>((event, emit) {
-      // TODO: implement event handler
+      
     });
   }
 }

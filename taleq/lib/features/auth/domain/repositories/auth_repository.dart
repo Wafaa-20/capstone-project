@@ -21,4 +21,10 @@ abstract class AuthRepository {
     required String email,
     required String code,
   });
+  Future<Either<Failure, String>> resendotpAuth({required String email});
+  Future<Either<Failure, String>> forgetPassword({required String email});
+  Future<Either<Failure, String>> changePassword({
+    required String password,
+    required String email,
+  });
 }

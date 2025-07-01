@@ -85,6 +85,11 @@ class AppTheme {
   );
 
   //Outline Input Border Method
+  // static OutlineInputBorder _border(Color borderColor) {
+  //   return OutlineInputBorder(
+  //     borderSide: BorderSide(color: AppPalette.lightGray2, width: 0.8),
+  //   );
+  // }
   static OutlineInputBorder _border(Color borderColor) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),

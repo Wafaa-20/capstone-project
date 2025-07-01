@@ -7,7 +7,7 @@ part 'words_state.dart';
 class WordsBloc extends Bloc<WordsEvent, WordsState> {
   WordsBloc() : super(WordsInitial()) {
     on<WordsEvent>((event, emit) {
-      // TODO: implement event handler
+      
     });
   }
 }

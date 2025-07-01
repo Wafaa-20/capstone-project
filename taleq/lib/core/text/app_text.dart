@@ -26,10 +26,12 @@ class AppText {
   static const String otpSubTitle =
       """تم إرسال رمز التحقق لمرة واحدة إلى بريدك الإلكتروني .يرجى إدخاله لإكمال عملية التحقق""";
   static const String resend = "إعادة إرسال الرمز";
-  // Login Screen
+  // forget password Screen
   static const String resetPassword = "إعادة تعين كلمة المرور";
   static const String resetPasswordInfo =
       "سنرسل رقم التحقق الى بريدك الإلكتروني.";
+  static const String nowPassword = "كلمة المرور الجديدة";
+  static const String confrimPassword = "تأكيد كلمة المرور";
 
   //
   static const String start = "ابدأ";

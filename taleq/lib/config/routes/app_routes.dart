@@ -20,6 +20,7 @@ abstract class Routes {
   static const signup = _Paths.signup;
   static const forgetPassword = _Paths.forgetPassword;
   static const otp = _Paths.otp;
+  static const changePassword = _Paths.changePassword;
   Routes._();
 }
 
@@ -45,6 +46,7 @@ abstract class _Paths {
   static const login = '/login';
   static const signup = '/signup';
   static const otp = '/otp';
+  static const changePassword = '/change_password';
   _Paths._();
 }
 
@@ -70,6 +72,7 @@ abstract class _Names {
   static const forgetPassword = 'forget_password';
   static const login = 'login';
   static const signup = 'signup';
+  static const changePassword = 'change_password';
   _Names._();
 }
 
@@ -95,6 +98,7 @@ abstract class Names {
   static const auth = _Names.auth;
   static const login = _Names.login;
   static const signup = _Names.signup;
+  static const changePassword = _Names.changePassword;
 
   Names._();
 }

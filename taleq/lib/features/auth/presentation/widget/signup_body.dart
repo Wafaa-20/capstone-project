@@ -50,7 +50,7 @@ class SignUpBody extends StatelessWidget {
                         color: AppPalette.black,
                       ),
                     ),
-                    SizedBox(height: context.getHeight() * 0.02),
+                    SizedBox(height: context.getHeight() * 0.01),
 
                     CustomTextField(
                       controller: bloc.userNameSignupController,
@@ -66,8 +66,8 @@ class SignUpBody extends StatelessWidget {
                       validator: (p0) {
                         return FormValidation.validateInput(
                           p0,
-                          bloc.usernameSignupRegExp,
-                          bloc.usernameSignupInputRules.tr(),
+                          bloc.usernameRegExp,
+                          bloc.usernameInputRules.tr(),
                         );
                       },
                       fieldKey: bloc.signUpNameKey,
@@ -90,8 +90,8 @@ class SignUpBody extends StatelessWidget {
                       validator: (p0) {
                         return FormValidation.validateInput(
                           p0,
-                          bloc.emailSignupRegExp,
-                          bloc.emailSignupInputRules.tr(),
+                          bloc.emailRegExp,
+                          bloc.emailInputRules.tr(),
                         );
                       },
                       fieldKey: bloc.signUpEmailKey,
@@ -124,8 +124,8 @@ class SignUpBody extends StatelessWidget {
                           validator: (p0) {
                             return FormValidation.validateInput(
                               p0,
-                              bloc.passwordSignupRegExp,
-                              bloc.passwordSignupInputRules.tr(),
+                              bloc.passwordRegExp,
+                              bloc.passwordInputRules.tr(),
                             );
                           },
                           onChange: (p0) {
@@ -193,18 +193,18 @@ class SignUpBody extends StatelessWidget {
             ),
             SizedBox(height: context.getHeight() * 0.07),
             CustomDivider(dividerText: AppText.registertionBy.tr()),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             SocialAuth(
               icons: [
                 Image.asset(
                   'assets/image/apple.png',
-                  width: context.getWidth() * 0.12153,
-                  height: context.getHeight() * 0.0546875,
+                  width: context.getEqualedWidthHeight(90),
+                  height: context.getEqualedWidthHeight(90),
                 ),
                 Image.asset(
                   'assets/image/Google.webp',
-                  width: context.getWidth() * 0.12153,
-                  height: context.getHeight() * 0.0546875,
+                  width: context.getEqualedWidthHeight(90),
+                  height: context.getEqualedWidthHeight(90),
                 ),
               ],
               onPressedList: [

@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
-import 'package:taleq/core/widget/butterflay.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_event.dart';
@@ -41,8 +37,12 @@ class OtpBottomSheet extends StatelessWidget {
               VerifyOtpSheet(
                 emailOrPhone: email,
                 onCompleted: (code) {
-                  bloc.add(OTPVervy(email: email,code:code));
+                  bloc.add(OTPVervy(email: email, code: code));
                 },
+                timerFunction: () {
+                  bloc.add(ResendOTPEvent(email));
+                },
+                timeResend: 30,
               ),
               const SizedBox(height: 32),
               Center(
@@ -50,9 +50,7 @@ class OtpBottomSheet extends StatelessWidget {
                   width: 200,
                   height: 44,
                   color: AppPalette.bluePrimary,
-                  onPressed: () {
-                    // تحقق من otp إن أردت
-                  },
+                  onPressed: () {},
                   child: Text(AppText.ok.tr(), style: TextStyles.sf70018),
                 ),
               ),

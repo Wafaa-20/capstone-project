@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +52,7 @@ class LoginBody extends StatelessWidget {
                     ),
                     SizedBox(height: context.getHeight() * 0.02),
 
-                    SizedBox(height: 10),
+                    SizedBox(height: context.getHeight() * 0.01),
                     CustomTextField(
                       controller: bloc.emailLoginController,
                       labelText: AppText.email.tr(),
@@ -68,8 +67,8 @@ class LoginBody extends StatelessWidget {
                       validator: (p0) {
                         return FormValidation.validateInput(
                           p0,
-                          bloc.emailSignupRegExp,
-                          bloc.emailSignupInputRules.tr(),
+                          bloc.emailRegExp,
+                          bloc.emailInputRules.tr(),
                         );
                       },
                       fieldKey: bloc.loginEmailKey,
@@ -77,7 +76,7 @@ class LoginBody extends StatelessWidget {
                         if (bloc.loginEmailKey.currentState!.validate()) {}
                       },
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: context.getHeight() * 0.01),
                     BlocBuilder<AuthBloc, AuthState>(
                       builder: (context, state) {
                         return CustomTextField(
@@ -102,8 +101,8 @@ class LoginBody extends StatelessWidget {
                           validator: (p0) {
                             return FormValidation.validateInput(
                               p0,
-                              bloc.passwordSignupRegExp,
-                              bloc.passwordSignupInputRules.tr(),
+                              bloc.passwordRegExp,
+                              bloc.passwordInputRules.tr(),
                             );
                           },
                           onChange: (p0) {
@@ -135,7 +134,7 @@ class LoginBody extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: context.getWidth(),
-                          height: context.getHeight() * 0.03,
+                          height: context.getHeight() * 0.07,
                         ),
 
                         CustomButton(
@@ -169,20 +168,20 @@ class LoginBody extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: context.getHeight() * 0.07),
+            SizedBox(height: context.getHeight() * 0.04),
             CustomDivider(dividerText: AppText.loginby.tr()),
-            SizedBox(height: 20),
+            SizedBox(height: context.getHeight() * 0.01),
             SocialAuth(
               icons: [
                 Image.asset(
                   'assets/image/apple.png',
-                  width: context.getWidth() * 0.12153,
-                  height: context.getHeight() * 0.0546875,
+                  width: context.getEqualedWidthHeight(90),
+                  height: context.getEqualedWidthHeight(90),
                 ),
                 Image.asset(
                   'assets/image/Google.webp',
-                  width: context.getWidth() * 0.12153,
-                  height: context.getHeight() * 0.0546875,
+                  width: context.getEqualedWidthHeight(90),
+                  height: context.getEqualedWidthHeight(90),
                 ),
               ],
               onPressedList: [

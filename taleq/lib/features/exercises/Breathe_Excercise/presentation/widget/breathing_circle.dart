@@ -6,10 +6,10 @@ class BreathingCircle extends StatelessWidget {
   final double opacityValue;
 
   const BreathingCircle({
-    Key? key,
+    super.key,
     required this.scaleValue,
     required this.opacityValue,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

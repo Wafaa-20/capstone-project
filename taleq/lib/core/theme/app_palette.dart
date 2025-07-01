@@ -15,6 +15,7 @@ class AppPalette {
 
   //white
   static const Color whitePrimary = Color(0xffFFFFFF);
+  static const Color opicityWhite = Color.fromARGB(126, 255, 255, 255);
   static const Color whiteLight = Color(0xFFF7F7F7);
   static const Color whiteLight2 = Color(0xFFE5E7EB);
   static const Color whiteTransparent20 = Color(0x33FFFFFF);

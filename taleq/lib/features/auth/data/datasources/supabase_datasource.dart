@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taleq/features/auth/data/models/auth_model.dart';
 import 'package:taleq/features/auth/data/models/otp_model.dart';
@@ -14,6 +13,12 @@ abstract class AuthRemoteDatasource {
   Future signupWithGoogleAuth();
   Future signupWithAppleAuth();
   Future<OTPModel> otpAuth({required String email, required String code});
+  Future<String> resendotpAuth({required String email});
+  Future<String> forgetPassword({required String email});
+  Future<String> changePassword({
+    required String password,
+    required String email,
+  });
 }
 
 class SupabaseDatasource implements AuthRemoteDatasource {
@@ -34,10 +39,7 @@ class SupabaseDatasource implements AuthRemoteDatasource {
         email: email,
         password: password,
       );
-      log('after supabase$email');
-      log(password);
-      log('supabase$userAuth');
-      log(userAuth.user.toString());
+
       final user = userAuth.user;
       if (user == null) {
         throw FormatException("Invalid email or password");
@@ -48,7 +50,7 @@ class SupabaseDatasource implements AuthRemoteDatasource {
           .select('full_name')
           .eq('user_id', user.id)
           .single();
-      log(userInfo.toString());
+
       return AuthModel(
         id: user.id,
         name: userInfo['name'] ?? 'No Name',
@@ -142,7 +144,7 @@ class SupabaseDatasource implements AuthRemoteDatasource {
       );
 
       final user = response.user;
-      final session = response.session;
+      //final session = response.session;
 
       if (user == null) {
         throw const FormatException("لم يتم التحقق من المستخدم.");
@@ -153,6 +155,49 @@ class SupabaseDatasource implements AuthRemoteDatasource {
       throw FormatException(e.message);
     } catch (e) {
       throw const FormatException("حدث خطأ أثناء التحقق من الرمز.");
+    }
+  }
+
+  @override
+  Future<String> resendotpAuth({required String email}) async {
+    try {
+      // final response = await supabase.auth.signInWithOtp(email: email);
+      await supabase.auth.signInWithOtp(email: email);
+      return "Success";
+    } on AuthException catch (e) {
+      throw FormatException(e.message);
+    } catch (e) {
+      throw const FormatException("حدث خطأ أثناء التحقق من الرمز.");
+    }
+  }
+
+  @override
+  Future<String> forgetPassword({required String email}) async {
+    try {
+      // final response = await supabase.auth.signInWithOtp(email: email);
+      await supabase.auth.signInWithOtp(email: email);
+      return "Success";
+    } on AuthException catch (e) {
+      throw FormatException(e.message);
+    } catch (e) {
+      throw const FormatException("حدث خطأ أثناء محاولة الاستعادة.");
+    }
+  }
+
+  @override
+  Future<String> changePassword({
+    required String password,
+    required String email,
+  }) async {
+    try {
+      await supabase.auth.updateUser(
+        UserAttributes(password: password, email: email),
+      );
+      return "تم تغيير كلمة المرور بنجاح";
+    } on AuthException catch (e) {
+      throw FormatException(e.message);
+    } catch (e) {
+      throw const FormatException("حدث خطأ أثناء تغيير كلمة المرور.");
     }
   }
 }
