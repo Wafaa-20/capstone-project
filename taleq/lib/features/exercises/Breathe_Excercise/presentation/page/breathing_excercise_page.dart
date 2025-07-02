@@ -10,7 +10,7 @@ import 'package:taleq/features/exercises/Breathe_Excercise/presentation/widget/b
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/widget/enum.dart';
 
 class BreathingExercisePage extends StatelessWidget {
-  const BreathingExercisePage({Key? key}) : super(key: key);
+  const BreathingExercisePage({super.key});
 
   String _formatTime(int totalSeconds) {
     int minutes = totalSeconds ~/ 60;
@@ -111,20 +111,26 @@ class BreathingExercisePage extends StatelessWidget {
                                     SetDurationEvent(index),
                                   );
                                 },
-                                child: Text(
-                                  durations[index],
-                                  style: TextStyles.sf40018.copyWith(
-                                    color:
-                                        selectedDurationIndexFromBloc == index
-                                        ? Colors.white
-                                        : Colors.white.withOpacity(0.6),
-                                    fontWeight:
-                                        selectedDurationIndexFromBloc == index
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                                child: selectedDurationIndexFromBloc == index
+                                    ? Text(
+                                        durations[index],
+                                        style: TextStyles.sf40018.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                        ),
+                                      )
+                                    : Opacity(
+                                        opacity: 0.6,
+                                        child: Text(
+                                          durations[index],
+                                          style: TextStyles.sf40018.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
                               ),
                             );
                           }),

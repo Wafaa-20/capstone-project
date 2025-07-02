@@ -12,7 +12,7 @@ import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/butterflay.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_state.dart';
-import 'package:taleq/features/auth/presentation/pages/otp_page.dart';
+import 'package:taleq/features/auth/presentation/widget/otp_bottomsheet.dart';
 import 'package:taleq/features/auth/presentation/widget/signup_body.dart';
 
 class SignupPage extends StatelessWidget {
@@ -35,7 +35,7 @@ class SignupPage extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   builder: (_) => OtpBottomSheet(email: otpEmail, bloc: bloc),
                 );
-                //context.go('/login');
+                
               } else if (state is AuthFailure) {
                 ScaffoldMessenger.of(
                   context,
@@ -44,76 +44,86 @@ class SignupPage extends StatelessWidget {
                 context.go('/login');
               }
             },
-            child: Scaffold(
-              backgroundColor: AppPalette.blueSoft,
-              body: SafeArea(
-                bottom: false,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: context.getWidth()),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: context.getWidth() * 0.04,
-                          ),
-                          child: Column(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              behavior: HitTestBehavior.translucent,
+              child: Scaffold(
+                backgroundColor: AppPalette.blueSoft,
+                body: SafeArea(
+                  bottom: false,
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width: context.getWidth(),
+                      height: context.getHeight() - context.getSafeHeight(),
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                width: context.getWidth(),
-                                height: context.getHeight() * 0.03,
-                              ),
+                              SizedBox(width: context.getWidth()),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: context.getWidth() * 0.04,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      width: context.getWidth(),
+                                      height: context.getHeight() * 0.03,
+                                    ),
 
-                              TextButton(
-                                onPressed: () {
-                                  context.go('/home');
-                                },
-                                child: Text(
-                                  AppText.continueAsGuest.tr(),
-                                  style: TextStyles.sf70018.copyWith(
-                                    color: AppPalette.bluePrimary,
-                                  ),
+                                    TextButton(
+                                      onPressed: () {
+                                        context.go('/home');
+                                      },
+                                      child: Text(
+                                        AppText.continueAsGuest.tr(),
+                                        style: TextStyles.sf70018.copyWith(
+                                          color: AppPalette.bluePrimary,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
+                              SizedBox(height: context.getHeight() * 0.10),
+                              SignUpBody(bloc: bloc),
                             ],
                           ),
-                        ),
-                        SizedBox(height: context.getHeight() * 0.10),
-                        SignUpBody(bloc: bloc),
-                      ],
-                    ),
-                    ButterflyWidget(
-                      top: -context.getHeight() * 0.04,
-                      right: -context.getWidth() * 0.17,
-                      angle: 1.83 * pi,
-                      height: context.getHeight() * 0.15,
-                      width: context.getWidth() * 0.37,
-                    ),
+                          ButterflyWidget(
+                            top: -context.getHeight() * 0.04,
+                            right: -context.getWidth() * 0.17,
+                            angle: 1.83 * pi,
+                            height: context.getHeight() * 0.15,
+                            width: context.getWidth() * 0.37,
+                          ),
 
-                    Positioned(
-                      top: context.getHeight() * 0.07,
-                      right: context.getWidth() * 0.03,
-                      child: Text(
-                        AppText.welcome.tr(),
-                        style: TextStyles.sf70020.copyWith(
-                          color: AppPalette.black,
-                          fontSize: 32,
-                        ),
+                          Positioned(
+                            top: context.getHeight() * 0.07,
+                            right: context.getWidth() * 0.03,
+                            child: Text(
+                              AppText.welcome.tr(),
+                              style: TextStyles.sf70020.copyWith(
+                                color: AppPalette.black,
+                                fontSize: 32,
+                              ),
+                            ),
+                          ),
+                          ButterflyWidget(
+                            top: context.getHeight() * 0.09,
+                            left: -context.getWidth() * 0.12,
+                            angle: 0.61,
+                            height: context.getHeight() * 0.15,
+                            width: context.getWidth() * 0.33,
+                          ),
+                        ],
                       ),
                     ),
-                    ButterflyWidget(
-                      top: context.getHeight() * 0.09,
-                      left: -context.getWidth() * 0.12,
-                      angle: 0.61,
-                      height: context.getHeight() * 0.15,
-                      width: context.getWidth() * 0.33,
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

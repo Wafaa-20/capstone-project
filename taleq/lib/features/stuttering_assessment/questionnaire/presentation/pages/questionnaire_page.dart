@@ -74,7 +74,7 @@ class QuestionnairePage extends StatelessWidget {
                               isLastPage
                                   ? bloc.add(SubmitAnswersEvent())
                                   : bloc.add(NextPageEvent());
-                              print("THE LIST: ${bloc.userAnswers}");
+                              
                             },
                             child: Text(
                               isLastPage ? AppText.done : AppText.next,

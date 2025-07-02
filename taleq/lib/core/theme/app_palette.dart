@@ -9,12 +9,14 @@ class AppPalette {
   static const Color blueSoft = Color(0xFFD5E3FF);
   static const Color blueSoftLight = Color(0xFFB3C5FF);
   static const Color blueLavenderLight = Color(0xFFD5DFFF);
+  static const Color blueGroup = Color(0xFFD3DEFF);
 
   static const Color bluePrimaryAccent = Color(0xFF6489FE);
   static const Color headingBlueDark = Color(0xFF3E3FAC);
 
   //white
   static const Color whitePrimary = Color(0xffFFFFFF);
+  static const Color opicityWhite = Color.fromARGB(126, 255, 255, 255);
   static const Color whiteLight = Color(0xFFF7F7F7);
   static const Color whiteLight2 = Color(0xFFE5E7EB);
   static const Color whiteTransparent20 = Color(0x33FFFFFF);
@@ -28,6 +30,7 @@ class AppPalette {
   static const Color greyUltraLightTransparent = Color(0x33C4C4C4);
   static const Color greyNeutral = Color(0xFFD7D7D7);
   static const Color greyDeep = Color(0xff676767);
+  static const Color navGray = Color(0xffAAAAAA);
 
   //black
   static const Color black = Colors.black;

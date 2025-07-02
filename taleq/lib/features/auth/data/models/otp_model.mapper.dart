@@ -20,10 +20,10 @@ class OTPModelMapper extends ClassMapperBase<OTPModel> {
   @override
   final String id = 'OTPModel';
 
-  static const Field<OTPModel, dynamic> _f$email =
-      Field('email', null, mode: FieldMode.param);
-  static const Field<OTPModel, dynamic> _f$code =
-      Field('code', null, mode: FieldMode.param);
+  static String _$email(OTPModel v) => v.email;
+  static const Field<OTPModel, String> _f$email = Field('email', _$email);
+  static String _$code(OTPModel v) => v.code;
+  static const Field<OTPModel, String> _f$code = Field('code', _$code);
 
   @override
   final MappableFields<OTPModel> fields = const {
@@ -85,7 +85,7 @@ extension OTPModelValueCopy<$R, $Out> on ObjectCopyWith<$R, OTPModel, $Out> {
 
 abstract class OTPModelCopyWith<$R, $In extends OTPModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({dynamic email, dynamic code});
+  $R call({String? email, String? code});
   OTPModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -98,11 +98,12 @@ class _OTPModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<OTPModel> $mapper =
       OTPModelMapper.ensureInitialized();
   @override
-  $R call({dynamic email, dynamic code}) =>
-      $apply(FieldCopyWithData({#email: email, #code: code}));
+  $R call({String? email, String? code}) => $apply(FieldCopyWithData(
+      {if (email != null) #email: email, if (code != null) #code: code}));
   @override
-  OTPModel $make(CopyWithData data) =>
-      OTPModel(email: data.get(#email), code: data.get(#code));
+  OTPModel $make(CopyWithData data) => OTPModel(
+      email: data.get(#email, or: $value.email),
+      code: data.get(#code, or: $value.code));
 
   @override
   OTPModelCopyWith<$R2, OTPModel, $Out2> $chain<$R2, $Out2>(

@@ -1,6 +1,6 @@
 // lib/breath/bloc/breath_bloc.dart
 import 'dart:async';
-import 'dart:math'; // لاستخدام Math.sin أو Math.cos في الرسوم المتحركة
+//import 'dart:math'; // لاستخدام Math.sin أو Math.cos في الرسوم المتحركة
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/bloc/breath_event.dart';

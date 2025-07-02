@@ -5,9 +5,12 @@ import 'package:taleq/core/service/local_storage.dart';
 import 'package:taleq/features/auth/data/datasources/supabase_datasource.dart';
 import 'package:taleq/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:taleq/features/auth/domain/repositories/auth_repository.dart';
-import 'package:taleq/features/auth/domain/usecases/login_use_case%20.dart';
+import 'package:taleq/features/auth/domain/usecases/change_password_use_case.dart';
+import 'package:taleq/features/auth/domain/usecases/forget_password_use_case.dart';
+import 'package:taleq/features/auth/domain/usecases/login_use_case.dart';
 import 'package:taleq/features/auth/domain/usecases/otp_use_case.dart';
-import 'package:taleq/features/auth/domain/usecases/signup_use_case%20.dart';
+import 'package:taleq/features/auth/domain/usecases/resend_otp_use_case.dart';
+import 'package:taleq/features/auth/domain/usecases/signup_use_case.dart';
 import 'package:taleq/features/auth/domain/usecases/signup_with_apple_usecase.dart';
 import 'package:taleq/features/auth/domain/usecases/signup_with_google_usecase.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_bloc.dart';
@@ -22,41 +25,26 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/domain/usecas
 import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/bloc/questionnaire_bloc.dart';
 
 Future<void> setup() async {
-  //Shared Preferences
+  // Core Services
   GetIt.I.registerSingletonAsync<LocalStorage>(() async {
     final localStorage = LocalStorage();
     await localStorage.init();
     return localStorage;
   });
-  //Supabase
   GetIt.I.registerSingleton<SupabaseClient>(Supabase.instance.client);
 
-  // Bloc
-  GetIt.I.registerFactory(
-    () => AuthBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
+  // Data Sources
+  GetIt.I.registerLazySingleton<AuthRemoteDatasource>(
+    () => SupabaseDatasource(supabase: GetIt.I()),
   );
-  GetIt.I.registerFactory(() => QuestionnaireBloc(GetIt.I()));
-
-  // Use cases
-  GetIt.I.registerLazySingleton(() => SignupUseCase(repository: GetIt.I()));
-  GetIt.I.registerLazySingleton(() => LoginUseCase(repository: GetIt.I()));
-  GetIt.I.registerLazySingleton(
-    () => SaveAnswersUseCase(repository: GetIt.I()),
+  GetIt.I.registerLazySingleton<QuestionnaireDatasource>(
+    () => QuestionnaireDatasourceImpl(supabase: GetIt.I()),
   );
-  GetIt.I.registerLazySingleton(
-    () => CameraAnalysisUseCase(repository: GetIt.I()),
-  );
-  //===================================================
-  GetIt.I.registerLazySingleton(
-    () => SignupWithGoogleUseCase(repository: GetIt.I()),
+  GetIt.I.registerLazySingleton<CameraAnalysisDatasource>(
+    () => CameraAnalysisDatasourceImpl(),
   );
 
-  //==========================
-  GetIt.I.registerLazySingleton(
-    () => SignupWithAppleUseCase(repository: GetIt.I()),
-  );
-  GetIt.I.registerLazySingleton(() => OTPUseCase(repository: GetIt.I()));
-  // Repository
+  // Repositories
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(datasource: GetIt.I()),
   );
@@ -66,15 +54,43 @@ Future<void> setup() async {
   GetIt.I.registerLazySingleton<CameraAnalysisRepository>(
     () => CameraAnalysisRepositoryImpl(datasource: GetIt.I()),
   );
-  // Data sources
-  GetIt.I.registerLazySingleton<AuthRemoteDatasource>(
-    () => SupabaseDatasource(supabase: GetIt.I()),
+
+  // UseCases
+  GetIt.I.registerLazySingleton(() => SignupUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(() => LoginUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(
+    () => ChangePasswordUseCase(repository: GetIt.I()),
   );
-  GetIt.I.registerLazySingleton<QuestionnaireDatasource>(
-    () => QuestionnaireDatasourceImpl(supabase: GetIt.I()),
+  GetIt.I.registerLazySingleton(
+    () => ForgetPasswordUseCase(repository: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton(() => OTPUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(() => ResendOTPUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(
+    () => SignupWithGoogleUseCase(repository: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton(
+    () => SignupWithAppleUseCase(repository: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton(
+    () => SaveAnswersUseCase(repository: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton(
+    () => CameraAnalysisUseCase(repository: GetIt.I()),
   );
 
-  GetIt.I.registerLazySingleton<CameraAnalysisDatasource>(
-    () => CameraAnalysisDatasourceImpl(),
+  // Blocs
+  GetIt.I.registerFactory(
+    () => AuthBloc(
+      GetIt.I(),
+      GetIt.I(),
+      GetIt.I(),
+      GetIt.I(),
+      GetIt.I(),
+      GetIt.I(),
+      GetIt.I(),
+      GetIt.I(),
+    ),
   );
+  GetIt.I.registerFactory(() => QuestionnaireBloc(GetIt.I()));
 }

@@ -10,6 +10,10 @@ sealed class SplashEvent extends Equatable {
 
 class CheckFirstTimeUserEvent extends SplashEvent {}
 
+class InitAppEvent extends SplashEvent {
+  const InitAppEvent();
+}
+
 class AuthSuccessWithGoogleEvent extends SplashEvent {
   final User user;
   const AuthSuccessWithGoogleEvent({required this.user});

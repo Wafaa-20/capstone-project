@@ -10,7 +10,7 @@ class WordExerciseBloc extends Bloc<WordExerciseEvent, WordExerciseState> {
   final  list = ListConstants.words;
   WordExerciseBloc() : super(WordExerciseInitial()) {
     on<WordExerciseEvent>((event, emit) {
-      // TODO: implement event handler
+      
     });
   }
 }

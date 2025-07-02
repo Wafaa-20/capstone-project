@@ -1,7 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:taleq/core/constants/constants.dart';
+
 class FormValidation {
   static validateInput(String? value, RegExp pattern, String? patternRules) {
     if (value == null || value.isEmpty) {
-      return "This field is required";
+      return Constants.requiredField.tr();
     }
     if (!pattern.hasMatch(value)) {
       return patternRules ?? 'Invalid Input';
@@ -12,11 +15,12 @@ class FormValidation {
   static String? confirmPassword({
     required String password,
     required String confirmPassword,
+    String? patternRules,
   }) {
     if (confirmPassword != password) {
-      return "Passwords do not match";
+      return patternRules;
     } else if (confirmPassword.isEmpty) {
-      return "This field is required";
+      return Constants.requiredField.tr();
     }
     return null;
   }

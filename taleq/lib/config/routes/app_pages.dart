@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:taleq/features/auth/presentation/pages/change_password_page.dart';
 import 'package:taleq/features/auth/presentation/pages/forget_password_page.dart';
 import 'package:taleq/features/auth/presentation/pages/login_page.dart';
+
 import 'package:taleq/features/auth/presentation/pages/signup_page.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/page/breathing_excercise_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_start_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise_start/presentation/page/intro_words_excercise_page.dart';
 import 'package:taleq/features/exercises/presentation/page/task_success_page.dart';
+
 import 'package:taleq/features/home/presentation/pages/home_page.dart';
 import 'package:taleq/features/navigation/presentation/pages/navigation_page.dart';
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
@@ -151,6 +154,13 @@ final router = GoRouter(
       name: Names.forgetPassword,
       path: Routes.forgetPassword,
       builder: (context, state) => const ForgetPasswordPage(),
+    ),
+    GoRoute(
+      path: '/change_password',
+      builder: (context, state) {
+        final email = state.uri.queryParameters['email'];
+        return ChangePasswordPage(email: email!);
+      },
     ),
   ],
 );

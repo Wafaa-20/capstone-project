@@ -6,6 +6,8 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.controller,
     this.hintText,
+    this.onChanged,
+
     this.labelText,
     this.obscureText = false,
     this.validator,
@@ -14,10 +16,11 @@ class CustomTextField extends StatelessWidget {
     this.labelstyle,
     this.hintstyle,
     this.textstyle,
-    this.onChange,
+
     this.fieldKey,
     this.keyboardType,
   });
+  final ValueChanged<String>? onChanged;
   final TextEditingController controller;
   final String? hintText;
   final String? labelText;
@@ -28,7 +31,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? labelstyle;
   final TextStyle? hintstyle;
   final TextStyle? textstyle;
-  final void Function(String)? onChange;
+
   final Key? fieldKey;
   final TextInputType? keyboardType;
 
@@ -54,8 +57,8 @@ class CustomTextField extends StatelessWidget {
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
           ),
-          onChanged: onChange,
           validator: validator,
+          onChanged: onChanged,
         ),
       ],
     );

@@ -83,4 +83,41 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+  @override
+  Future<Either<Failure, String>> resendotpAuth({
+    required String email,
+    
+  }) async {
+    try {
+      final result = await datasource.resendotpAuth(email: email);
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+  @override
+  Future<Either<Failure, String>> forgetPassword({
+    required String email,
+    
+  }) async {
+    try {
+      final result = await datasource.forgetPassword(email: email);
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+   @override
+  Future<Either<Failure, String>> changePassword({
+    required String password,
+    required String email,
+    
+  }) async {
+    try {
+      final result = await datasource.changePassword(password: password ,email:email);
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
 }

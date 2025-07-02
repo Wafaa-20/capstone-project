@@ -1,6 +1,11 @@
 part of 'navigation_bloc.dart';
 
 @immutable
-sealed class NavigationState {}
+sealed class NavState {}
 
-final class NavigationInitial extends NavigationState {}
+final class NavInitial extends NavState {}
+
+class NavigationSelectedState extends NavState {
+  final int selectedIndex;
+  NavigationSelectedState(this.selectedIndex);
+}
