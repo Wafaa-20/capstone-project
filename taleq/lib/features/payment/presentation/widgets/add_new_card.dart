@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:moyasar/moyasar.dart';
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -41,7 +42,7 @@ class AddNewCard extends StatelessWidget {
 
 PaymentConfig paymentConfig(int amount) {
   return PaymentConfig(
-    publishableApiKey: 'pk_test_jWGJ6kmumCx5FwyJVPDknDr5qP3VsWFJFsGWxY1Y',
+    publishableApiKey: dotenv.env['publishableApiKey'].toString(),
     amount: amount,
     description: 'order #1324',
   );
