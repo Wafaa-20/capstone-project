@@ -75,18 +75,16 @@ class GroupSuggestionPage extends StatelessWidget {
               BlocBuilder<GroupsBloc, GroupsState>(
                 bloc: bloc,
                 builder: (context, state) {
-                  return state.showButton
-                      ? CustomButton(
-                          width: context.getWidth(),
-                          onPressed: () {},
-                          child: Text(
-                            AppText.suggestGroup.tr(),
-                            style: TextStyles.sf60020.copyWith(
-                              color: AppPalette.whiteLight,
-                            ),
-                          ),
-                        )
-                      : const SizedBox.shrink();
+                  return CustomButton(
+                    width: context.getWidth(),
+                    onPressed: () {},
+                    child: Text(
+                      AppText.suggestGroup.tr(),
+                      style: TextStyles.sf60020.copyWith(
+                        color: AppPalette.whiteLight,
+                      ),
+                    ),
+                  );
                 },
               ),
             ],

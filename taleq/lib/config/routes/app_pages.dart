@@ -11,12 +11,14 @@ import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/word
 import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_start_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise_start/presentation/page/intro_words_excercise_page.dart';
 import 'package:taleq/features/exercises/presentation/page/task_success_page.dart';
+import 'package:taleq/features/groups/presentation/pages/groups_page.dart';
 
 import 'package:taleq/features/home/presentation/pages/home_page.dart';
 import 'package:taleq/features/navigation/presentation/pages/navigation_page.dart';
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:taleq/features/payment/presentation/pages/payment_page.dart';
 import 'package:taleq/features/plan/presentation/pages/plan_page.dart';
+import 'package:taleq/features/space/presentation/pages/space_page.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:taleq/features/splash/presentation/pages/splash_page.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/presentation/pages/assessment_result_page.dart';
@@ -28,7 +30,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/navigation',
+  initialLocation: '/groups',
 
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
@@ -162,6 +164,16 @@ final router = GoRouter(
         final email = state.uri.queryParameters['email'];
         return ChangePasswordPage(email: email!);
       },
+    ),
+    GoRoute(
+      name: Names.space,
+      path: Routes.space,
+      builder: (context, state) => const SpacePage(),
+    ),
+    GoRoute(
+      name: Names.groups,
+      path: Routes.groups,
+      builder: (context, state) => const GroupsPage(),
     ),
   ],
 );

@@ -14,6 +14,12 @@ import 'package:taleq/features/auth/domain/usecases/signup_use_case.dart';
 import 'package:taleq/features/auth/domain/usecases/signup_with_apple_usecase.dart';
 import 'package:taleq/features/auth/domain/usecases/signup_with_google_usecase.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:taleq/features/groups/data/datasources/supabase_datasource.dart';
+import 'package:taleq/features/groups/data/repositories/groups_repository_impl.dart';
+import 'package:taleq/features/groups/domain/repositories/groups_repository.dart';
+import 'package:taleq/features/groups/domain/usecases/get_space_details_use_case.dart';
+import 'package:taleq/features/groups/domain/usecases/get_spaces_use_case.dart';
+import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/data/datasources/camera_analysis_datasource.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/data/repositories/camera_analysis_repository_impl.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/domain/repositories/camera_analysis_repository.dart';
@@ -48,6 +54,13 @@ Future<void> setup() async {
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(datasource: GetIt.I()),
   );
+  GetIt.I.registerLazySingleton<GroupsRemoteDatasource>(
+    () => GroupsSupabaseDatasource(supabase: GetIt.I()),
+  );
+
+  GetIt.I.registerLazySingleton<GroupsRepository>(
+    () => GroupsRepositoryImpl(GetIt.I()),
+  );
   GetIt.I.registerLazySingleton<QuestionnaireRepository>(
     () => QuestionnaireRepositoryImpl(datasource: GetIt.I()),
   );
@@ -79,6 +92,10 @@ Future<void> setup() async {
     () => CameraAnalysisUseCase(repository: GetIt.I()),
   );
 
+  GetIt.I.registerLazySingleton(() => GetSpacesUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(
+    () => GetSpaceDetailsUseCase(repository: GetIt.I()),
+  );
   // Blocs
   GetIt.I.registerFactory(
     () => AuthBloc(
@@ -93,4 +110,5 @@ Future<void> setup() async {
     ),
   );
   GetIt.I.registerFactory(() => QuestionnaireBloc(GetIt.I()));
+  GetIt.I.registerFactory(() => GroupsBloc(GetIt.I(), GetIt.I()));
 }

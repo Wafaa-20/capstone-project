@@ -73,6 +73,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     userNameSignupController.dispose();
     emailSignupController.dispose();
     passwordSignupController.dispose();
+    emailLoginController.dispose();
+    passwordLoginController.dispose();
+    emailForgetPasswordController.dispose();
+    passwordConfrimChangePasswordController.dispose();
+    passwordChangePasswordController.dispose();
     return super.close();
   }
 

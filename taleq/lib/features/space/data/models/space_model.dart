@@ -1,16 +1,16 @@
-import 'package:taleq/features/groups/domain/entities/groups.dart';
+import 'package:taleq/features/space/domain/entities/space.dart';
 
-class GroupsModel {
+class SpaceModel {
   final String id;
   final String name;
 
-  GroupsModel({
+  SpaceModel({
     required this.id,
     required this.name,
   });
 
-  factory GroupsModel.fromJson(Map<String, dynamic> json) {
-    return GroupsModel(
+  factory SpaceModel.fromJson(Map<String, dynamic> json) {
+    return SpaceModel(
       id: json['id'],
       name: json['name'],
     );
@@ -23,8 +23,8 @@ class GroupsModel {
     };
   }
 
-  Groups toEntity() {
-    return Groups(
+  Space toEntity() {
+    return Space(
       id: id,
       name: name,
     );

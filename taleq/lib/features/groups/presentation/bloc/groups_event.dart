@@ -7,6 +7,10 @@ abstract class GroupsEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class GetSpaces extends GroupsEvent {
+  const GetSpaces();
+}
+
 class TitleChanged extends GroupsEvent {
   final String text;
 
@@ -14,4 +18,13 @@ class TitleChanged extends GroupsEvent {
 
   @override
   List<Object> get props => [text];
+}
+
+class BringSpaceDetails extends GroupsEvent {
+  final String spaceId;
+
+  const BringSpaceDetails({required this.spaceId});
+
+  @override
+  List<Object> get props => [spaceId];
 }

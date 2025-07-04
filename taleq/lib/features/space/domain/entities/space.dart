@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class Groups extends Equatable {
+class Space extends Equatable {
   final String id;
   final String name;
 
-  const Groups({
+  const Space({
     required this.id,
     required this.name,
   });

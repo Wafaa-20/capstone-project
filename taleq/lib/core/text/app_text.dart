@@ -3,6 +3,8 @@ class AppText {
   static const String continueAsGuest = "الاستمرار كضيف";
   static const String orRegisterWith = "التسجيل من خلال";
   static const String forgotPassword = "نسيت كلمة المرور؟";
+  static const String error = "خطأ غير معروف";
+  static const String networkError = "حدث خطأ اثناء جلب البيانات من الخادم";
 
   // Login Screen
   static const String welcomeBack = "مرحباً بعودتك!";

@@ -1,199 +1,236 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
+import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
+import 'package:taleq/features/groups/presentation/bloc/groups_event.dart';
+import 'package:taleq/features/groups/presentation/bloc/groups_state.dart';
 import 'package:taleq/features/groups/presentation/widgets/group_card.dart';
 
 class AvailableGroup extends StatelessWidget {
-  const AvailableGroup({super.key});
-
+  const AvailableGroup({super.key, required this.spaceId});
+  final String spaceId;
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> texts = {
-      "name": "رحلة التعافي",
-      "number_of_seats": "3 مقاعد متبقية",
-      "number_of_pepole": "10 أشخاص",
-      "date": "18 - 22 فبراير",
-      // "start_date": "18",
-      // "end_date": "22",
-      "description": "مساحة ملهمة لمشاركة التجارب في رحلة التغلب على التأتأة.",
-      "goals": [
-        "تبادل الخبرات",
-        "الهام وتحفيز الاعضاء",
-        "بناء مجتمع داعم",
-        "تعزيز وتطوير الذات",
-      ],
-    };
-
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  children: [
-                    Row(
+    return BlocProvider(
+      create: (context) =>
+          GetIt.I<GroupsBloc>()..add(BringSpaceDetails(spaceId: spaceId)),
+      child: Builder(
+        builder: (context) {
+          final GroupsBloc bloc = context.read<GroupsBloc>();
+          return Scaffold(
+            body: SafeArea(
+              child: BlocBuilder<GroupsBloc, GroupsState>(
+                builder: (context, state) {
+                  if (state is SpacesLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is SpaceDetailsFiled) {
+                    return Center(child: Text(AppText.networkError.tr()));
+                  } else if (state is SpaceDetailsSuccess) {
+                    return Column(
                       children: [
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: IconButton(
-                            onPressed: () {
-                              context.customPop();
-                            },
-                            icon: const Icon(
-                              Icons.keyboard_arrow_right_rounded,
-                              size: 30,
-                            ),
-                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                    GroupCard(
-                      height: 100,
-                      width: 361,
-                      background: AppPalette.blueGroup,
-                      showButton: false,
-                      title: texts["name".tr()],
-                      titleAlignment: AlignmentDirectional(-0.9, 0.2),
-                      titleStyle: TextStyles.sf70018.copyWith(
-                        color: AppPalette.black,
-                      ),
-                      backgroundImage: const DecorationImage(
-                        image: AssetImage("assets/image/tabler_butterfly.png"),
-                        alignment: Alignment(-0.5, -0.35),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GroupCard(
-                            height: 86,
-                            width: 113,
-                            title: texts["date".tr()],
-                            icon: Icons.access_time_outlined,
-                            background: AppPalette.whiteLight,
-                            iconOnTop: true,
-                            showDate: false,
-                            showButton: false,
-                            titleStyle: TextStyles.sf30014.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          GroupCard(
-                            height: 86,
-                            width: 113,
-                            title: texts["number_of_pepole".tr()],
-                            icon: Icons.groups,
-                            background: AppPalette.whiteLight,
-                            iconOnTop: true,
-                            showDate: false,
-                            showButton: false,
-                            titleStyle: TextStyles.sf30014.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          GroupCard(
-                            height: 86,
-                            width: 113,
-                            title: texts["number_of_seats".tr()],
-                            icon: Icons.event_seat,
-                            background: AppPalette.whiteLight,
-                            iconOnTop: true,
-                            showDate: false,
-                            showButton: false,
-                            titleStyle: TextStyles.sf30014.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    GroupCard(
-                      height: 55,
-                      width: 364,
-                      title: AppText.groupDec.tr(),
-                      showButton: false,
-                      showLeftIcon: false,
-                      background: AppPalette.blueGroup,
-                      titleStyle: TextStyles.sf70016.copyWith(
-                        color: AppPalette.black,
-                      ),
-                    ),
-                    Text(texts["description"], style: TextStyles.sf50014),
-                    const SizedBox(height: 12),
-                    GroupCard(
-                      height: 55,
-                      width: 364,
-                      title: AppText.groupGole.tr(),
-                      showButton: false,
-                      showLeftIcon: false,
-                      background: AppPalette.blueGroup,
-                      titleStyle: TextStyles.sf70016.copyWith(
-                        color: AppPalette.black,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(
-                        texts["goals".tr()].length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 2),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Column(
                               children: [
-                                const Text(
-                                  "• ",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: AppPalette.bluePrimary,
+                                Row(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          context.customPop();
+                                        },
+                                        icon: const Icon(
+                                          Icons.keyboard_arrow_right_rounded,
+                                          size: 30,
+                                        ),
+                                        padding: const EdgeInsets.fromLTRB(
+                                          0,
+                                          10,
+                                          0,
+                                          20,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                GroupCard(
+                                  height: 100,
+                                  width: 361,
+                                  background: AppPalette.blueGroup,
+                                  showButton: false,
+                                  title: state.spaceDetails.name,
+                                  titleAlignment: AlignmentDirectional(
+                                    -0.9,
+                                    0.2,
+                                  ),
+                                  titleStyle: TextStyles.sf70018.copyWith(
+                                    color: AppPalette.black,
+                                  ),
+                                  backgroundImage: const DecorationImage(
+                                    image: AssetImage(
+                                      "assets/image/tabler_butterfly.png",
+                                    ),
+                                    alignment: Alignment(-0.5, -0.35),
                                   ),
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    texts["goals".tr()][index],
-                                    style: TextStyles.sf50014,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      GroupCard(
+                                        height: 86,
+                                        width: 113,
+                                        title: bloc.formatDetailsDate(
+                                          state.spaceDetails.startDate,
+                                          state.spaceDetails.endDate,
+                                        ),
+                                        icon: Icons.access_time_outlined,
+                                        background: AppPalette.whiteLight,
+                                        iconOnTop: true,
+                                        showDate: false,
+                                        showButton: false,
+                                        titleStyle: TextStyles.sf30014.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      GroupCard(
+                                        height: 86,
+                                        width: 113,
+                                        title: state.spaceDetails.numberOfPepole
+                                            .toString(),
+                                        icon: Icons.groups,
+                                        background: AppPalette.whiteLight,
+                                        iconOnTop: true,
+                                        showDate: false,
+                                        showButton: false,
+                                        titleStyle: TextStyles.sf30014.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      GroupCard(
+                                        height: 86,
+                                        width: 113,
+                                        title: state.spaceDetails.numberOfSeats
+                                            .toString(),
+                                        icon: Icons.event_seat,
+                                        background: AppPalette.whiteLight,
+                                        iconOnTop: true,
+                                        showDate: false,
+                                        showButton: false,
+                                        titleStyle: TextStyles.sf30014.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                GroupCard(
+                                  height: 55,
+                                  width: 364,
+                                  title: AppText.groupDec.tr(),
+                                  showButton: false,
+                                  showLeftIcon: false,
+                                  background: AppPalette.blueGroup,
+                                  titleStyle: TextStyles.sf70016.copyWith(
+                                    color: AppPalette.black,
+                                  ),
+                                ),
+                                Text(
+                                  state.spaceDetails.description,
+                                  style: TextStyles.sf50014,
+                                ),
+                                const SizedBox(height: 12),
+                                GroupCard(
+                                  height: 55,
+                                  width: 364,
+                                  title: AppText.groupGole.tr(),
+                                  showButton: false,
+                                  showLeftIcon: false,
+                                  background: AppPalette.blueGroup,
+                                  titleStyle: TextStyles.sf70016.copyWith(
+                                    color: AppPalette.black,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: List.generate(
+                                    state.spaceDetails.goals.length,
+                                    (index) => Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 2,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                          0,
+                                          0,
+                                          20,
+                                          0,
+                                        ),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              "• ",
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                color: AppPalette.bluePrimary,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                state.spaceDetails.goals[index],
+                                                style: TextStyles.sf50014,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: CustomButton(
+                            height: 44,
+                            width: 365,
+                            onPressed: () {},
+                            child: Text(
+                              AppText.joinGroup.tr(),
+                              style: TextStyles.sf60020.copyWith(
+                                color: AppPalette.whiteLight,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  return Center(child: Text(AppText.error.tr()));
+                },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: CustomButton(
-                height: 44,
-                width: 365,
-                onPressed: () {},
-                child: Text(
-                  AppText.joinGroup.tr(),
-                  style: TextStyles.sf60020.copyWith(
-                    color: AppPalette.whiteLight,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
