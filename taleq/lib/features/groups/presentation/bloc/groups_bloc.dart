@@ -23,7 +23,7 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
   }
   FutureOr<void> getSpaces(event, Emitter<GroupsState> emit) async {
     emit(SpacesLoading());
-    final spaces = await _getSpacesUseCase(params: GetSpacesParams());
+    final spaces = await _getSpacesUseCase(GetSpacesParams());
 
     spaces.fold(
       (failure) => emit(GetFalid(message: failure.message)),
@@ -42,7 +42,7 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
   ) async {
     emit(SpacesLoading());
     final spaceDetails = await _getSpaceDetailsUseCase(
-      params: GetSpaceDetailsParams(id: event.spaceId),
+       GetSpaceDetailsParams(id: event.spaceId),
     );
 
     spaceDetails.fold(

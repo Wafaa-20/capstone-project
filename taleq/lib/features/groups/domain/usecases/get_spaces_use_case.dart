@@ -11,9 +11,9 @@ class GetSpacesUseCase
   GetSpacesUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, Map<String, List<SpacesEntity>>>> call({
-    required GetSpacesParams params,
-  }) async {
+  Future<Either<Failure, Map<String, List<SpacesEntity>>>> call(
+    GetSpacesParams params,
+  ) async {
     return await repository.getSummerySpaces();
   }
 }

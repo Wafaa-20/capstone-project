@@ -12,9 +12,9 @@ class GetSpaceDetailsUseCase
   GetSpaceDetailsUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, SpaceDetailsEntity>> call({
-    required GetSpaceDetailsParams params,
-  }) async {
+  Future<Either<Failure, SpaceDetailsEntity>> call(
+    GetSpaceDetailsParams params,
+  ) async {
     return await repository.getSpaceDetails(params.id);
   }
 }

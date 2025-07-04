@@ -10,9 +10,9 @@ class SignupUseCase implements UseCase<AuthEntity, SignupParams> {
   SignupUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, AuthEntity>> call({
-    required SignupParams params,
-  }) async {
+  Future<Either<Failure, AuthEntity>> call(
+     SignupParams params,
+  ) async {
     return await repository.signUpAuth(
       name: params.name,
       email: params.email,

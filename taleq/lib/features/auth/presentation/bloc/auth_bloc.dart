@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:taleq/features/auth/domain/usecases/change_password_use_case.dart';
-import 'package:taleq/features/auth/domain/usecases/forget_password_use_case.dart';
-import 'package:taleq/features/auth/domain/usecases/otp_use_case.dart';
-import 'package:taleq/features/auth/domain/usecases/resend_otp_use_case.dart';
-import 'package:taleq/features/auth/domain/usecases/signup_with_apple_usecase.dart';
-import 'package:taleq/features/auth/domain/usecases/signup_with_google_usecase.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taleq/core/constants/constants.dart';
+import 'package:taleq/features/auth/domain/usecases/change_password_use_case.dart';
+import 'package:taleq/features/auth/domain/usecases/forget_password_use_case.dart';
 import 'package:taleq/features/auth/domain/usecases/login_use_case.dart';
+import 'package:taleq/features/auth/domain/usecases/otp_use_case.dart';
+import 'package:taleq/features/auth/domain/usecases/resend_otp_use_case.dart';
 import 'package:taleq/features/auth/domain/usecases/signup_use_case.dart';
+import 'package:taleq/features/auth/domain/usecases/signup_with_apple_usecase.dart';
+import 'package:taleq/features/auth/domain/usecases/signup_with_google_usecase.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_event.dart';
 import 'package:taleq/features/auth/presentation/bloc/auth_state.dart';
 
@@ -119,7 +120,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final String email = emailSignupController.text;
     final result = await _signupUseCase(
-      params: SignupParams(
+      SignupParams(
         name: userNameSignupController.text,
         email: emailSignupController.text,
         password: passwordSignupController.text,
@@ -138,9 +139,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     final String email = event.email;
-    final result = await _resendOTPUseCase(
-      params: ResendOTPParams(email: email),
-    );
+    final result = await _resendOTPUseCase(ResendOTPParams(email: email));
     result.fold(
       (failure) => emit(AuthFailure(message: failure.message)),
       (success) => emit(AuthSuccess(email: email)),
@@ -155,7 +154,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final String email = emailForgetPasswordController.text;
     final result = await _forgetPasswordUseCase(
-      params: ForgetPasswordParams(email: email),
+      ForgetPasswordParams(email: email),
     );
     result.fold(
       (failure) => emit(AuthFailure(message: failure.message)),
@@ -173,7 +172,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     log('in bloc $email');
     log('in bloc $password');
     final result = await _changePasswordUseCase(
-      params: ChangePasswordParams(password: password, email: email),
+      ChangePasswordParams(password: password, email: email),
     );
     result.fold(
       (failure) => emit(AuthFailure(message: failure.message)),
@@ -184,9 +183,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> otp(OTPVervy event, Emitter<AuthState> emit) async {
     final String email = event.email;
     final String code = event.code;
-    final result = await _otpUseCase(
-      params: OTPParams(email: email, code: code),
-    );
+    final result = await _otpUseCase(OTPParams(email: email, code: code));
     result.fold(
       (failure) => emit(AuthFailure(message: failure.message)),
       (success) => emit(OTPSuccess()),
@@ -199,9 +196,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     try {
       emit(AuthLoading());
-      final result = await _signupWithGoogleUseCase(
-        params: SignupWithGoogleParams(),
-      );
+      final result = await _signupWithGoogleUseCase(SignupWithGoogleParams());
       result.fold(
         (failure) => emit(AuthFailure(message: failure.message)),
         (success) => emit(MoveState()),
@@ -217,9 +212,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     try {
       emit(AuthLoading());
-      final result = await _signupWithAppleUseCase(
-        params: SignupWithAppleParams(),
-      );
+      final result = await _signupWithAppleUseCase(SignupWithAppleParams());
       result.fold(
         (failure) => emit(AuthFailure(message: failure.message)),
         (success) => emit(MoveState()),
@@ -232,7 +225,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> logInEvent(LogInEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     final result = await _loginUseCase(
-      params: LoginParams(
+      LoginParams(
         email: emailLoginController.text,
         password: passwordLoginController.text,
       ),

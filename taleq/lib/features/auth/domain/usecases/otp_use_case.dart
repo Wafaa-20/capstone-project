@@ -10,7 +10,7 @@ class OTPUseCase implements UseCase<OTPEntity, OTPParams> {
   OTPUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, OTPEntity>> call({required OTPParams params}) async {
+  Future<Either<Failure, OTPEntity>> call( OTPParams params) async {
     return await repository.otpAuth(email: params.email, code: params.code);
   }
 }

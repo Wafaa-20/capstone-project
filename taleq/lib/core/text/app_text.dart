@@ -196,4 +196,7 @@ class AppText {
   static const String groupDec = "وصف المجموعة";
   static const String groupGole = "أهداف المجموعة";
   static const String joinGroup = "انضم للمجموعة";
+
+  //Specialist Page
+  static const String specialist = "الأخصائيون";
 }

@@ -23,7 +23,6 @@ class PlanPage extends StatelessWidget {
             height: 24,
             child: SvgPicture.asset(
               "assets/icon/Group.svg",
-              // colorFilter: ColorFilter.mode( BlendMode.srcIn),
               fit: BoxFit.contain,
             ),
           ),
@@ -31,7 +30,6 @@ class PlanPage extends StatelessWidget {
         body: Column(
           children: [
             DayItemWidget(),
-
             Flexible(child: CustomTimeLine()),
           ],
         ),

@@ -20,6 +20,11 @@ import 'package:taleq/features/groups/domain/repositories/groups_repository.dart
 import 'package:taleq/features/groups/domain/usecases/get_space_details_use_case.dart';
 import 'package:taleq/features/groups/domain/usecases/get_spaces_use_case.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
+import 'package:taleq/features/specialists/data/datasources/specialists_datasource.dart';
+import 'package:taleq/features/specialists/data/repositories/specialists_repository_impl.dart';
+import 'package:taleq/features/specialists/domain/repositories/specialists_repository.dart';
+import 'package:taleq/features/specialists/domain/usecases/get_specialists.dart';
+import 'package:taleq/features/specialists/presentation/bloc/specialists_bloc.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/data/datasources/camera_analysis_datasource.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/data/repositories/camera_analysis_repository_impl.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/domain/repositories/camera_analysis_repository.dart';
@@ -49,6 +54,9 @@ Future<void> setup() async {
   GetIt.I.registerLazySingleton<CameraAnalysisDatasource>(
     () => CameraAnalysisDatasourceImpl(),
   );
+  GetIt.I.registerLazySingleton<SpecialistsDatasource>(
+    () => SpecialistsDatasourceImpl(supabase: GetIt.I()),
+  );
 
   // Repositories
   GetIt.I.registerLazySingleton<AuthRepository>(
@@ -66,6 +74,9 @@ Future<void> setup() async {
   );
   GetIt.I.registerLazySingleton<CameraAnalysisRepository>(
     () => CameraAnalysisRepositoryImpl(datasource: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton<SpecialistsRepository>(
+    () => SpecialistsRepositoryImpl(datasource: GetIt.I()),
   );
 
   // UseCases
@@ -91,6 +102,9 @@ Future<void> setup() async {
   GetIt.I.registerLazySingleton(
     () => CameraAnalysisUseCase(repository: GetIt.I()),
   );
+  GetIt.I.registerLazySingleton(
+    () => GetSpecialistsUseCase(repository: GetIt.I()),
+  );
 
   GetIt.I.registerLazySingleton(() => GetSpacesUseCase(repository: GetIt.I()));
   GetIt.I.registerLazySingleton(
@@ -111,4 +125,5 @@ Future<void> setup() async {
   );
   GetIt.I.registerFactory(() => QuestionnaireBloc(GetIt.I()));
   GetIt.I.registerFactory(() => GroupsBloc(GetIt.I(), GetIt.I()));
+  GetIt.I.registerFactory(() => SpecialistsBloc(GetIt.I()));
 }

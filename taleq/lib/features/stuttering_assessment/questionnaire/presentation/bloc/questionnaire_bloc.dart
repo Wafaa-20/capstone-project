@@ -66,7 +66,7 @@ class QuestionnaireBloc extends Bloc<QuestionnaireEvent, QuestionnaireState> {
   ) async {
     emit(SubmitLoadingState());
     final result = await saveAnswersUseCase(
-      params: AnswerParams(answer: userAnswers),
+       AnswerParams(answer: userAnswers),
     );
     result.fold(
       (failure) => emit(SubmitFailureState(message: failure.message)),

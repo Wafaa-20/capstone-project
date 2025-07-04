@@ -11,6 +11,7 @@ class AppTheme {
       backgroundColor: AppPalette.whitePrimary,
       foregroundColor: AppPalette.black,
       titleTextStyle: TextStyles.sf60020,
+      titleSpacing: 0,
     ),
 
     // radioTheme: RadioThemeData(
@@ -72,7 +73,7 @@ class AppTheme {
 
     // 2) ضبط لون وشكل الموصلات
     connectorTheme: const ConnectorThemeData(
-      color: AppPalette.bluePrimary, 
+      color: AppPalette.bluePrimary,
       thickness: 3,
       // space: 10,
     ),

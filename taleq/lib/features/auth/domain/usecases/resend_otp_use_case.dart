@@ -9,9 +9,9 @@ class ResendOTPUseCase implements UseCase<String, ResendOTPParams> {
   ResendOTPUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, String>> call({
-    required ResendOTPParams params,
-  }) async {
+  Future<Either<Failure, String>> call(
+     ResendOTPParams params,
+  ) async {
     return await repository.resendotpAuth(email: params.email);
   }
 }

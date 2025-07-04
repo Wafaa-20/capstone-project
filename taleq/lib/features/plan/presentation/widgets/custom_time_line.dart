@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/theme/app_theme.dart';
 import 'package:taleq/features/plan/data/models/plan_details/plan_details_model.dart';
 import 'package:taleq/features/plan/presentation/bloc/plan_bloc.dart';
@@ -13,42 +14,43 @@ class CustomTimeLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // int activeStep = 1;
     final bloc = context.read<PlanBloc>();
+    Color stepColor(int index, {Color? color}) {
+      if (index < bloc.currentIndex) {
+        return color ?? AppPalette.greenSuccess;
+      } else if (index == bloc.currentIndex) {
+        return planDetails[index].color;
+      } else {
+        return color ?? AppPalette.greyLight;
+      }
+    }
 
     return BlocBuilder<PlanBloc, PlanState>(
       builder: (context, state) {
-//        final ScrollController _controller = ScrollController();
         return Padding(
           padding: const EdgeInsets.only(right: 24.0),
           child: Timeline.tileBuilder(
             theme: AppTheme.timelineTheme,
+            controller: bloc.controller,
             builder: TimelineTileBuilder.connected(
               itemCount: planDetails.length,
               connectionDirection: ConnectionDirection.after,
               connectorBuilder: (context, index, connectorType) {
-                return
-                // index < activeStep
-                //     ? SolidLineConnector(color: Colors.green, thickness: 2)
-                DashedLineConnector(
-                  color: planDetails[index].color,
+                return DashedLineConnector(
+                  color: stepColor(index),
                   dash: 4,
                   gap: 6,
                   thickness: 2,
                 );
               },
 
-              indicatorBuilder: (_, index) {
+              indicatorBuilder: (context, index) {
                 return DotIndicator(
                   size: 24,
-                  color: planDetails[index].color,
-                  child: Icon(
-                    Icons.check,
-                    color: index == bloc.currentIndex
-                        ? Colors.white
-                        : Colors.red,
-                    size: 16,
-                  ),
+                  color: stepColor(index),
+                  child: index < bloc.currentIndex
+                      ? Icon(Icons.check, color: Colors.white, size: 16)
+                      : SizedBox(),
                 );
               },
 
@@ -57,17 +59,21 @@ class CustomTimeLine extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 child: PlanWidget(
                   detail: planDetails[index],
-                  color: planDetails[index].color,
+                  index: index,
+                  containerColor: stepColor(
+                    index,
+                    color: AppPalette.whiteLight,
+                  ),
                   onPressed: () {
                     //    ctx.go(planDetails[index].route);
-
                     bloc.add(SelectExerciseEvent(currentExercise: index));
-                    // _controller.animateTo(
-                    //   index * 150, // تقريبًا حسب حجم العنصر
-                    //   duration: Duration(milliseconds: 500),
-                    //   curve: Curves.easeInOut,
-                    // );
+                    bloc.controller.animateTo(
+                      index * 150, // تقريبًا حسب حجم العنصر
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    );
                   },
+                  bloc: bloc,
                 ),
               ),
 

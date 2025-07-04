@@ -19,7 +19,7 @@ class CameraAnalysisBloc
     Emitter<CameraAnalysisState> emit,
   ) async {
     emit(CameraAnalysisLoading());
-    final result = await getCameraAnalysis.call(params: CameraAnalysisParam());
+    final result = await getCameraAnalysis.call( CameraAnalysisParam());
 
     result.fold(
       (failure) => emit(CameraAnalysisFailure(message: failure.message)),

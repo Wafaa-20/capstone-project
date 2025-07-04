@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,12 +20,11 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
     Emitter<PlanState> emit,
   ) {
     final newIndex = event.currentExercise;
-    log({event.currentExercise}.toString());
     //back to Previous Exercise
-    if (newIndex < 0) {
+    if (newIndex < currentIndex) {
       emit(PreviousExercise(previousIndex: newIndex));
       //Go to Current Exercise
-    } else if (newIndex == 0) {
+    } else if (newIndex == currentIndex) {
       emit(CurrentExercise(currentIndex: newIndex));
       //Go to Next Exercise
     } else if (newIndex > currentIndex && newIndex < totalExercises) {

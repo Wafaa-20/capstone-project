@@ -10,9 +10,9 @@ class ForgetPasswordUseCase
   ForgetPasswordUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, String>> call({
-    required ForgetPasswordParams params,
-  }) async {
+  Future<Either<Failure, String>> call(
+     ForgetPasswordParams params,
+  ) async {
     return await repository.forgetPassword(email: params.email);
   }
 }
