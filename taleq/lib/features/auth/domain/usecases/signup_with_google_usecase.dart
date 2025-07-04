@@ -11,9 +11,9 @@ class SignupWithGoogleUseCase
   SignupWithGoogleUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, SignupWithGoogleEntity>> call({
-    required SignupWithGoogleParams params,
-  }) async {
+  Future<Either<Failure, SignupWithGoogleEntity>> call(
+    SignupWithGoogleParams params,
+  ) async {
     return await repository.signupWithGoogleAuth();
   }
 }

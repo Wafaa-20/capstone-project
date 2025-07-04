@@ -10,9 +10,9 @@ class ChangePasswordUseCase implements UseCase<String, ChangePasswordParams> {
   ChangePasswordUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, String>> call({
-    required ChangePasswordParams params,
-  }) async {
+  Future<Either<Failure, String>> call(
+     ChangePasswordParams params,
+  ) async {
     return await repository.changePassword(
       password: params.password,
       email: params.email,

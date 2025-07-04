@@ -9,9 +9,9 @@ class LoginUseCase implements UseCase<AuthEntity, LoginParams> {
 
   LoginUseCase({required this.repository});
   @override
-  Future<Either<Failure, AuthEntity>> call({
-    required LoginParams params,
-  }) async {
+  Future<Either<Failure, AuthEntity>> call(
+     LoginParams params,
+  ) async {
     return await repository.loginAuth(
       email: params.email,
       password: params.password,

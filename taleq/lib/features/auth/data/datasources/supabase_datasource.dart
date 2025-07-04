@@ -9,6 +9,7 @@ abstract class AuthRemoteDatasource {
     required String email,
     required String password,
   });
+  
   Future<AuthModel> login({required String email, required String password});
   Future signupWithGoogleAuth();
   Future signupWithAppleAuth();

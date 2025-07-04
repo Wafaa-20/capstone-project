@@ -12,9 +12,9 @@ class SaveAnswersUseCase implements UseCase<UserAnswerEntity, AnswerParams> {
   
 
   @override
-  Future<Either<Failure, UserAnswerEntity>> call({
-    required AnswerParams params,
-  }) async {
+  Future<Either<Failure, UserAnswerEntity>> call(
+     AnswerParams params,
+  ) async {
     return await repository.saveUserAnswers(answers: params.answer);
   }
 }

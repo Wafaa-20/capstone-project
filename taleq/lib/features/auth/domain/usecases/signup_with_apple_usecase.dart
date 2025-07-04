@@ -9,9 +9,9 @@ class SignupWithAppleUseCase implements UseCase<SignupWithAppleEntity, SignupWit
   SignupWithAppleUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, SignupWithAppleEntity>> call({
-    required SignupWithAppleParams params,
-  }) async {
+  Future<Either<Failure, SignupWithAppleEntity>> call(
+     SignupWithAppleParams params,
+  ) async {
     return await repository.signupWithAppleAuth();
   }
 }

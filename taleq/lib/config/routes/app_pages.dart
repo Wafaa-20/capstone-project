@@ -4,19 +4,18 @@ import 'package:go_router/go_router.dart';
 import 'package:taleq/features/auth/presentation/pages/change_password_page.dart';
 import 'package:taleq/features/auth/presentation/pages/forget_password_page.dart';
 import 'package:taleq/features/auth/presentation/pages/login_page.dart';
-
 import 'package:taleq/features/auth/presentation/pages/signup_page.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/page/breathing_excercise_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_start_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise_start/presentation/page/intro_words_excercise_page.dart';
 import 'package:taleq/features/exercises/presentation/page/task_success_page.dart';
-
 import 'package:taleq/features/home/presentation/pages/home_page.dart';
 import 'package:taleq/features/navigation/presentation/pages/navigation_page.dart';
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:taleq/features/payment/presentation/pages/payment_page.dart';
 import 'package:taleq/features/plan/presentation/pages/plan_page.dart';
+import 'package:taleq/features/specialists/presentation/pages/specialists_page.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:taleq/features/splash/presentation/pages/splash_page.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/presentation/pages/assessment_result_page.dart';
@@ -28,7 +27,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/plan',
+  initialLocation: '/specialists',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     GoRoute(
@@ -86,6 +85,11 @@ final router = GoRouter(
       name: Names.navigation,
       path: Routes.navigation,
       builder: (context, state) => const NavigationPage(),
+    ),
+    GoRoute(
+      name: Names.specialists,
+      path: Routes.specialists,
+      builder: (context, state) => const SpecialistsPage(),
     ),
 
     GoRoute(

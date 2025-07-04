@@ -8,6 +8,7 @@ abstract class Routes {
   static const assessmentResult = _Paths.assessmentResult;
   static const navigation = _Paths.navigation;
   static const home = _Paths.home;
+  static const specialists = _Paths.specialists;
   static const success = _Paths.success;
   static const words = _Paths.words;
   static const srartwords = _Paths.srartwords;
@@ -34,6 +35,7 @@ abstract class _Paths {
   static const assessmentResult = '/assessmentResult';
   static const navigation = '/navigation';
   static const home = '/home';
+  static const specialists = '/specialists';
   static const success = '/success';
   static const words = '/words';
   static const srartwords = '/srartwords';
@@ -61,6 +63,7 @@ abstract class _Names {
   static const otp = 'otp';
   static const navigation = 'navigation';
   static const home = 'home';
+  static const specialists = 'specialists';
   static const success = 'success';
   static const words = 'words';
   static const srartwords = 'srartwords';
@@ -88,6 +91,7 @@ abstract class Names {
   static const otp = _Names.otp;
   static const navigation = _Names.navigation;
   static const home = _Names.home;
+  static const specialists = _Names.specialists;
   static const success = _Names.success;
   static const words = _Names.words;
   static const srartwords = _Names.srartwords;

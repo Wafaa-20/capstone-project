@@ -86,21 +86,20 @@ class PlanWidget extends StatelessWidget {
           Positioned(
             top: 53,
             left: 15,
-            child: index == bloc.currentIndex
-                ? CustomButton(
-                    width: 72,
-                    height: 2,
-                    color: AppPalette.whiteLight,
-                    sideColor: AppPalette.whiteLight,
-                    onPressed: onPressed,
-                    child: Text(
-                      AppText.start,
-                      style: TextStyles.sf40016.copyWith(
-                        color: AppPalette.black,
-                      ),
-                    ),
-                  )
-                : SizedBox(),
+            child:
+                // index == bloc.currentIndex
+                CustomButton(
+                  width: 72,
+                  height: 2,
+                  color: AppPalette.whiteLight,
+                  sideColor: AppPalette.whiteLight,
+                  onPressed: onPressed,
+                  child: Text(
+                    AppText.start,
+                    style: TextStyles.sf40016.copyWith(color: AppPalette.black),
+                  ),
+                ),
+            // : SizedBox(),
           ),
         ],
       ),

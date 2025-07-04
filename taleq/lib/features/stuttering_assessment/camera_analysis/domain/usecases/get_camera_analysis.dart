@@ -11,9 +11,9 @@ class CameraAnalysisUseCase
   CameraAnalysisUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, CameraAnalysisEntity>> call({
-    required CameraAnalysisParam params,
-  }) async {
+  Future<Either<Failure, CameraAnalysisEntity>> call(
+     CameraAnalysisParam params,
+  ) async {
     return await repository.getCameraAnalysis();
   }
 }
