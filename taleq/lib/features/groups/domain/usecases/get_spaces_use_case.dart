@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:taleq/core/error/failures.dart';
 import 'package:taleq/core/usecase/usecase.dart';
@@ -14,6 +16,7 @@ class GetSpacesUseCase
   Future<Either<Failure, Map<String, List<SpacesEntity>>>> call(
     GetSpacesParams params,
   ) async {
+    
     return await repository.getSummerySpaces();
   }
 }

@@ -7,7 +7,6 @@
 part of 'summary_spaces_model.dart';
 
 class SummarySpaceMapper extends ClassMapperBase<SummarySpace> {
-  
   SummarySpaceMapper._();
 
   static SummarySpaceMapper? _instance;

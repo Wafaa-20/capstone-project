@@ -38,3 +38,14 @@ class SpaceDetailsSuccess extends GroupsState {
 class SpaceDetailsFiled extends GroupsState {
   const SpaceDetailsFiled();
 }
+
+class JoinSuccees extends GroupsState {
+  final String userID;
+  final String token;
+  const JoinSuccees({required this.userID, required this.token});
+}
+
+class JoinFalid extends GroupsState {
+  final String message;
+  const JoinFalid({required this.message});
+}

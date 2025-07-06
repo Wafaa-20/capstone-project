@@ -28,3 +28,10 @@ class BringSpaceDetails extends GroupsEvent {
   @override
   List<Object> get props => [spaceId];
 }
+
+class JoinSpace extends GroupsEvent {
+  final String spaceID;
+  final String channelName;
+
+  const JoinSpace({required this.spaceID, required this.channelName});
+}

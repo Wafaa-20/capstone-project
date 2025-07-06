@@ -30,7 +30,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/specialists',
+  initialLocation: '/navigation',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     GoRoute(
@@ -171,8 +171,14 @@ final router = GoRouter(
     ),
     GoRoute(
       name: Names.space,
-      path: Routes.space,
-      builder: (context, state) => const SpacePage(),
+      path: '/space',
+      builder: (context, state) {
+        final token = state.uri.queryParameters['token'];
+        final userID = state.uri.queryParameters['userID'];
+        final spaceID = state.uri.queryParameters['spaceID'];
+
+        return SpacePage(userID: userID!, token: token!, spaceID: spaceID!);
+      },
     ),
     GoRoute(
       name: Names.groups,

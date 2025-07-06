@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/features/groups/domain/usecases/get_space_details_use_case.dart';
 import 'package:taleq/features/groups/domain/usecases/get_spaces_use_case.dart';
+import 'package:taleq/features/groups/domain/usecases/join_space_use_case.dart';
 import 'groups_event.dart';
 import 'groups_state.dart';
 
@@ -15,11 +17,12 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
   final details = TextEditingController();
   final GetSpacesUseCase _getSpacesUseCase;
   final GetSpaceDetailsUseCase _getSpaceDetailsUseCase;
-
-  GroupsBloc(this._getSpacesUseCase, this._getSpaceDetailsUseCase)
+  final JoinSpaceUseCase _joinSpaceUseCase;
+  GroupsBloc(this._getSpacesUseCase, this._getSpaceDetailsUseCase, this._joinSpaceUseCase)
     : super(GroupsInitial()) {
     on<GetSpaces>(getSpaces);
     on<BringSpaceDetails>(getSpaceDetails);
+    on<JoinSpace>(joinspace);
   }
   FutureOr<void> getSpaces(event, Emitter<GroupsState> emit) async {
     emit(SpacesLoading());
@@ -36,13 +39,23 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     );
   }
 
+    FutureOr<void> joinspace(JoinSpace event, Emitter<GroupsState> emit) async {
+    emit(SpacesLoading());
+    final result = await _joinSpaceUseCase(JoinSpaceParams(spaceID: event.spaceID,channelName:event.channelName));
+
+    result.fold(
+      (failure) => emit(JoinFalid(message: failure.message)),
+      (result) => emit(JoinSuccees(userID: result.userID, token: result.token)),
+    );
+  }
+
   FutureOr<void> getSpaceDetails(
     BringSpaceDetails event,
     Emitter<GroupsState> emit,
   ) async {
     emit(SpacesLoading());
     final spaceDetails = await _getSpaceDetailsUseCase(
-       GetSpaceDetailsParams(id: event.spaceId),
+      GetSpaceDetailsParams(id: event.spaceId),
     );
 
     spaceDetails.fold(
@@ -74,7 +87,9 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
   }
 
   String formatDetailsDate(DateTime startDate, DateTime endDate) {
-    return "${startDate.day}-${endDate.day}/ ${startDate.month}";
+    final monthName = DateFormat.MMMM('ar').format(startDate);
+
+    return "${startDate.day}-${endDate.day} $monthName";
   }
 
   bool isTodayBetween(DateTime today, DateTime start, DateTime end) {

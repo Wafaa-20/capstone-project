@@ -139,6 +139,7 @@ class GroupCard extends StatelessWidget {
                             fontSize: 17,
                             color: AppPalette.bluePrimary,
                           ),
+                      softWrap: true,
                     ),
                     if (showRightIcon && icon != null)
                       Row(

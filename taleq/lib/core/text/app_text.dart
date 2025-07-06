@@ -130,6 +130,9 @@ class AppText {
   static const String groupDate2 = "الخميس, 19 مارس";
   static const String groupTitle3 = "مساحة تجارب";
   static const String join = "انضمام";
+  static const String pepole = "أشخاص";
+  static const String availableSeats = "مقاعد متبقية";
+
   //Plan
 
   static const String homeAppBar = "تدريباتي اليومية";

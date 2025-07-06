@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
@@ -89,8 +93,8 @@ class AvailableGroup extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       GroupCard(
-                                        height: 86,
-                                        width: 113,
+                                        height: context.getHeight() * 0.115,
+                                        width: context.getWidth() * 0.285,
                                         title: bloc.formatDetailsDate(
                                           state.spaceDetails.startDate,
                                           state.spaceDetails.endDate,
@@ -106,10 +110,10 @@ class AvailableGroup extends StatelessWidget {
                                       ),
                                       const SizedBox(width: 8),
                                       GroupCard(
-                                        height: 86,
-                                        width: 113,
-                                        title: state.spaceDetails.numberOfPepole
-                                            .toString(),
+                                        height: context.getHeight() * 0.115,
+                                        width: context.getWidth() * 0.285,
+                                        title:
+                                            '${state.spaceDetails.numberOfPepole.toString()} ${AppText.pepole.tr()}',
                                         icon: Icons.groups,
                                         background: AppPalette.whiteLight,
                                         iconOnTop: true,
@@ -121,16 +125,16 @@ class AvailableGroup extends StatelessWidget {
                                       ),
                                       const SizedBox(width: 8),
                                       GroupCard(
-                                        height: 86,
-                                        width: 113,
-                                        title: state.spaceDetails.numberOfSeats
-                                            .toString(),
+                                        height: context.getHeight() * 0.115,
+                                        width: context.getWidth() * 0.285,
+                                        title:
+                                            '${state.spaceDetails.numberOfSeats.toString()} ${AppText.availableSeats.tr()}',
                                         icon: Icons.event_seat,
                                         background: AppPalette.whiteLight,
                                         iconOnTop: true,
                                         showDate: false,
                                         showButton: false,
-                                        titleStyle: TextStyles.sf30014.copyWith(
+                                        titleStyle: TextStyles.sf40016.copyWith(
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -213,7 +217,14 @@ class AvailableGroup extends StatelessWidget {
                           child: CustomButton(
                             height: 44,
                             width: 365,
-                            onPressed: () {},
+                            onPressed: () {
+                              bloc.add(
+                                JoinSpace(
+                                  spaceID: state.spaceDetails.id,
+                                  channelName: state.spaceDetails.channelName,
+                                ),
+                              );
+                            },
                             child: Text(
                               AppText.joinGroup.tr(),
                               style: TextStyles.sf60020.copyWith(
@@ -224,8 +235,160 @@ class AvailableGroup extends StatelessWidget {
                         ),
                       ],
                     );
+                  } else if (state is JoinSuccees) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      context.push(
+                        '/space?userID=${Uri.encodeComponent(state.userID)}'
+                        '&token=${Uri.encodeComponent(state.token)}'
+                        '&spaceID=${Uri.encodeComponent(spaceId)}',
+                      );
+                    });
+                  } else if (state is JoinFalid) {
+                    return Center(child: Text(AppText.error.tr()));
                   }
-                  return Center(child: Text(AppText.error.tr()));
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        context.customPop();
+                                      },
+                                      icon: const Icon(
+                                        Icons.keyboard_arrow_right_rounded,
+                                        size: 30,
+                                      ),
+                                      padding: const EdgeInsets.fromLTRB(
+                                        0,
+                                        10,
+                                        0,
+                                        20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              GroupCard(
+                                height: 100,
+                                width: 361,
+                                background: AppPalette.blueGroup,
+                                showButton: false,
+                                title: "",
+                                titleAlignment: AlignmentDirectional(-0.9, 0.2),
+                                titleStyle: TextStyles.sf70018.copyWith(
+                                  color: AppPalette.black,
+                                ),
+                                backgroundImage: const DecorationImage(
+                                  image: AssetImage(
+                                    "assets/image/tabler_butterfly.png",
+                                  ),
+                                  alignment: Alignment(-0.5, -0.35),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GroupCard(
+                                      height: context.getHeight() * 0.115,
+                                      width: context.getWidth() * 0.285,
+                                      title: "",
+                                      icon: Icons.access_time_outlined,
+                                      background: AppPalette.whiteLight,
+                                      iconOnTop: true,
+                                      showDate: false,
+                                      showButton: false,
+                                      titleStyle: TextStyles.sf30014.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    GroupCard(
+                                      height: context.getHeight() * 0.115,
+                                      width: context.getWidth() * 0.285,
+                                      title: AppText.pepole.tr(),
+                                      icon: Icons.groups,
+                                      background: AppPalette.whiteLight,
+                                      iconOnTop: true,
+                                      showDate: false,
+                                      showButton: false,
+                                      titleStyle: TextStyles.sf30014.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    GroupCard(
+                                      height: context.getHeight() * 0.115,
+                                      width: context.getWidth() * 0.285,
+                                      title: AppText.availableSeats.tr(),
+                                      icon: Icons.event_seat,
+                                      background: AppPalette.whiteLight,
+                                      iconOnTop: true,
+                                      showDate: false,
+                                      showButton: false,
+                                      titleStyle: TextStyles.sf40016.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              GroupCard(
+                                height: 55,
+                                width: 364,
+                                title: AppText.groupDec.tr(),
+                                showButton: false,
+                                showLeftIcon: false,
+                                background: AppPalette.blueGroup,
+                                titleStyle: TextStyles.sf70016.copyWith(
+                                  color: AppPalette.black,
+                                ),
+                              ),
+                              Text("", style: TextStyles.sf50014),
+                              const SizedBox(height: 12),
+                              GroupCard(
+                                height: 55,
+                                width: 364,
+                                title: AppText.groupGole.tr(),
+                                showButton: false,
+                                showLeftIcon: false,
+                                background: AppPalette.blueGroup,
+                                titleStyle: TextStyles.sf70016.copyWith(
+                                  color: AppPalette.black,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: CustomButton(
+                          height: 44,
+                          width: 365,
+                          onPressed: () {},
+                          child: Text(
+                            AppText.joinGroup.tr(),
+                            style: TextStyles.sf60020.copyWith(
+                              color: AppPalette.whiteLight,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
                 },
               ),
             ),

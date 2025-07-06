@@ -1,11 +1,18 @@
 import 'dart:collection';
+import 'dart:developer';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:taleq/features/groups/data/models/join_details.dart';
 import 'package:taleq/features/groups/data/models/space_details_model.dart';
 import 'package:taleq/features/groups/data/models/summary_spaces_model.dart';
+import 'package:taleq/features/groups/presentation/bloc/groups_event.dart';
 
 abstract class GroupsRemoteDatasource {
   Future<Map<String, List<SummarySpace>>> getSummerySpaces();
+
   Future<SpaceDetails> getSpaceDetails(String spaceId);
+  Future<JoinDetailsModel> joinSpace(String spaceId, String channelName);
 }
 
 class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
@@ -55,8 +62,10 @@ class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
 
       return {'availableSpaces': availableSpaces, 'userSpaces': userSpaces};
     } on AuthException catch (e) {
+      log("message : $e");
       throw FormatException(e.message);
     } catch (e) {
+      log("message : $e");
       throw const FormatException("Error fetching spaces.");
     }
   }
@@ -96,5 +105,75 @@ class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
     } catch (e) {
       throw const FormatException("Error fetching space details.");
     }
+  }
+
+  @override
+  Future<JoinDetailsModel> joinSpace(String spaceId, String channelName) async {
+    try {
+      final currentParticipantsResponse = await supabase
+          .from('space_members')
+          .count(CountOption.exact)
+          .eq('space_id', spaceId);
+
+      final currentParticipantsCount = currentParticipantsResponse;
+
+      final maxResponse = await supabase
+          .from('spaces')
+          .select('max_participants')
+          .eq('id', spaceId)
+          .single();
+
+      final maxParticipants = maxResponse['max_participants'] ?? 0;
+
+      if (currentParticipantsCount >= maxParticipants) {
+        throw FormatException("المساحة ممتلئة");
+      }
+
+      final String uid = supabase.auth.currentUser!.id;
+
+      await supabase.from('space_members').upsert({
+        'space_id': spaceId,
+        'user_id': uid,
+        'joined_at': DateTime.now().toIso8601String(),
+      }, onConflict: 'space_id,user_id');
+
+      final token = await _fetchAgoraTokenFromBackend(channelName, uid);
+
+      return JoinDetailsModel(userID: uid, token: token);
+    } on AuthException catch (e) {
+      log(e.toString());
+      log(e.message.toString());
+      throw FormatException(e.message);
+    } catch (e) {
+      log(e.toString());
+      log(e.toString());
+      throw const FormatException("حدث خطأ أثناء التحقق من المساحة.");
+    }
+  }
+
+  Future<String> _fetchAgoraTokenFromBackend(
+    String channelName,
+    String uid,
+  ) async {
+    final url = Uri.parse('http://hsat.masar10.com/api/taleqapi/token.php');
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Ourkey': 'TALEQAPIPASSING',
+      },
+      body: jsonEncode({'channelName': channelName, 'uid': uid}),
+    );
+
+    if (response.statusCode != 200) {
+      throw FormatException('فشل إنشاء التوكن: ${response.statusCode}');
+    }
+
+    final data = jsonDecode(response.body);
+    if (data['status'] != 'success') {
+      throw FormatException('فشل إنشاء التوكن: ${data['message']}');
+    }
+
+    return data['token'];
   }
 }
