@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:taleq/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'config/routes/app_pages.dart';
+import 'routes/app_pages.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -17,6 +17,12 @@ class TextStyles {
     fontSize: 30,
     color: AppPalette.black,
   );
+  static final sf70025 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w700,
+    fontSize: 25,
+    color: AppPalette.black,
+  );
   static final sf70020 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w700,
@@ -66,7 +72,12 @@ class TextStyles {
     fontSize: 18,
     color: AppPalette.black,
   );
-
+  static final sf60016 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    color: AppPalette.black,
+  );
   // SF500
   static final sf50018 = TextStyle(
     fontFamily: _fontFamily,
@@ -88,6 +99,13 @@ class TextStyles {
     color: AppPalette.bluePrimary,
   );
   // SF400
+
+  static final sf40020 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 20,
+    color: AppPalette.black,
+  );
   static final sf40018 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,

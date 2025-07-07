@@ -42,7 +42,7 @@ class BottomSheetBody extends StatelessWidget {
                 height: context.getHeight() * 0.55,
                 AddNewCard(),
               );
-              log("PAY");
+            
             },
           ),
 

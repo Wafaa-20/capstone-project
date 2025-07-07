@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/features/onboarding/data/models/onboarding_model.dart';
+import 'package:taleq/features/profile/data/models/profile_model.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/data/models/question/question_model.dart';
 
 class ListConstants {
@@ -70,5 +72,34 @@ class ListConstants {
     AppText.phrase1,
     AppText.phrase2,
     AppText.phrase3,
+  ];
+  static List<ProfileModel> profileData = [
+    ProfileModel(
+      icon: Icons.create_outlined,
+      title: AppText.editProfile,
+      iconBack: Icons.arrow_forward_ios,
+      route: '/editProfile',
+    ),
+    ProfileModel(
+      icon: Icons.notifications_active_outlined,
+      title: AppText.reminders,
+      iconBack: Icons.arrow_forward_ios,
+      route: '/reminder',
+    ),
+    ProfileModel(
+      icon: Icons.language_outlined,
+      title: AppText.language,
+      iconBack: Icons.arrow_forward_ios,
+    ),
+    ProfileModel(
+      icon: Icons.phone_outlined,
+      title: AppText.contactUs,
+      iconBack: Icons.arrow_forward_ios,
+    ),
+    ProfileModel(
+      icon: Icons.exit_to_app,
+      title: AppText.logout,
+      iconBack: Icons.logout,
+    ),
   ];
 }

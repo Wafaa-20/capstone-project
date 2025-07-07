@@ -30,7 +30,7 @@ class QuestionnaireDatasourceImpl implements QuestionnaireDatasource {
         'goal_of_use_taleq': answerModel.answers[AppText.questionnaire4],
       });
       return UserAnswerModel(answers: answerModel.answers);
-    } on AuthException catch (e) {
+    } on PostgrestException  catch (e) {
       throw FormatException(e.message);
     } catch (e) {
       throw FormatException("There is error with save answer");

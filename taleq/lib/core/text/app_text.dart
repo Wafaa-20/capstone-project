@@ -197,4 +197,40 @@ class AppText {
 
   //Specialist Page
   static const String specialist = "الأخصائيون";
+  static const String tabTitle = "نبذة";
+  static const String tabTitle2 = "حجز الجلسة";
+  static const String ratings = "التقييمات";
+  static const String time = "الأوقات المتاحة";
+  static const String bookSession = "حجز الموعد";
+
+  //Profile Page
+  static const String profileTitle = "الملف الشخصي";
+  static const String editProfile = "تعديل الملف الشخصي";
+  static const String reminders = "التذكيرات";
+  static const String language = "اللغة";
+  static const String contactUs = "تواصل معنا";
+  static const String logout = "تسجيل خروج";
+  static const String joinAsSpecialist = "الأنضمام كأخصائي";
+
+  //Edit Profile Page
+  static const String editTitle = "تعديل الملف الشخصي";
+  static const String name = "الأسم";
+  static const String save = "حفظ التعديلات";
+
+  //Camera Bottom Sheet
+  static const String editProfilePicture = "تعديل صورة الملف الشخصي";
+  static const String takePhoto = "التقاط صورة";
+  static const String choosePhoto = "اختيار صورة";
+  static const String deletePhoto = "حذف الصورة";
+
+  //language Dialog
+  static const String ar = "العربية";
+  static const String en = "الإنجليزية";
+
+  //Reminder Page
+  static const String reminderTitle = "اضبط تذكيراتك لخطتك العلاجية !";
+  static const String reminderSubtitle =
+      """تأكد من عدم تفويت أي جلسة , وابقَ على المسار الصحيح في رحلتك العلاجية.""";
+  static const String reminder = "تمكين التذكير";
+  static const String notNow = "ليس الان";
 }

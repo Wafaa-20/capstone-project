@@ -18,7 +18,6 @@ class SpecialistsBloc extends Bloc<SpecialistsEvent, SpecialistsState> {
   ) async {
     emit(SpecialistsLoading());
     final result = await specialistsUseCase(SpecialistsParam());
-    print("Result From BLOC: $result");
     result.fold(
       (failure) => emit(SpecialistsFailure(message: failure.message)),
       (success) => emit(SpecialistsSuccesses(specialists: success)),

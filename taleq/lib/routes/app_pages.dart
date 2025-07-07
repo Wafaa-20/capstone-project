@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/features/auth/presentation/pages/change_password_page.dart';
 import 'package:taleq/features/auth/presentation/pages/forget_password_page.dart';
@@ -15,6 +16,10 @@ import 'package:taleq/features/navigation/presentation/pages/navigation_page.dar
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:taleq/features/payment/presentation/pages/payment_page.dart';
 import 'package:taleq/features/plan/presentation/pages/plan_page.dart';
+import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:taleq/features/profile/presentation/pages/edit_profile_page.dart';
+import 'package:taleq/features/profile/presentation/pages/profile_page.dart';
+import 'package:taleq/features/profile/presentation/pages/reminder_page.dart';
 import 'package:taleq/features/specialists/presentation/pages/specialists_page.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:taleq/features/splash/presentation/pages/splash_page.dart';
@@ -30,6 +35,30 @@ final router = GoRouter(
   initialLocation: '/specialists',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
+    //Profile Page
+    GoRoute(
+      name: Names.profile,
+      path: Routes.profile,
+      builder: (context, state) => const ProfilePage(),
+    ),
+    //Edit Profile Page
+    GoRoute(
+      name: Names.editProfile,
+      path: Routes.editProfile,
+      builder: (context, state) {
+        return BlocProvider<ProfileBloc>(
+          create: (_) => GetIt.I<ProfileBloc>(),
+          child: const EditProfilePage(),
+        );
+      },
+    ),
+    //Reminder Page
+    GoRoute(
+      name: Names.reminder,
+      path: Routes.reminder,
+      builder: (context, state) => const ReminderPage(),
+    ),
+
     GoRoute(
       name: Names.splash,
       path: Routes.splash,
@@ -80,23 +109,25 @@ final router = GoRouter(
       path: '/login-callback',
       builder: (context, state) => const HomePage(),
     ),
-
+    //NavigationPage
     GoRoute(
       name: Names.navigation,
       path: Routes.navigation,
       builder: (context, state) => const NavigationPage(),
     ),
+    //Specialists Page
     GoRoute(
       name: Names.specialists,
       path: Routes.specialists,
       builder: (context, state) => const SpecialistsPage(),
     ),
-
+    //HomePage
     GoRoute(
       name: Names.home,
       path: Routes.home,
       builder: (context, state) => const HomePage(),
     ),
+    //TaskSuccess Page
     GoRoute(
       name: Names.success,
       path: Routes.success,
