@@ -50,7 +50,6 @@ class _SpacePageState extends State<SpacePage> {
       token: widget.token,
       channelName: channelName,
       userAccount: widget.userID,
-      isBroadcaster: widget.hostID == widget.userID ? true : false,
     );
     setState(() => isAgoraInitialized = true);
   }

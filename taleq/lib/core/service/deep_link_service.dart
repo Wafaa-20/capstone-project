@@ -37,7 +37,7 @@ Future<void> handleAuthCallback(Uri? uri, BuildContext context) async {
     await Future.delayed(Duration(seconds: 2));
     if (context.mounted) {
       if (session != null) {
-        context.go('/home');
+        context.go('/navigation');
       } else {
         context.go('/login');
       }
