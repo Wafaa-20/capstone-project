@@ -3,6 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
+
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:taleq/features/groups/data/models/join_details.dart';
 
@@ -20,6 +21,11 @@ class JoinDetailsModelMapper extends ClassMapperBase<JoinDetailsModel> {
   @override
   final String id = 'JoinDetailsModel';
 
+  static String _$hostID(JoinDetailsModel v) => v.hostID;
+  static const Field<JoinDetailsModel, String> _f$hostID = Field(
+    'hostID',
+    _$hostID,
+  );
   static String _$userID(JoinDetailsModel v) => v.userID;
   static const Field<JoinDetailsModel, String> _f$userID = Field(
     'userID',
@@ -33,12 +39,14 @@ class JoinDetailsModelMapper extends ClassMapperBase<JoinDetailsModel> {
 
   @override
   final MappableFields<JoinDetailsModel> fields = const {
+    #hostID: _f$hostID,
     #userID: _f$userID,
     #token: _f$token,
   };
 
   static JoinDetailsModel _instantiate(DecodingData data) {
     return JoinDetailsModel(
+      hostID: data.dec(_f$hostID),
       userID: data.dec(_f$userID),
       token: data.dec(_f$token),
     );
@@ -106,7 +114,7 @@ extension JoinDetailsModelValueCopy<$R, $Out>
 
 abstract class JoinDetailsModelCopyWith<$R, $In extends JoinDetailsModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? userID, String? token});
+  $R call({String? hostID, String? userID, String? token});
   JoinDetailsModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -121,14 +129,16 @@ class _JoinDetailsModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<JoinDetailsModel> $mapper =
       JoinDetailsModelMapper.ensureInitialized();
   @override
-  $R call({String? userID, String? token}) => $apply(
+  $R call({String? hostID, String? userID, String? token}) => $apply(
     FieldCopyWithData({
+      if (hostID != null) #hostID: hostID,
       if (userID != null) #userID: userID,
       if (token != null) #token: token,
     }),
   );
   @override
   JoinDetailsModel $make(CopyWithData data) => JoinDetailsModel(
+    hostID: data.get(#hostID, or: $value.hostID),
     userID: data.get(#userID, or: $value.userID),
     token: data.get(#token, or: $value.token),
   );

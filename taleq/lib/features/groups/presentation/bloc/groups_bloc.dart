@@ -18,8 +18,11 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
   final GetSpacesUseCase _getSpacesUseCase;
   final GetSpaceDetailsUseCase _getSpaceDetailsUseCase;
   final JoinSpaceUseCase _joinSpaceUseCase;
-  GroupsBloc(this._getSpacesUseCase, this._getSpaceDetailsUseCase, this._joinSpaceUseCase)
-    : super(GroupsInitial()) {
+  GroupsBloc(
+    this._getSpacesUseCase,
+    this._getSpaceDetailsUseCase,
+    this._joinSpaceUseCase,
+  ) : super(GroupsInitial()) {
     on<GetSpaces>(getSpaces);
     on<BringSpaceDetails>(getSpaceDetails);
     on<JoinSpace>(joinspace);
@@ -39,13 +42,21 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     );
   }
 
-    FutureOr<void> joinspace(JoinSpace event, Emitter<GroupsState> emit) async {
+  FutureOr<void> joinspace(JoinSpace event, Emitter<GroupsState> emit) async {
     emit(SpacesLoading());
-    final result = await _joinSpaceUseCase(JoinSpaceParams(spaceID: event.spaceID,channelName:event.channelName));
+    final result = await _joinSpaceUseCase(
+      JoinSpaceParams(spaceID: event.spaceID, channelName: event.channelName),
+    );
 
     result.fold(
       (failure) => emit(JoinFalid(message: failure.message)),
-      (result) => emit(JoinSuccees(userID: result.userID, token: result.token)),
+      (result) => emit(
+        JoinSuccees(
+          userID: result.userID,
+          token: result.token,
+          hostID: result.hostID,
+        ),
+      ),
     );
   }
 

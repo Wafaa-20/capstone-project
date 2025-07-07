@@ -6,12 +6,17 @@ import 'package:taleq/features/groups/domain/entities/join_details.dart';
 class JoinDetailsModel {
   final String userID;
   final String token;
+  final String hostID;
 
-  const JoinDetailsModel({required this.userID, required this.token});
+  const JoinDetailsModel({
+    required this.hostID,
+    required this.userID,
+    required this.token,
+  });
 }
 
 extension JoinDetailsEntityToEntityMapper on JoinDetailsModel {
   JoinDetailsEntity toEntity() {
-    return JoinDetailsEntity(userID: userID, token: token);
+    return JoinDetailsEntity(userID: userID, token: token,hostID:hostID);
   }
 }

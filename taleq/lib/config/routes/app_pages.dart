@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/features/auth/presentation/pages/change_password_page.dart';
 import 'package:taleq/features/auth/presentation/pages/forget_password_page.dart';
@@ -17,6 +18,7 @@ import 'package:taleq/features/navigation/presentation/pages/navigation_page.dar
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:taleq/features/payment/presentation/pages/payment_page.dart';
 import 'package:taleq/features/plan/presentation/pages/plan_page.dart';
+import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
 import 'package:taleq/features/space/presentation/pages/space_page.dart';
 import 'package:taleq/features/specialists/presentation/pages/specialists_page.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
@@ -30,7 +32,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/navigation',
+  initialLocation: '/login',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     GoRoute(
@@ -106,19 +108,18 @@ final router = GoRouter(
       builder: (context, state) => const TaskSuccessPage(),
     ),
 
-    //EX 1
     GoRoute(
       name: Names.srartexercise,
       path: Routes.srartexercise,
       builder: (context, state) => const IntroWordsExercisePage(),
     ),
-    //Ex 2
+
     GoRoute(
       name: Names.breathing,
       path: Routes.breathing,
       builder: (context, state) => const BreathingExercisePage(),
     ),
-    //Ex 3
+
     GoRoute(
       name: Names.words,
       path: Routes.words,
@@ -173,13 +174,23 @@ final router = GoRouter(
       name: Names.space,
       path: '/space',
       builder: (context, state) {
-        final token = state.uri.queryParameters['token'];
-        final userID = state.uri.queryParameters['userID'];
-        final spaceID = state.uri.queryParameters['spaceID'];
+        final token = state.uri.queryParameters['token'] ?? '';
+        final userID = state.uri.queryParameters['userID'] ?? '';
+        final spaceID = state.uri.queryParameters['spaceID'] ?? '';
+        final hostID = state.uri.queryParameters['hostID'] ?? '';
 
-        return SpacePage(userID: userID!, token: token!, spaceID: spaceID!);
+        return BlocProvider(
+          create: (_) => GetIt.I<SpaceBloc>(),
+          child: SpacePage(
+            userID: userID,
+            token: token,
+            spaceID: spaceID,
+            hostID: hostID,
+          ),
+        );
       },
     ),
+
     GoRoute(
       name: Names.groups,
       path: Routes.groups,

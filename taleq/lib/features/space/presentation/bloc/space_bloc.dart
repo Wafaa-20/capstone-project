@@ -1,25 +1,46 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:taleq/features/space/domain/usecases/add_comment_use_case.dart';
 import 'package:taleq/features/space/domain/usecases/get_space.dart';
 import 'package:taleq/features/space/presentation/bloc/space_event.dart';
 import 'package:taleq/features/space/presentation/bloc/space_state.dart';
 
 class SpaceBloc extends Bloc<SpaceEvent, SpaceState> {
   final GetSpaceListsUseCase _getSpaceListsUseCase;
+  final AddCommentUseCase _addCommentUseCase;
   final SupabaseClient supabase;
 
-  // للاشتراك في القنوات (channels)
   RealtimeChannel? _membersChannel;
   RealtimeChannel? _commentsChannel;
 
-  SpaceBloc(this._getSpaceListsUseCase, this.supabase) : super(SpaceInitial()) {
+  SpaceBloc(this._getSpaceListsUseCase, this.supabase, this._addCommentUseCase)
+    : super(SpaceInitial()) {
     on<GetSpaceLists>(getSpaceLists);
     on<UpdateMembersEvent>(_onUpdateMembers);
     on<UpdateCommentsEvent>(_onUpdateComments);
+    on<AddCommentEvent>(addComment);
+  }
+  FutureOr<void> addComment(
+    AddCommentEvent event,
+    Emitter<SpaceState> emit,
+  ) async {
+    final comment = await _addCommentUseCase(
+      CommentParams(
+        comment: event.commentText,
+        userID: event.userID,
+        spaceID: event.spaceID,
+      ),
+    );
+
+    comment.fold(
+      (failure) => emit(GetSpaceFiled(message: failure.message)),
+      (_) {},
+    );
   }
 
   FutureOr<void> getSpaceLists(
@@ -44,7 +65,7 @@ class SpaceBloc extends Bloc<SpaceEvent, SpaceState> {
   void _subscribeToMembers(String spaceId) {
     _membersChannel?.unsubscribe();
 
-    _membersChannel = supabase.channel('public:space_members_$spaceId');
+    _membersChannel = supabase.channel('space_members_$spaceId');
 
     _membersChannel!
       ..onPostgresChanges(
@@ -79,21 +100,24 @@ class SpaceBloc extends Bloc<SpaceEvent, SpaceState> {
   void _subscribeToComments(String spaceId) {
     _commentsChannel?.unsubscribe();
 
-    _commentsChannel = supabase.channel('public:space_chats_$spaceId');
+    _commentsChannel = supabase.channel('space_chats_full_$spaceId');
+
     _commentsChannel!
       ..onPostgresChanges(
         event: PostgresChangeEvent.insert,
         schema: 'public',
-        table: 'space_chats',
+        table: 'space_chats_full',
         filter: PostgresChangeFilter(
           type: PostgresChangeFilterType.eq,
           column: 'space_id',
           value: spaceId,
         ),
         callback: (payload) {
+          print('📥 Realtime full change received: ${payload.newRecord}');
           final newChat = payload.newRecord;
           final newComment = {
-            'user': newChat['user_profiles']?['full_name'] ?? '',
+            'userID': newChat['user_id'] ?? '',
+            'userName': newChat['user_name'] ?? '',
             'message': newChat['message'] ?? '',
             'sent_at': newChat['sent_at'],
           };
@@ -116,6 +140,7 @@ class SpaceBloc extends Bloc<SpaceEvent, SpaceState> {
   }
 
   void _onUpdateComments(UpdateCommentsEvent event, Emitter<SpaceState> emit) {
+
     if (state is GetSpaceSuccess) {
       final currentState = state as GetSpaceSuccess;
       final updatedComments = [

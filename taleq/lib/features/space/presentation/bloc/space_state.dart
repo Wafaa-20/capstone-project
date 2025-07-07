@@ -14,7 +14,12 @@ class GetSpaceSuccess extends SpaceState {
   final SpaceEntity getSpaceinfo;
   final List<Map<String, dynamic>> getspaceusers;
 
-  const GetSpaceSuccess({required this.getSpaceinfo, required this.getspaceusers});
+  const GetSpaceSuccess({
+    required this.getSpaceinfo,
+    required this.getspaceusers,
+  });
+  @override
+  List<Object> get props => [getSpaceinfo, getspaceusers];
 }
 
 final class GetSpaceFiled extends SpaceState {

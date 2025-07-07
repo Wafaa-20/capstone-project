@@ -24,6 +24,7 @@ import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/space/data/datasources/space_datasource.dart';
 import 'package:taleq/features/space/data/repositories/space_repository_impl.dart';
 import 'package:taleq/features/space/domain/repositories/space_repository.dart';
+import 'package:taleq/features/space/domain/usecases/add_comment_use_case.dart';
 import 'package:taleq/features/space/domain/usecases/get_space.dart';
 import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
 import 'package:taleq/features/specialists/data/datasources/specialists_datasource.dart';
@@ -127,7 +128,7 @@ Future<void> setup() async {
   GetIt.I.registerLazySingleton(
     () => GetSpaceListsUseCase(repository: GetIt.I()),
   );
-
+  GetIt.I.registerLazySingleton(() => AddCommentUseCase(repository: GetIt.I()));
   // Blocs
   GetIt.I.registerFactory(
     () => AuthBloc(
@@ -144,5 +145,5 @@ Future<void> setup() async {
   GetIt.I.registerFactory(() => QuestionnaireBloc(GetIt.I()));
   GetIt.I.registerFactory(() => GroupsBloc(GetIt.I(), GetIt.I(), GetIt.I()));
   GetIt.I.registerFactory(() => SpecialistsBloc(GetIt.I()));
-  GetIt.I.registerFactory(() => SpaceBloc(GetIt.I(),GetIt.I()));
+  GetIt.I.registerFactory(() => SpaceBloc(GetIt.I(), GetIt.I(), GetIt.I()));
 }

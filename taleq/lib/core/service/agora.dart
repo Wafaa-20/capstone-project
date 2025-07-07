@@ -67,13 +67,26 @@ class AgoraService {
       token: token,
       channelId: channelName,
       userAccount: userAccount,
-      options: const ChannelMediaOptions(),
+      options: const ChannelMediaOptions(
+        publishMicrophoneTrack: true,
+        autoSubscribeAudio: true,
+      ),
     );
+    await _engine.enableAudio();
+    await _engine.enableLocalAudio(true);
   }
 
   Future<void> leave() async {
     await _engine.leaveChannel();
     await _engine.release();
+  }
+
+  Future<void> muteLocalMic() async {
+    await _engine.muteLocalAudioStream(true);
+  }
+
+  Future<void> unmuteLocalMic() async {
+    await _engine.muteLocalAudioStream(false);
   }
 
   bool get isLocalUserJoined => _localUserJoined;

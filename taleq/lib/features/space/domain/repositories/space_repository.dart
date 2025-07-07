@@ -7,4 +7,9 @@ abstract class SpaceRepository {
     String spaceID,
     String userID,
   );
+  Future<Either<Failure, String>> addComment(
+    String comment,
+    String userID,
+    String spaceID,
+  );
 }

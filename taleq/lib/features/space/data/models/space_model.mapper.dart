@@ -30,6 +30,11 @@ class SpaceListsModelMapper extends ClassMapperBase<SpaceListsModel> {
     'channelName',
     _$channelName,
   );
+  static String _$hostID(SpaceListsModel v) => v.hostID;
+  static const Field<SpaceListsModel, String> _f$hostID = Field(
+    'hostID',
+    _$hostID,
+  );
   static List<Map<String, dynamic>> _$users(SpaceListsModel v) => v.users;
   static const Field<SpaceListsModel, List<Map<String, dynamic>>> _f$users =
       Field('users', _$users);
@@ -42,6 +47,7 @@ class SpaceListsModelMapper extends ClassMapperBase<SpaceListsModel> {
     #id: _f$id,
     #name: _f$name,
     #channelName: _f$channelName,
+    #hostID: _f$hostID,
     #users: _f$users,
     #comments: _f$comments,
   };
@@ -51,6 +57,7 @@ class SpaceListsModelMapper extends ClassMapperBase<SpaceListsModel> {
       id: data.dec(_f$id),
       name: data.dec(_f$name),
       channelName: data.dec(_f$channelName),
+      hostID: data.dec(_f$hostID),
       users: data.dec(_f$users),
       comments: data.dec(_f$comments),
     );
@@ -134,6 +141,7 @@ abstract class SpaceListsModelCopyWith<$R, $In extends SpaceListsModel, $Out>
     String? id,
     String? name,
     String? channelName,
+    String? hostID,
     List<Map<String, dynamic>>? users,
     List<Map<String, dynamic>>? comments,
   });
@@ -177,6 +185,7 @@ class _SpaceListsModelCopyWithImpl<$R, $Out>
     String? id,
     String? name,
     String? channelName,
+    String? hostID,
     List<Map<String, dynamic>>? users,
     List<Map<String, dynamic>>? comments,
   }) => $apply(
@@ -184,6 +193,7 @@ class _SpaceListsModelCopyWithImpl<$R, $Out>
       if (id != null) #id: id,
       if (name != null) #name: name,
       if (channelName != null) #channelName: channelName,
+      if (hostID != null) #hostID: hostID,
       if (users != null) #users: users,
       if (comments != null) #comments: comments,
     }),
@@ -193,6 +203,7 @@ class _SpaceListsModelCopyWithImpl<$R, $Out>
     id: data.get(#id, or: $value.id),
     name: data.get(#name, or: $value.name),
     channelName: data.get(#channelName, or: $value.channelName),
+    hostID: data.get(#hostID, or: $value.hostID),
     users: data.get(#users, or: $value.users),
     comments: data.get(#comments, or: $value.comments),
   );

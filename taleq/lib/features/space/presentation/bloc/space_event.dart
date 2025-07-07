@@ -21,13 +21,13 @@ class GetSpaceLists extends SpaceEvent {
   List<Object> get props => [];
 }
 
-// تحديث الأعضاء (قائمة الأعضاء الجديدة كاملة)
+
 class UpdateMembersEvent extends SpaceEvent {
   final List<Map<String, dynamic>> members;
   const UpdateMembersEvent(this.members);
 }
 
-// إضافة تعليق جديد (تعليق واحد فقط)
+
 class UpdateCommentsEvent extends SpaceEvent {
   final Map<String, dynamic> newComment;
   const UpdateCommentsEvent(this.newComment);
@@ -35,5 +35,11 @@ class UpdateCommentsEvent extends SpaceEvent {
 
 class AddCommentEvent extends SpaceEvent {
   final String commentText;
-  const AddCommentEvent({required this.commentText});
+  final String spaceID;
+  final String userID;
+  const AddCommentEvent({
+    required this.spaceID,
+    required this.userID,
+    required this.commentText,
+  });
 }

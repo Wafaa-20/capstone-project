@@ -119,12 +119,12 @@ class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
 
       final maxResponse = await supabase
           .from('spaces')
-          .select('max_participants')
+          .select('max_participants,host_id')
           .eq('id', spaceId)
           .single();
 
       final maxParticipants = maxResponse['max_participants'] ?? 0;
-
+      final hostID = maxResponse['host_id'] ?? '';
       if (currentParticipantsCount >= maxParticipants) {
         throw FormatException("المساحة ممتلئة");
       }
@@ -139,7 +139,7 @@ class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
 
       final token = await _fetchAgoraTokenFromBackend(channelName, uid);
 
-      return JoinDetailsModel(userID: uid, token: token);
+      return JoinDetailsModel(userID: uid, token: token ,hostID:hostID);
     } on AuthException catch (e) {
       log(e.toString());
       log(e.message.toString());

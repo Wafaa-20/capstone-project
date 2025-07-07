@@ -240,7 +240,8 @@ class AvailableGroup extends StatelessWidget {
                       context.push(
                         '/space?userID=${Uri.encodeComponent(state.userID)}'
                         '&token=${Uri.encodeComponent(state.token)}'
-                        '&spaceID=${Uri.encodeComponent(spaceId)}',
+                        '&spaceID=${Uri.encodeComponent(spaceId)}'
+                        '&hostID=${Uri.encodeComponent(state.hostID)}',
                       );
                     });
                   } else if (state is JoinFalid) {

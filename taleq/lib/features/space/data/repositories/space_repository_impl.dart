@@ -22,4 +22,18 @@ class SpaceRepositoryImpl implements SpaceRepository {
       return Left(ServerFailure(message: "Something went wrong!"));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> addComment(
+    String comment,
+    String userID,
+    String spaceID,
+  ) async {
+    try {
+      final result = await datasource.addComment(comment,userID,spaceID);
+      return Right(result);
+    } on Exception {
+      return Left(ServerFailure(message: "Something went wrong!"));
+    }
+  }
 }

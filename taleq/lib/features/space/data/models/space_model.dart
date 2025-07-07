@@ -6,6 +6,7 @@ class SpaceListsModel {
   final String id;
   final String name;
   final String channelName;
+  final String hostID;
   final List<Map<String, dynamic>> users;
   final List<Map<String, dynamic>> comments;
 
@@ -13,6 +14,7 @@ class SpaceListsModel {
     required this.id,
     required this.name,
     required this.channelName,
+    required this.hostID,
     required this.users,
     required this.comments,
   });
@@ -24,6 +26,7 @@ extension SpaceEntityToEntityMapper on SpaceListsModel {
       id: id,
       name: name,
       channelName: channelName,
+      hostID: hostID,
       users: users,
       comments: comments,
     );

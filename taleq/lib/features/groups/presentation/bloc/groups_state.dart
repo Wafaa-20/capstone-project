@@ -42,7 +42,12 @@ class SpaceDetailsFiled extends GroupsState {
 class JoinSuccees extends GroupsState {
   final String userID;
   final String token;
-  const JoinSuccees({required this.userID, required this.token});
+  final String hostID;
+  const JoinSuccees({
+    required this.userID,
+    required this.token,
+    required this.hostID,
+  });
 }
 
 class JoinFalid extends GroupsState {

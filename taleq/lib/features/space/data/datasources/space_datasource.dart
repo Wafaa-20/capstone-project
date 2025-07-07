@@ -12,6 +12,7 @@ import 'package:taleq/features/space/domain/entities/space.dart';
 
 abstract class SpaceRemoteDatasource {
   Future<SpaceListsModel> getSpaceLists(String spaceID, String userID);
+  Future<String> addComment(String comment, String userID, String spaceID);
 }
 
 class SpaceSupabaseDatasource implements SpaceRemoteDatasource {
@@ -27,18 +28,19 @@ class SpaceSupabaseDatasource implements SpaceRemoteDatasource {
         throw const FormatException("User not authenticated");
       }
 
-      // 1. تفاصيل المساحة
+     
       final spaceResponse = await supabase
           .from('spaces')
-          .select('id, title, channel_name')
+          .select('id, title,host_id, channel_name')
           .eq('id', spaceID)
           .single();
 
       final id = spaceResponse['id'] as String? ?? '';
       final name = spaceResponse['title'] as String? ?? '';
       final channelName = spaceResponse['channel_name'] as String? ?? '';
+            final hostID = spaceResponse['host_id'] as String? ?? '';
 
-      // 2. الأعضاء
+
       final membersResponse = await supabase
           .from('space_members')
           .select('user_profiles:user_id(avatar_url, full_name)')
@@ -52,16 +54,16 @@ class SpaceSupabaseDatasource implements SpaceRemoteDatasource {
         };
       }).toList();
 
-
       final chatsResponse = await supabase
           .from('space_chats')
-          .select('message, sent_at, user_profiles:user_id(full_name)')
+          .select('message, sent_at, user_id, user_profiles:user_id(full_name)')
           .eq('space_id', spaceID)
-          .order('sent_at');
+          .order('sent_at', ascending: true);
 
       final comments = (chatsResponse as List<dynamic>).map((chat) {
         return {
-          'user': chat['user_profiles']['full_name'] ?? '',
+          'userName': chat['user_profiles']['full_name'] ?? '',
+          'userID': chat['user_id'] ?? '',
           'message': chat['message'] ?? '',
           'sent_at': chat['sent_at'] ?? '',
         };
@@ -71,6 +73,7 @@ class SpaceSupabaseDatasource implements SpaceRemoteDatasource {
         id: id,
         name: name,
         channelName: channelName,
+        hostID:hostID,
         users: users,
         comments: comments,
       );
@@ -80,6 +83,30 @@ class SpaceSupabaseDatasource implements SpaceRemoteDatasource {
     } catch (e) {
       log("Error fetching space lists: $e");
       throw const FormatException("Error fetching space details.");
+    }
+  }
+
+  @override
+  Future<String> addComment(
+    String comment,
+    String userID,
+    String spaceID,
+  ) async {
+    try {
+      final response = await supabase.from('space_chats').insert({
+        'user_id': userID,
+        'message': comment,
+        'space_id': spaceID,
+        'sent_at': DateTime.now().toUtc().toIso8601String(),
+      });
+
+      return "Success";
+    } on AuthException catch (e) {
+      log("Auth Error: $e");
+      throw FormatException(e.message);
+    } catch (e) {
+      log("Error adding comment: $e");
+      throw const FormatException("Error adding comment.");
     }
   }
 }

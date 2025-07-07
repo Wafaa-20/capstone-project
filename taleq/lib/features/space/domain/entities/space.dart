@@ -4,6 +4,7 @@ class SpaceEntity extends Equatable {
   final String id;
   final String name;
   final String channelName;
+  final String hostID;
   final List<Map<String, dynamic>> users;
   final List<Map<String, dynamic>> comments;
 
@@ -11,6 +12,7 @@ class SpaceEntity extends Equatable {
     required this.id,
     required this.name,
     required this.channelName,
+    required this.hostID,
     required this.users,
     required this.comments,
   });
@@ -18,6 +20,7 @@ class SpaceEntity extends Equatable {
     String? id,
     String? name,
     final String? channelName,
+    final String? hostID,
     final List<Map<String, dynamic>>? users,
     final List<Map<String, dynamic>>? comments,
   }) {
@@ -25,6 +28,7 @@ class SpaceEntity extends Equatable {
       id: id ?? this.id,
       name: name ?? this.name,
       channelName: channelName ?? this.channelName,
+      hostID: hostID ?? this.hostID,
       users: users ?? this.users,
       comments: comments ?? this.comments,
     );

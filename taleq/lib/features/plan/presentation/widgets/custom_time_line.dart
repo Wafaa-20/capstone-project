@@ -68,7 +68,7 @@ class CustomTimeLine extends StatelessWidget {
                     //    ctx.go(planDetails[index].route);
                     bloc.add(SelectExerciseEvent(currentExercise: index));
                     bloc.controller.animateTo(
-                      index * 150, // تقريبًا حسب حجم العنصر
+                      index * 150, 
                       duration: Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
                     );
