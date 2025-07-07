@@ -1,4 +1,7 @@
 abstract class Routes {
+  static const profile = _Paths.profile;
+  static const editProfile = _Paths.editProfile;
+  static const reminder = _Paths.reminder;
   static const splash = _Paths.splash;
   static const onboarding = _Paths.onboarding;
   static const questionnaire = _Paths.questionnaire;
@@ -9,6 +12,7 @@ abstract class Routes {
   static const navigation = _Paths.navigation;
   static const home = _Paths.home;
   static const specialists = _Paths.specialists;
+  static const specialistProfile = _Paths.specialistProfile;
   static const success = _Paths.success;
   static const words = _Paths.words;
   static const srartwords = _Paths.srartwords;
@@ -28,6 +32,9 @@ abstract class Routes {
 }
 
 abstract class _Paths {
+  static const profile = '/profile';
+  static const editProfile = '/editProfile';
+  static const reminder = '/reminder';
   static const splash = '/splash';
   static const onboarding = '/onboarding';
   static const questionnaire = '/questionnaire';
@@ -38,6 +45,7 @@ abstract class _Paths {
   static const navigation = '/navigation';
   static const home = '/home';
   static const specialists = '/specialists';
+  static const specialistProfile = '/specialistProfile';
   static const success = '/success';
   static const words = '/words';
   static const srartwords = '/srartwords';
@@ -57,6 +65,9 @@ abstract class _Paths {
 }
 
 abstract class _Names {
+  static const profile = 'profile';
+  static const editProfile = 'editProfile';
+  static const reminder = 'reminder';
   static const splash = 'splash';
   static const onboarding = 'onboarding';
   static const questionnaire = 'questionnaire';
@@ -68,6 +79,7 @@ abstract class _Names {
   static const navigation = 'navigation';
   static const home = 'home';
   static const specialists = 'specialists';
+  static const specialistProfile = 'specialistProfile';
   static const success = 'success';
   static const words = 'words';
   static const srartwords = 'srartwords';
@@ -86,6 +98,9 @@ abstract class _Names {
 }
 
 abstract class Names {
+  static const profile = _Names.profile;
+  static const editProfile = _Names.editProfile;
+  static const reminder = _Names.reminder;
   static const splash = _Names.splash;
   static const forgetPassword = _Names.forgetPassword;
   static const onboarding = _Names.onboarding;
@@ -98,6 +113,7 @@ abstract class Names {
   static const navigation = _Names.navigation;
   static const home = _Names.home;
   static const specialists = _Names.specialists;
+  static const specialistProfile = _Names.specialistProfile;
   static const success = _Names.success;
   static const words = _Names.words;
   static const srartwords = _Names.srartwords;

@@ -13,10 +13,9 @@ class SpecialistsRepositoryImpl implements SpecialistsRepository {
   Future<Either<Failure, List<SpecialistsModel>>> getSpecialists() async {
     try {
       final result = await datasource.getSpecialists();
-      print("Result: +++ $result");
       return Right(result);
     } on Exception {
-      return Left(ServerFailure(message: "Something went wrong!++++"));
+      return Left(ServerFailure(message: "Something went wrong!"));
     }
   }
 }

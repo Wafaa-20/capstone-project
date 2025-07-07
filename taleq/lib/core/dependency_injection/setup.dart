@@ -27,6 +27,18 @@ import 'package:taleq/features/space/domain/repositories/space_repository.dart';
 import 'package:taleq/features/space/domain/usecases/add_comment_use_case.dart';
 import 'package:taleq/features/space/domain/usecases/get_space.dart';
 import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
+import 'package:taleq/features/profile/data/datasources/image_picker_datasource.dart';
+import 'package:taleq/features/profile/data/datasources/profile_datasource.dart';
+import 'package:taleq/features/profile/data/repositories/image_picker_repository_impl.dart';
+import 'package:taleq/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:taleq/features/profile/domain/repositories/image_picker_repository.dart';
+import 'package:taleq/features/profile/domain/repositories/profile_repository.dart';
+import 'package:taleq/features/profile/domain/usecases/get_profile_use_case.dart';
+import 'package:taleq/features/profile/domain/usecases/pick_image_use_case.dart';
+import 'package:taleq/features/profile/domain/usecases/sign_out_use_case.dart';
+import 'package:taleq/features/profile/domain/usecases/update_profile_use_case.dart';
+import 'package:taleq/features/profile/domain/usecases/upload_avatar_use_case.dart';
+import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:taleq/features/specialists/data/datasources/specialists_datasource.dart';
 import 'package:taleq/features/specialists/data/repositories/specialists_repository_impl.dart';
 import 'package:taleq/features/specialists/domain/repositories/specialists_repository.dart';
@@ -65,6 +77,13 @@ Future<void> setup() async {
     () => SpecialistsDatasourceImpl(supabase: GetIt.I()),
   );
 
+  GetIt.I.registerLazySingleton<ProfileDatasource>(
+    () => ProfileDatasourceImpl(supabase: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton<ImagePickerDatasource>(
+    () => ImagePickerDatasourceImpl(),
+  );
+
   // Repositories
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(datasource: GetIt.I()),
@@ -91,6 +110,12 @@ Future<void> setup() async {
   );
   GetIt.I.registerLazySingleton<SpecialistsRepository>(
     () => SpecialistsRepositoryImpl(datasource: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(datasource: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton<ImagePickerRepository>(
+    () => ImagePickerRepositoryImpl(datasource: GetIt.I()),
   );
 
   // UseCases
@@ -119,6 +144,15 @@ Future<void> setup() async {
   GetIt.I.registerLazySingleton(
     () => GetSpecialistsUseCase(repository: GetIt.I()),
   );
+  GetIt.I.registerLazySingleton(() => PickImageUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(() => GetProfileUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(() => SignOutUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(
+    () => UpdateProfileUseCase(repository: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton(
+    () => UploadAvatarUseCase(repository: GetIt.I()),
+  );
 
   GetIt.I.registerLazySingleton(() => GetSpacesUseCase(repository: GetIt.I()));
   GetIt.I.registerLazySingleton(
@@ -146,4 +180,7 @@ Future<void> setup() async {
   GetIt.I.registerFactory(() => GroupsBloc(GetIt.I(), GetIt.I(), GetIt.I()));
   GetIt.I.registerFactory(() => SpecialistsBloc(GetIt.I()));
   GetIt.I.registerFactory(() => SpaceBloc(GetIt.I(), GetIt.I(), GetIt.I()));
+  GetIt.I.registerFactory(
+    () => ProfileBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
+  );
 }

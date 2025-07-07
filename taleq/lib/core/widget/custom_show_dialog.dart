@@ -20,7 +20,7 @@ class CustomShowDialog {
       builder: (_) {
         return AlertDialog(
           insetPadding: EdgeInsets.zero,
-          backgroundColor: AppPalette.whitePrimary,
+          backgroundColor: AppPalette.bluePrimary,
           title: title,
           content: ConstrainedBox(
             constraints: BoxConstraints(maxHeight: 700, minHeight: 100),
@@ -41,6 +41,7 @@ class CustomShowDialog {
                   child: Text(AppText.back, style: TextStyles.sf40018),
                 ),
                 SizedBox(width: 15),
+              
                 CustomButton(
                   onPressed: onPressed,
                   height: 48,

@@ -15,13 +15,11 @@ class SpecialistsDatasourceImpl implements SpecialistsDatasource {
     try {
       final response = await supabase.from('specialist').select();
 
-      print("Specialist: $response");
-
-      final x = response.map((e) => SpecialistsModelMapper.fromMap(e)).toList();
-      // print("**********The List : $x");
-      return x;
+      return response.map((e) => SpecialistsModelMapper.fromMap(e)).toList();
+    } on PostgrestException catch (e) {
+      throw FormatException(e.message);
     } catch (e) {
-      throw FormatException("There is error with save answer");
+      throw FormatException("There is error with $e");
     }
   }
 }

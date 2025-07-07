@@ -9,12 +9,18 @@ class CustomIconButton extends StatelessWidget {
     this.color,
     this.size,
     this.withContainer = false,
+    this.height,
+    this.width,
+    this.containerColor,
   });
   final void Function()? onPressed;
   final IconData icon;
   final Color? color;
   final double? size;
   final bool withContainer;
+  final double? height;
+  final double? width;
+  final Color? containerColor;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +29,10 @@ class CustomIconButton extends StatelessWidget {
       onPressed: onPressed,
       icon: withContainer
           ? Container(
-              height: 100,
-              width: 100,
+              height: height ?? 100,
+              width: width ?? 100,
               decoration: BoxDecoration(
-                color: AppPalette.whiteLight,
+                color: containerColor ?? AppPalette.whiteLight,
                 shape: BoxShape.circle,
               ),
               child: Icon(

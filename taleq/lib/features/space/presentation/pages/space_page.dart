@@ -216,7 +216,9 @@ class _SpacePageState extends State<SpacePage> {
             ],
           ),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              agoraService.unmuteLocalMic();
+            },
             icon: const Icon(Icons.mic, color: Colors.white),
             label: const Text("طلب التحدث"),
             style: ElevatedButton.styleFrom(

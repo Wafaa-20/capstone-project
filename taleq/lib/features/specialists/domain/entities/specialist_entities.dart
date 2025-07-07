@@ -6,7 +6,7 @@ class SpecialistEntities extends Equatable {
   final String name;
   final String subtitle;
   final double rating;
-  final List<String> description;
+  final List<String>? description;
 
   const SpecialistEntities({
     required this.id,
@@ -18,5 +18,5 @@ class SpecialistEntities extends Equatable {
   });
 
   @override
-  List<Object> get props => [id, image, name, subtitle, rating, description];
+  List<Object> get props => [id, image, name, subtitle, rating, description!];
 }
