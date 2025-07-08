@@ -11,9 +11,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await SupabaseConnect.init();
+  await setup();
   SpecialistsModelMapper.ensureInitialized();
   UserProfileModelMapper.ensureInitialized();
-  await setup();
+
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('ar'), Locale('en')],

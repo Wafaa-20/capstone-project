@@ -1,16 +1,16 @@
-import 'package:taleq/features/home/domain/entities/home.dart';
+import 'package:taleq/features/trainning/domain/entities/trainning.dart';
 
-class HomeModel {
+class TrainningModel {
   final String id;
   final String name;
 
-  HomeModel({
+  TrainningModel({
     required this.id,
     required this.name,
   });
 
-  factory HomeModel.fromJson(Map<String, dynamic> json) {
-    return HomeModel(
+  factory TrainningModel.fromJson(Map<String, dynamic> json) {
+    return TrainningModel(
       id: json['id'],
       name: json['name'],
     );
@@ -23,8 +23,8 @@ class HomeModel {
     };
   }
 
-  Home toEntity() {
-    return Home(
+  Trainning toEntity() {
+    return Trainning(
       id: id,
       name: name,
     );

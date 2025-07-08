@@ -16,11 +16,11 @@ class CustomTextField extends StatelessWidget {
     this.labelstyle,
     this.hintstyle,
     this.textstyle,
-
     this.fieldKey,
     this.keyboardType,
     this.maxLines,
     this.minLines,
+    this.onSubmitted,
   });
   final ValueChanged<String>? onChanged;
   final TextEditingController controller;
@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? labelstyle;
   final TextStyle? hintstyle;
   final TextStyle? textstyle;
-
+  final ValueChanged<String>? onSubmitted;
   final Key? fieldKey;
   final TextInputType? keyboardType;
   final int? maxLines;
@@ -57,6 +57,7 @@ class CustomTextField extends StatelessWidget {
           key: fieldKey,
           maxLines: maxLines ?? 1,
           minLines: minLines,
+          onFieldSubmitted: onSubmitted,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: hintstyle,

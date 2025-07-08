@@ -47,7 +47,7 @@ class _SplashPageState extends State<SplashPage> {
         } else if (state is NotFirstTimeUseApp) {
           context.go('/signup');
         } else if (state is AuthSuccess) {
-          context.go('/home');
+          context.go('/navigation');
         }
       },
       child: Scaffold(

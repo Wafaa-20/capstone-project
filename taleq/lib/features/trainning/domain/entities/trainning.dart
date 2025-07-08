@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class Home extends Equatable {
+class Trainning extends Equatable {
   final String id;
   final String name;
 
-  const Home({
+  const Trainning({
     required this.id,
     required this.name,
   });

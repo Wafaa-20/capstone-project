@@ -84,7 +84,7 @@ class SupabaseDatasource implements AuthRemoteDatasource {
         throw const FormatException("لم يتم إنشاء المستخدم.");
       }
 
-      // يمكنك حفظ الاسم في بيانات المستخدم إن أردت:
+   
       await supabase.from('user_profiles').insert({
         'user_id': user.id,
         'full_name': name,

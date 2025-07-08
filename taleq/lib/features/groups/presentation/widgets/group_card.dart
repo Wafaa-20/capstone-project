@@ -28,6 +28,7 @@ class GroupCard extends StatelessWidget {
   final AlignmentGeometry? titleAlignment;
   final DecorationImage? backgroundImage;
   final bool iconOnTop;
+  final int? usersCount;
 
   const GroupCard({
     super.key,
@@ -51,6 +52,7 @@ class GroupCard extends StatelessWidget {
     this.titleAlignment,
     this.backgroundImage,
     this.iconOnTop = false,
+    this.usersCount,
   });
 
   @override
@@ -137,6 +139,7 @@ class GroupCard extends StatelessWidget {
                             fontSize: 17,
                             color: AppPalette.bluePrimary,
                           ),
+                      softWrap: true,
                     ),
                     if (showRightIcon && icon != null)
                       Row(
@@ -148,7 +151,7 @@ class GroupCard extends StatelessWidget {
                   ],
                 ),
                 if (avatars != null && avatars!.isNotEmpty)
-                  AvatarList(avatars: avatars!),
+                  AvatarList(avatars: avatars!, totalUsers: usersCount ?? 0),
               ],
             ),
 
@@ -161,11 +164,7 @@ class GroupCard extends StatelessWidget {
                 if (showDate && date != null)
                   Row(
                     children: [
-                      const Icon(
-                        Icons.access_time_outlined,
-                        size: 18,
-                        color: AppPalette.black,
-                      ),
+                      Icon(icon, size: 18, color: AppPalette.black),
                       const SizedBox(width: 8),
                       Text(
                         date!,

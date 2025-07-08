@@ -2,14 +2,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_it/get_it.dart';
+
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
-import 'package:taleq/features/groups/presentation/pages/available_group.dart';
+import 'package:taleq/features/groups/presentation/bloc/groups_event.dart';
+
 import 'package:taleq/features/groups/presentation/pages/group_suggestion_page.dart';
 import 'package:taleq/features/groups/presentation/widgets/group_card.dart';
+import 'package:taleq/features/groups/presentation/widgets/horzintal_spaces.dart';
+import 'package:taleq/features/groups/presentation/widgets/vertical_spaces.dart';
 
 class GroupsPage extends StatelessWidget {
   const GroupsPage({super.key});
@@ -17,11 +22,11 @@ class GroupsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GroupsBloc(),
+      create: (context) => GetIt.I<GroupsBloc>(),
 
       child: Builder(
         builder: (context) {
-          final bloc = context.read<GroupsBloc>();
+          final bloc = context.read<GroupsBloc>()..add(GetSpaces());
           return Scaffold(
             appBar: AppBar(
               title: Text(AppText.groupTitle.tr()),
@@ -61,16 +66,10 @@ class GroupsPage extends StatelessWidget {
                           height: 59,
                           width: 450,
                           title: AppText.addGroup.tr(),
-                          showRightIcon: true,
-                          icon: Icons.keyboard_arrow_left_rounded,
                           showButton: false,
                           showBorder: true,
-                          showLeftIcon: false,
                           borderColor: AppPalette.bluePrimary,
                           background: AppPalette.blueGroup,
-                          onPressed: () {
-                            context.customPush(AvailableGroup());
-                          },
                         ),
                       ),
                     ),
@@ -81,46 +80,9 @@ class GroupsPage extends StatelessWidget {
                       ),
                       textAlign: TextAlign.start,
                     ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: GroupCard(
-                              height: 93,
-                              width: 261,
-                              title: AppText.story.tr(),
-                              date: AppText.now.tr(),
-                              icon: Icons.wifi_tethering,
-                              showButton: false,
-                              avatars: [
-                                "assets/image/doctor1.png",
-                                "assets/image/doctor1.png",
-                                "assets/image/doctor1.png",
-                              ],
-                              background: AppPalette.whiteLight,
-                            ),
-                          ),
-                          SizedBox(width: 18),
-                          GestureDetector(
-                            onTap: () {},
-                            child: GroupCard(
-                              height: 93,
-                              width: 261,
-                              title: AppText.talkFree.tr(),
-                              date: AppText.groupDate1.tr(),
-                              icon: Icons.access_time,
-                              showButton: false,
-                              background: AppPalette.whiteLight,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    HorzintalSpaces(bloc: bloc),
                     SizedBox(height: 18),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         spacing: 8,
@@ -132,42 +94,7 @@ class GroupsPage extends StatelessWidget {
                             ),
                             textAlign: TextAlign.start,
                           ),
-                          GroupCard(
-                            height: 104,
-                            width: 380,
-                            title: AppText.groupTitle1.tr(),
-                            date: AppText.groupDate1.tr(),
-                            icon: Icons.access_time,
-                            onPressed: () {
-                              context.customPush(AvailableGroup());
-                            },
-                            showButton: true,
-                            background: AppPalette.whiteLight,
-                          ),
-                          GroupCard(
-                            height: 104,
-                            width: 380,
-                            title: AppText.groupTitle2.tr(),
-                            date: AppText.groupDate2.tr(),
-                            icon: Icons.access_time,
-                            showButton: true,
-                            onPressed: () {
-                              context.customPush(AvailableGroup());
-                            },
-                            background: AppPalette.whiteLight,
-                          ),
-                          GroupCard(
-                            height: 104,
-                            width: 380,
-                            title: AppText.groupTitle3.tr(),
-                            date: AppText.groupDate2.tr(),
-                            icon: Icons.access_time,
-                            showButton: true,
-                            onPressed: () {
-                              context.customPush(AvailableGroup());
-                            },
-                            background: AppPalette.whiteLight,
-                          ),
+                          VerticalSpaces(bloc: bloc),
                         ],
                       ),
                     ),

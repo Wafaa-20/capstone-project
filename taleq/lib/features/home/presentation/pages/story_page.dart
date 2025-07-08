@@ -7,13 +7,14 @@ import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/core/widget/button/custom_icon_button.dart';
 import 'package:taleq/core/widget/custom_text_field.dart';
+import 'package:taleq/features/home/presentation/bloc/home_bloc.dart';
 
 class StoryPage extends StatelessWidget {
-  const StoryPage({super.key});
+  const StoryPage({super.key, required this.bloc});
+  final HomeBloc bloc;
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text("قصتك"),
@@ -41,16 +42,16 @@ class StoryPage extends StatelessWidget {
                 child: Column(
                   children: [
                     CustomTextField(
-                      controller: controller,
+                      controller: bloc.titleController,
                       keyboardType: TextInputType.multiline,
                       hintText: AppText.hintTitle,
                     ),
                     CustomTextField(
-                      controller: controller,
+                      controller: bloc.storyController,
                       keyboardType: TextInputType.multiline,
                       hintText: AppText.hintStory,
-                      maxLines: null,
                       minLines: 5,
+                      maxLines: 10,
                     ),
                   ],
                 ),

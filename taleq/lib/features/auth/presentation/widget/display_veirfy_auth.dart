@@ -14,7 +14,7 @@ class VerifyOtpSheet extends StatefulWidget {
   final String? emailOrPhone;
   final VoidCallback? onFinishTimer;
   final Function(String)? onCompleted;
-  // final OtpTimerButtonController controllerResend;
+
   final Function()? onTapResend;
   final int? timeResend;
   final void Function() timerFunction;
@@ -23,7 +23,7 @@ class VerifyOtpSheet extends StatefulWidget {
     required this.emailOrPhone,
     this.onFinishTimer,
     required this.onCompleted,
-    //required this.controllerResend,
+
     this.onTapResend,
     this.timeResend = 8,
     required this.timerFunction,

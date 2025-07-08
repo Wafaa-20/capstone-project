@@ -15,12 +15,9 @@ class SupabaseConnect {
           authFlowType: AuthFlowType.pkce,
           detectSessionInUri: true,
         ),
-      );
+      ).timeout(Duration(seconds: 15));
     } catch (e) {
       throw FormatException("There is error with connect DB");
     }
   }
-
- 
-
 }

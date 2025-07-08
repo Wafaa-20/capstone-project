@@ -12,6 +12,7 @@ import 'package:taleq/core/widget/custom_text_field.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_event.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_state.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 class GroupSuggestionPage extends StatelessWidget {
   const GroupSuggestionPage({super.key, required this.bloc});
@@ -75,18 +76,30 @@ class GroupSuggestionPage extends StatelessWidget {
               BlocBuilder<GroupsBloc, GroupsState>(
                 bloc: bloc,
                 builder: (context, state) {
-                  return state.showButton
-                      ? CustomButton(
-                          width: context.getWidth(),
-                          onPressed: () {},
-                          child: Text(
-                            AppText.suggestGroup.tr(),
-                            style: TextStyles.sf60020.copyWith(
-                              color: AppPalette.whiteLight,
-                            ),
-                          ),
-                        )
-                      : const SizedBox.shrink();
+                  if (state is GroupsInitial) {
+                    return CustomButton(
+                      width: context.getWidth(),
+                      onPressed: () {
+                        bloc.title.clear();
+                        bloc.details.clear();
+                        Flushbar(
+                          message: AppText.suggestionSuccess.tr(),
+                          duration: const Duration(seconds: 2),
+                          backgroundColor: Colors.green,
+                          margin: const EdgeInsets.all(8),
+                          borderRadius: BorderRadius.circular(8),
+                          flushbarPosition: FlushbarPosition.TOP,
+                        ).show(context);
+                      },
+                      child: Text(
+                        AppText.suggestGroup.tr(),
+                        style: TextStyles.sf60020.copyWith(
+                          color: AppPalette.whiteLight,
+                        ),
+                      ),
+                    );
+                  }
+                  return SizedBox.shrink();
                 },
               ),
             ],

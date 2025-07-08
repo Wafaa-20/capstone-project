@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:taleq/core/text/text_styles.dart';
 
 class AvatarList extends StatelessWidget {
-  //avtar images
+  /// الصور الرمزية (روابط الصور أو المسارات).
   final List<String> avatars;
 
-  const AvatarList({super.key, required this.avatars});
+  /// العدد الكلي للمستخدمين في المساحة.
+  final int totalUsers;
+
+  const AvatarList({
+    super.key,
+    required this.avatars,
+    required this.totalUsers,
+  });
 
   @override
   Widget build(BuildContext context) {
-    //show 2 avtar
+    // نعرض 3 صور كحد أقصى
     int displayCount = avatars.length > 2 ? 2 : avatars.length;
-    double totalWidth = (displayCount + (avatars.length > 2 ? 1 : 0)) * 24.0;
+
+    // عدد الأشخاص الباقين
+    int remaining = totalUsers - displayCount;
+
+    // نحجز مساحة لثلاث صور + واحدة للأرقام إن وجدت
+    double totalWidth = (displayCount + (remaining > 0 ? 1 : 0)) * 24.0;
 
     return SizedBox(
       height: 32,
@@ -22,20 +35,20 @@ class AvatarList extends StatelessWidget {
               left: index * 24.0,
               child: CircleAvatar(
                 radius: 16,
-                backgroundImage: AssetImage(avatars[index]),
+                backgroundImage: NetworkImage(avatars[index]),
               ),
             );
           }),
 
-          if (avatars.length > 2)
+          if (remaining > 0)
             Positioned(
-              left: displayCount * 20,
+              left: displayCount * 24.0,
               child: CircleAvatar(
                 radius: 16,
-                backgroundColor: const Color(0xFFE6F07B),
+                backgroundColor: Colors.white,
                 child: Text(
-                  "+${avatars.length - displayCount}",
-                  style: const TextStyle(fontSize: 12, color: Colors.black),
+                  '+${remaining.toString()}',
+                  style: TextStyles.sf70012,
                 ),
               ),
             ),

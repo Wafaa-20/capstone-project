@@ -23,7 +23,6 @@ class PlanPage extends StatelessWidget {
             height: 24,
             child: SvgPicture.asset(
               "assets/icon/Group.svg",
-
               fit: BoxFit.contain,
             ),
           ),

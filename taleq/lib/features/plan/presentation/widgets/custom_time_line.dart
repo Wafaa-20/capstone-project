@@ -80,6 +80,7 @@ class CustomTimeLine extends StatelessWidget {
 
               nodePositionBuilder: (_, __) => 0.0,
             ),
+            //controller: _controller,
           ),
         );
       },

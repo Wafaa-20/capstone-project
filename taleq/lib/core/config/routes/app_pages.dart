@@ -11,6 +11,8 @@ import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/word
 import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_start_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise_start/presentation/page/intro_words_excercise_page.dart';
 import 'package:taleq/features/exercises/presentation/page/task_success_page.dart';
+import 'package:taleq/features/groups/presentation/pages/available_group.dart';
+import 'package:taleq/features/groups/presentation/pages/groups_page.dart';
 import 'package:taleq/features/home/presentation/pages/home_page.dart';
 import 'package:taleq/features/navigation/presentation/pages/navigation_page.dart';
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
@@ -20,6 +22,8 @@ import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:taleq/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:taleq/features/profile/presentation/pages/profile_page.dart';
 import 'package:taleq/features/profile/presentation/pages/reminder_page.dart';
+import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
+import 'package:taleq/features/space/presentation/pages/space_page.dart';
 import 'package:taleq/features/specialists/presentation/pages/specialists_page.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:taleq/features/splash/presentation/pages/splash_page.dart';
@@ -32,7 +36,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/onboarding',
+  initialLocation: '/navigation',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     //Profile Page
@@ -134,19 +138,18 @@ final router = GoRouter(
       builder: (context, state) => const TaskSuccessPage(),
     ),
 
-    //EX 1
     GoRoute(
       name: Names.srartexercise,
       path: Routes.srartexercise,
       builder: (context, state) => const IntroWordsExercisePage(),
     ),
-    //Ex 2
+
     GoRoute(
       name: Names.breathing,
       path: Routes.breathing,
       builder: (context, state) => const BreathingExercisePage(),
     ),
-    //Ex 3
+
     GoRoute(
       name: Names.words,
       path: Routes.words,
@@ -196,6 +199,39 @@ final router = GoRouter(
         final email = state.uri.queryParameters['email'];
         return ChangePasswordPage(email: email!);
       },
+    ),
+    GoRoute(
+      name: Names.space,
+      path: '/space',
+      builder: (context, state) {
+        final token = state.uri.queryParameters['token'] ?? '';
+        final userID = state.uri.queryParameters['userID'] ?? '';
+        final spaceID = state.uri.queryParameters['spaceID'] ?? '';
+        final hostID = state.uri.queryParameters['hostID'] ?? '';
+
+        return BlocProvider(
+          create: (_) => GetIt.I<SpaceBloc>(),
+          child: SpacePage(
+            userID: userID,
+            token: token,
+            spaceID: spaceID,
+            hostID: hostID,
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      name: Names.avilableGroup,
+      path: '/avilable_group',
+      builder: (context, state) {
+        final spaceID = state.uri.queryParameters['spaceID'] ?? '';
+        return AvailableGroup(spaceId: spaceID);
+      },
+    ),
+    GoRoute(
+      name: Names.groups,
+      path: Routes.groups,
+      builder: (context, state) => const GroupsPage(),
     ),
   ],
 );
