@@ -87,77 +87,72 @@ class HomePage extends StatelessWidget {
                     return SingleChildScrollView(
                       child: SizedBox(
                         height: context.getHeight(),
-                        child: Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppText.liveStream,
-                                style: TextStyles.sf40016.copyWith(
-                                  color: AppPalette.black,
-                                ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppText.liveStream,
+                              style: TextStyles.sf40016.copyWith(
+                                color: AppPalette.black,
                               ),
+                            ),
 
-                              LiveStreamWidget(
-                                bloc: homeBloc,
-                                imagesList: state.specialistList,
-                              ),
+                            LiveStreamWidget(
+                              bloc: homeBloc,
+                              imagesList: state.specialistList,
+                            ),
 
-                              Text(
-                                AppText.welcomeMessage,
-                                style: TextStyles.sf40016.copyWith(
-                                  color: AppPalette.black,
-                                ),
+                            Text(
+                              AppText.welcomeMessage,
+                              style: TextStyles.sf40016.copyWith(
+                                color: AppPalette.black,
                               ),
-                              SizedBox(height: 19),
-                              QuickSessionContainer(),
-                              SizedBox(height: 45),
-                              Text(
-                                AppText.topSpecialists,
-                                style: TextStyles.sf40016.copyWith(
-                                  color: AppPalette.black,
-                                ),
+                            ),
+                            SizedBox(height: 19),
+                            QuickSessionContainer(),
+                            SizedBox(height: 45),
+                            Text(
+                              AppText.topSpecialists,
+                              style: TextStyles.sf40016.copyWith(
+                                color: AppPalette.black,
                               ),
-                              ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  maxHeight: 114,
-                                  maxWidth: 361,
-                                ),
-                                child: SpecialistCard(
-                                  scrollDirection: Axis.horizontal,
-                                ),
+                            ),
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxHeight: 114,
+                                maxWidth: 361,
                               ),
-                              SizedBox(height: 8),
-                              Text(
-                                AppText.inspiringStories,
-                                style: TextStyles.sf40016.copyWith(
-                                  color: AppPalette.black,
-                                ),
+                              child: SpecialistCard(
+                                scrollDirection: Axis.horizontal,
                               ),
-                              SizedBox(height: 25),
-                              InspiringStoriesWidget(),
-                              SizedBox(height: 21),
-                              Align(
-                                alignment: Alignment.center,
-                                child: CustomButton(
-                                  height: 33,
-                                  width: 124,
-                                  onPressed: () {
-                                    context.customPush(
-                                      StoryPage(bloc: homeBloc),
-                                    );
-                                  },
-                                  child: Text(
-                                    AppText.shareStory,
-                                    style: TextStyles.sf40016.copyWith(
-                                      color: AppPalette.whitePrimary,
-                                    ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              AppText.inspiringStories,
+                              style: TextStyles.sf40016.copyWith(
+                                color: AppPalette.black,
+                              ),
+                            ),
+                            SizedBox(height: 25),
+                            InspiringStoriesWidget(),
+                            SizedBox(height: 21),
+                            Align(
+                              alignment: Alignment.center,
+                              child: CustomButton(
+                                height: 33,
+                                width: 124,
+                                onPressed: () {
+                                  context.customPush(StoryPage(bloc: homeBloc));
+                                },
+                                child: Text(
+                                  AppText.shareStory,
+                                  style: TextStyles.sf40016.copyWith(
+                                    color: AppPalette.whitePrimary,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     );

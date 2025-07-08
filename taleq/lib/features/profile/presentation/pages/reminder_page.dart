@@ -43,7 +43,12 @@ class ReminderPage extends StatelessWidget {
               height: 52,
               width: 134,
               onPressed: () {
-                customBottomSheet(context, height: 220, TimePicker());
+                customBottomSheet(
+                  color: Colors.transparent,
+                  context,
+                  height: 220,
+                  TimePicker(),
+                );
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
