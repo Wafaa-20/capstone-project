@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
@@ -20,6 +21,8 @@ import 'package:taleq/features/home/presentation/widget/quick_session_container.
 import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:taleq/features/profile/presentation/widgets/edit_image_profile.dart';
 import 'package:taleq/features/specialists/presentation/bloc/specialists_bloc.dart';
+import 'package:taleq/features/specialists/presentation/bloc/specialists_event.dart';
+import 'package:taleq/features/specialists/presentation/widgets/specialist_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -32,7 +35,10 @@ class HomePage extends StatelessWidget {
           create: (context) => GetIt.I<HomeBloc>()..add(GetSpecialistData()),
         ),
         BlocProvider(create: (context) => GetIt.I<ProfileBloc>()),
-        BlocProvider(create: (context) => GetIt.I<SpecialistsBloc>()),
+        BlocProvider(
+          create: (context) =>
+              GetIt.I<SpecialistsBloc>()..add(LoadSpecialists()),
+        ),
       ],
       child: Builder(
         builder: (context) {
@@ -62,45 +68,96 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppText.liveStream,
-                      style: TextStyles.sf40016.copyWith(
-                        color: AppPalette.black,
-                      ),
+            body: BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                if (state is HomeLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is GetFailure) {
+                  return Center(
+                    child: Text(
+                      state.message,
+                      style: TextStyles.sf40016.copyWith(color: Colors.red),
                     ),
+                  );
+                } else if (state is GetSuccess) {
+                  log(state.specialistList.toString());
+                  if (state.specialistList.isEmpty) {
+                    return const Center(child: Text("لا يوجد متخصصين حالياً"));
+                  }
+                }
+                return SingleChildScrollView(
+                  child: SizedBox(
+                    height: context.getHeight(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppText.liveStream,
+                            style: TextStyles.sf40016.copyWith(
+                              color: AppPalette.black,
+                            ),
+                          ),
 
-                    LiveStreamWidget(bloc: homeBloc),
+                          LiveStreamWidget(bloc: homeBloc),
 
-                    Text(
-                      AppText.welcomeMessage,
-                      style: TextStyles.sf40016.copyWith(
-                        color: AppPalette.black,
+                          Text(
+                            AppText.welcomeMessage,
+                            style: TextStyles.sf40016.copyWith(
+                              color: AppPalette.black,
+                            ),
+                          ),
+                          SizedBox(height: 19),
+                          QuickSessionContainer(),
+                          SizedBox(height: 45),
+                          Text(
+                            AppText.topSpecialists,
+                            style: TextStyles.sf40016.copyWith(
+                              color: AppPalette.black,
+                            ),
+                          ),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxHeight: 114,
+                              maxWidth: 361,
+                            ),
+                            child: SpecialistCard(
+                              scrollDirection: Axis.horizontal,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            AppText.inspiringStories,
+                            style: TextStyles.sf40016.copyWith(
+                              color: AppPalette.black,
+                            ),
+                          ),
+                          SizedBox(height: 25),
+                          InspiringStoriesWidget(),
+                          SizedBox(height: 21),
+                          Align(
+                            alignment: Alignment.center,
+                            child: CustomButton(
+                              height: 33,
+                              width: 124,
+                              onPressed: () {
+                                context.customPush(StoryPage(bloc: homeBloc));
+                              },
+                              child: Text(
+                                AppText.shareStory,
+                                style: TextStyles.sf40016.copyWith(
+                                  color: AppPalette.whitePrimary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 19),
-                    QuickSessionContainer(),
-                    SizedBox(height: 45),
-                    Text(
-                      AppText.topSpecialists,
-                      style: TextStyles.sf40016.copyWith(
-                        color: AppPalette.black,
-                      ),
-                    ),
-                    Text(
-                      AppText.inspiringStories,
-                      style: TextStyles.sf40016.copyWith(
-                        color: AppPalette.black,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
           );
         },

@@ -37,7 +37,7 @@ class ProfilePage extends StatelessWidget {
               centerTitle: true,
               leading: CustomIconButton(
                 icon: Icons.arrow_back_ios,
-                onPressed: () => context.push('/reminder'),
+                onPressed: () => context.push('/navigation'),
               ),
             ),
             body: Column(

@@ -78,6 +78,12 @@ class TextStyles {
     fontSize: 16,
     color: AppPalette.black,
   );
+  static final sf60014 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    color: AppPalette.black,
+  );
   // SF500
   static final sf50018 = TextStyle(
     fontFamily: _fontFamily,
