@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
-import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
@@ -19,7 +19,7 @@ class ReminderPage extends StatelessWidget {
       appBar: AppBar(
         leading: CustomIconButton(
           icon: Icons.arrow_back_ios,
-          onPressed: () => context.customPop(),
+          onPressed: () => context.pop(),
         ),
       ),
       body: Padding(

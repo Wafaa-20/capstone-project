@@ -241,9 +241,13 @@ class AppText {
   static const String sure = "هل أنت متأكد من تسجيل خروجك؟";
   static const String cancel = "الغاء";
   static const String yes = "نعم";
+
   //Home Page
-  // static const String reminder = "تمكين التذكير";
-  // static const String notNow = "ليس الان";
-  // static const String reminder = "تمكين التذكير";
-  // static const String notNow = "ليس الان";
+  static const String liveStream       = "بث مباشر";
+  static const String welcomeMessage   = "سعداء بوجودك في إطلاق !";
+  static const String needFollowUp     = "تحتاج متابعة؟";
+  static const String followUpDetails  = "جلسات فورية مع أفضل الأخصائيين";
+  static const String bookNow          = "احجز الآن";
+  static const String topSpecialists   = "أفضل الأخصائيين";
+  static const String inspiringStories = "قصص ملهمة";
 }
