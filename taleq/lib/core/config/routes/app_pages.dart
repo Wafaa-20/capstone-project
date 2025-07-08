@@ -13,18 +13,17 @@ import 'package:taleq/features/exercises/Words_Excercise_start/presentation/page
 import 'package:taleq/features/exercises/presentation/page/task_success_page.dart';
 import 'package:taleq/features/groups/presentation/pages/available_group.dart';
 import 'package:taleq/features/groups/presentation/pages/groups_page.dart';
-
 import 'package:taleq/features/home/presentation/pages/home_page.dart';
 import 'package:taleq/features/navigation/presentation/pages/navigation_page.dart';
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:taleq/features/payment/presentation/pages/payment_page.dart';
 import 'package:taleq/features/plan/presentation/pages/plan_page.dart';
-import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
-import 'package:taleq/features/space/presentation/pages/space_page.dart';
 import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:taleq/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:taleq/features/profile/presentation/pages/profile_page.dart';
 import 'package:taleq/features/profile/presentation/pages/reminder_page.dart';
+import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
+import 'package:taleq/features/space/presentation/pages/space_page.dart';
 import 'package:taleq/features/specialists/presentation/pages/specialists_page.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:taleq/features/splash/presentation/pages/splash_page.dart';
@@ -37,7 +36,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/splash',
+  initialLocation: '/navigation',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     //Profile Page

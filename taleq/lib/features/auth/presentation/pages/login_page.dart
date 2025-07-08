@@ -37,16 +37,24 @@ class LoginPage extends StatelessWidget {
               onTap: () => FocusScope.of(context).unfocus(),
               behavior: HitTestBehavior.translucent,
               child: Scaffold(
+                extendBody: true,
                 backgroundColor: AppPalette.blueSoft,
-                body: SafeArea(
-                  bottom: false,
-                  child: SingleChildScrollView(
+                body: SingleChildScrollView(
+                  child: SafeArea(
+                    bottom: false,
                     child: SizedBox(
                       width: context.getWidth(),
-                      height: context.getHeight() - context.getSafeHeight(),
+                      height: context.getHeight(),
                       child: Stack(
                         clipBehavior: Clip.none,
                         children: [
+                          ButterflyWidget(
+                            top: context.getHeight() * 0.10,
+                            left: -context.getWidth() * 0.17,
+                            angle: 0.61,
+                            height: context.getEqualedWidthHeight(400),
+                            width: context.getEqualedWidthHeight(400),
+                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +75,7 @@ class LoginPage extends StatelessWidget {
 
                                     TextButton(
                                       onPressed: () {
-                                        context.go('/home');
+                                        context.go('/navigation');
                                       },
                                       child: Text(
                                         AppText.continueAsGuest.tr(),
@@ -101,13 +109,6 @@ class LoginPage extends StatelessWidget {
                                 fontSize: 32,
                               ),
                             ),
-                          ),
-                          ButterflyWidget(
-                            top: context.getHeight() * 0.15,
-                            left: -context.getWidth() * 0.17,
-                            angle: 0.61,
-                            height: context.getEqualedWidthHeight(400),
-                            width: context.getEqualedWidthHeight(400),
                           ),
                         ],
                       ),

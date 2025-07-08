@@ -14,6 +14,11 @@ class SpecialistsDatasourceImpl implements SpecialistsDatasource {
   Future<List<SpecialistsModel>> getSpecialists() async {
     try {
       final response = await supabase.from('specialist').select();
+      print("LIST : $response");
+      print("++++++++++++++++++++++++++++++++++++++++");
+      print(
+        "THE LIST With MAP : ${response.map((e) => SpecialistsModelMapper.fromMap(e)).toList()}",
+      );
 
       return response.map((e) => SpecialistsModelMapper.fromMap(e)).toList();
     } on PostgrestException catch (e) {

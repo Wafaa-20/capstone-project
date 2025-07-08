@@ -18,6 +18,8 @@ class CustomTextField extends StatelessWidget {
     this.textstyle,
     this.fieldKey,
     this.keyboardType,
+    this.maxLines,
+    this.minLines,
     this.onSubmitted,
   });
   final ValueChanged<String>? onChanged;
@@ -34,6 +36,8 @@ class CustomTextField extends StatelessWidget {
   final ValueChanged<String>? onSubmitted;
   final Key? fieldKey;
   final TextInputType? keyboardType;
+  final int? maxLines;
+  final int? minLines;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +55,8 @@ class CustomTextField extends StatelessWidget {
           obscureText: obscureText!,
           style: textstyle,
           key: fieldKey,
+          maxLines: maxLines ?? 1,
+          minLines: minLines,
           onFieldSubmitted: onSubmitted,
           decoration: InputDecoration(
             hintText: hintText,

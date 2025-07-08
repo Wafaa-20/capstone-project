@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,10 +45,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       PickImageParams(source: event.params.source),
     );
     result.fold((failure) => emit(ProfileFailure(message: failure.message)), (
-      image,
+      file,
     ) {
-      emit(SelectedImageProfile(image: image));
-      add(UploadAvatarEvent(imageFile: image));
+      emit(SelectedImageProfile(image: file));
+
+      add(UploadAvatarEvent(imageFile: file));
     });
   }
 
@@ -68,7 +70,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     UpdateProfileEvent event,
     Emitter<ProfileState> emit,
   ) async {
+    log("here we gofff");
     emit(ProfileLoading());
+
     final result = await updateProfileUseCase(
       UpdateProfileParam(
         fullName: event.fullName,
@@ -77,10 +81,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         avatarUrl: event.avatarUrl,
       ),
     );
-    result.fold(
-      (failure) => emit(ProfileFailure(message: failure.message)),
-      (profile) => emit(ProfileLoadedSuccess(profile: profile)),
-    );
+    result.fold((failure) => emit(ProfileFailure(message: failure.message)), (
+      profile,
+    ) {
+      log("here we go:$profile");
+      emit(ProfileLoadedSuccess(profile: profile));
+    });
   }
 
   //upload Avatar(Image)
@@ -92,10 +98,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final result = await uploadAvatarUseCase(
       UploadAvatarParam(imageFile: event.imageFile),
     );
-    result.fold(
-      (failure) => emit(ProfileFailure(message: failure.message)),
-      (profile) => emit(ProfileLoadedSuccess(profile: profile)),
-    );
+    result.fold((failure) => emit(ProfileFailure(message: failure.message)), (
+      profile,
+    ) {
+      log(profile.toString());
+      emit(ProfileLoadedSuccess(profile: profile));
+    });
   }
 
   //Change APP Language
@@ -111,7 +119,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     // );
   }
 
- //Sign Out from the account
+  //Sign Out from the account
   FutureOr<void> signOut(SignOutEvent event, Emitter<ProfileState> emit) async {
     emit(ProfileLoading());
     final result = await signOutUseCase(SignOutParam());

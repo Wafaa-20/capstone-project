@@ -260,11 +260,18 @@ class AppText {
   static const String yes = "نعم";
 
   //Home Page
-  static const String liveStream       = "بث مباشر";
-  static const String welcomeMessage   = "سعداء بوجودك في إطلاق !";
-  static const String needFollowUp     = "تحتاج متابعة؟";
-  static const String followUpDetails  = "جلسات فورية مع أفضل الأخصائيين";
-  static const String bookNow          = "احجز الآن";
-  static const String topSpecialists   = "أفضل الأخصائيين";
+  static const String liveStream = "بث مباشر";
+  static const String welcomeMessage = "سعداء بوجودك في طلق !";
+  static const String needFollowUp = "تحتاج متابعة؟";
+  static const String followUpDetails = "جلسات فورية مع أفضل الأخصائيين";
+  static const String bookNow = "احجز الآن";
+  static const String topSpecialists = "أفضل الأخصائيين";
   static const String inspiringStories = "قصص ملهمة";
+  static const String shareStory = " شارك قصتك الآن";
+
+  //Story Page
+  static const String title = "قصتك تهمنا! شارك تجربتك مع التأتأة الآن";
+   static const String hintTitle = "العنوان";
+  static const String hintStory = " أكتب قصتك هنا";
+  static const String shareStory2 = " شارك قصتك ";
 }

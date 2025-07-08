@@ -12,17 +12,15 @@ class HomeDatasourceImpl implements HomeDatasource {
   HomeDatasourceImpl({required this.supabase});
   @override
   Future<List<SpecialistModel>> getSpecialistData() async {
-    log("start");
     try {
       final response = await supabase.from('specialist').select('uid, image');
-      log(response.toString());
+
       final specialists = (response as List<dynamic>).map((item) {
         return SpecialistModel(id: item['uid'] ?? '', image: item['image']);
       }).toList();
-      log(specialists.toString());
+
       return specialists;
     } catch (e) {
-      log(e.toString());
       throw Exception('Error fetching specialists: $e');
     }
   }
