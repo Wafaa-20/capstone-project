@@ -32,7 +32,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/home',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     //Profile Page

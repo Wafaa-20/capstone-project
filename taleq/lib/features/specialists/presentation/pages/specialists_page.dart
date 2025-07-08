@@ -12,7 +12,8 @@ import 'package:taleq/features/specialists/presentation/widgets/rating_widget.da
 import 'package:taleq/features/specialists/presentation/widgets/specialists_body.dart';
 
 class SpecialistsPage extends StatelessWidget {
-  const SpecialistsPage({super.key});
+  const SpecialistsPage({super.key, this.scrollDirection});
+  final Axis? scrollDirection;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,7 @@ class SpecialistsPage extends StatelessWidget {
             ),
             body: state is SpecialistsSuccesses
                 ? ListView.builder(
+                    // scrollDirection: scrollDirection!,
                     itemCount: state.specialists.length,
                     itemBuilder: (BuildContext context, int index) {
                       final list = state.specialists[index];
