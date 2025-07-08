@@ -41,12 +41,12 @@ class GroupSuggestionPage extends StatelessWidget {
                 ),
               ),
               Text(
-                AppText.groupSuggestionTitle,
+                AppText.groupSuggestionTitle.tr(),
                 style: TextStyles.sf70018.copyWith(color: AppPalette.black),
               ),
               const SizedBox(height: 8),
               Text(
-                AppText.groupSuggestionSubTitle,
+                AppText.groupSuggestionSubTitle.tr(),
                 style: TextStyles.sf40014.copyWith(
                   color: AppPalette.grayPrimary,
                 ),

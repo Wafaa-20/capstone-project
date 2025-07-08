@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:confetti/confetti.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -73,7 +74,7 @@ class SuccessPageState extends State<SuccessPage> {
                   Image.asset("assets/image/check.png"),
                   SizedBox(height: 24),
                   Text(
-                    AppText.exrIsDone,
+                    AppText.exrIsDone.tr(),
                     style: TextStyles.sf70018.copyWith(color: AppPalette.black),
                     textAlign: TextAlign.center,
                   ),
@@ -87,7 +88,7 @@ class SuccessPageState extends State<SuccessPage> {
                     height: 36,
                     width: 86,
                     child: Text(
-                      AppText.next,
+                      AppText.next.tr(),
                       style: TextStyles.sf40016.copyWith(
                         color: AppPalette.greenSuccess,
                       ),

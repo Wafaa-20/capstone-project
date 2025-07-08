@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -45,7 +46,10 @@ class TaskSuccessPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 24),
-                      Text(AppText.taskSuccessTitle, style: TextStyles.sf60018),
+                      Text(
+                        AppText.taskSuccessTitle.tr(),
+                        style: TextStyles.sf60018,
+                      ),
                       SizedBox(height: 49),
                     ],
                   ),

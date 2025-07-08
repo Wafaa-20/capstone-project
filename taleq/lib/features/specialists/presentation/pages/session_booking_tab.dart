@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/theme/app_palette.dart';
@@ -12,7 +13,7 @@ class SessionBookingTab extends StatelessWidget {
     return Column(
       children: [
         Flexible(child: CalendarTimeline()),
-        Text(AppText.time),
+        Text(AppText.time.tr()),
         SizedBox(height: 15),
         Container(
           height: 22,
@@ -28,7 +29,7 @@ class SessionBookingTab extends StatelessWidget {
           width: 165,
           radius: 15,
           onPressed: () {},
-          child: Text(AppText.bookSession),
+          child: Text(AppText.bookSession.tr()),
         ),
       ],
     );

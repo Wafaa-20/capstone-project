@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
@@ -62,14 +63,14 @@ class QuickSessionContainer extends StatelessWidget {
             children: [
               SizedBox(height: 11),
               Text(
-                AppText.needFollowUp,
+                AppText.needFollowUp.tr(),
                 style: TextStyles.sf60016.copyWith(
                   color: AppPalette.whitePrimary,
                 ),
               ),
               SizedBox(height: 7),
               Text(
-                AppText.followUpDetails,
+                AppText.followUpDetails.tr(),
                 style: TextStyles.sf40014.copyWith(
                   color: AppPalette.whitePrimary,
                 ),
@@ -84,7 +85,7 @@ class QuickSessionContainer extends StatelessWidget {
                   context.go('/specialists');
                 },
                 child: Text(
-                  AppText.bookNow,
+                  AppText.bookNow.tr(),
                   style: TextStyles.sf40016.copyWith(color: AppPalette.black),
                 ),
               ),

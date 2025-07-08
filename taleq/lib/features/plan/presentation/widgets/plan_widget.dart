@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
@@ -95,7 +96,7 @@ class PlanWidget extends StatelessWidget {
                   sideColor: AppPalette.whiteLight,
                   onPressed: onPressed,
                   child: Text(
-                    AppText.start,
+                    AppText.start.tr(),
                     style: TextStyles.sf40016.copyWith(color: AppPalette.black),
                   ),
                 ),

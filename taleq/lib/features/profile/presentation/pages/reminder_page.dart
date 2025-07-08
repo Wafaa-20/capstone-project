@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
@@ -28,11 +29,11 @@ class ReminderPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 20),
-            Text(AppText.reminderTitle, style: TextStyles.sf60018),
+            Text(AppText.reminderTitle.tr(), style: TextStyles.sf60018),
             SizedBox(height: 10),
             Text(
               textAlign: TextAlign.center,
-              AppText.reminderSubtitle,
+              AppText.reminderSubtitle.tr(),
               style: TextStyles.sf40016.copyWith(color: AppPalette.black),
             ),
             SizedBox(height: 70),
@@ -69,12 +70,12 @@ class ReminderPage extends StatelessWidget {
             CustomButton(
               onPressed: () {},
               width: context.getWidth(),
-              child: Text(AppText.reminder, style: TextStyles.sf70020),
+              child: Text(AppText.reminder.tr(), style: TextStyles.sf70020),
             ),
             SizedBox(height: 15),
             CustomTextButton(
               onPressed: () {},
-              text: AppText.notNow,
+              text: AppText.notNow.tr(),
               styles: TextStyles.sf40016,
             ),
           ],

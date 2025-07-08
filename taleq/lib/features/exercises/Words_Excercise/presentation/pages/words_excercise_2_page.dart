@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
@@ -19,10 +20,10 @@ class WordsExcercise2Page extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(AppText.talkExr, style: TextStyles.sf70020),
+                Text(AppText.talkExr.tr(), style: TextStyles.sf70020),
 
                 Text(
-                  AppText.talkExrSub,
+                  AppText.talkExrSub.tr(),
                   style: TextStyles.sf70016.copyWith(
                     fontWeight: FontWeight.w500,
                     color: AppPalette.whitePrimary,
@@ -34,7 +35,7 @@ class WordsExcercise2Page extends StatelessWidget {
                     onPressed: () {},
                     color: AppPalette.whiteLight,
                     sideColor: AppPalette.whiteLight,
-                    child: Text(AppText.start, style: TextStyles.sf70016),
+                    child: Text(AppText.start.tr(), style: TextStyles.sf70016),
                   ),
                 ),
               ],

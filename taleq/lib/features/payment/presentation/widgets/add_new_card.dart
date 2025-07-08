@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:moyasar/moyasar.dart';
@@ -24,7 +25,7 @@ class AddNewCard extends StatelessWidget {
                 onPressed: () => context.customPop(),
               ),
 
-              Text(AppText.addNewCard, style: TextStyles.sf70030),
+              Text(AppText.addNewCard.tr(), style: TextStyles.sf70030),
             ],
           ),
           const SizedBox(height: 35),

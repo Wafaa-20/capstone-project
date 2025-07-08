@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -32,7 +33,7 @@ class SpecialistsPage extends StatelessWidget {
           // final bloc = context.read<SpecialistsBloc>();
           return Scaffold(
             appBar: AppBar(
-              title: Text(AppText.specialist),
+              title: Text(AppText.specialist.tr()),
               leading: Image.asset("assets/image/specialist.png"),
               actions: const [Icon(Icons.search, size: 30)],
             ),

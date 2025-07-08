@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +21,7 @@ class EditProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppText.editTitle),
+        title: Text(AppText.editTitle.tr()),
         leading: CustomIconButton(
           icon: Icons.arrow_back_ios,
           onPressed: () => context.go('/profile'),
@@ -36,22 +37,22 @@ class EditProfilePage extends StatelessWidget {
             EditImageProfile(radius: 90),
             SizedBox(height: 7),
             CustomTextField(
-              labelText: AppText.name,
-              hintText: AppText.hintName,
+              labelText: AppText.name.tr(),
+              hintText: AppText.hintName.tr(),
               labelstyle: TextStyles.sf40020,
               controller: bloc.nameController,
             ),
             SizedBox(height: 20),
             CustomTextField(
-              labelText: AppText.email,
-              hintText: AppText.hintEmail,
+              labelText: AppText.email.tr(),
+              hintText: AppText.hintEmail.tr(),
               labelstyle: TextStyles.sf40020,
               controller: bloc.nameController,
             ),
             SizedBox(height: 20),
             CustomTextField(
-              labelText: AppText.password,
-              hintText: AppText.hintPassword,
+              labelText: AppText.password.tr(),
+              hintText: AppText.hintPassword.tr(),
               labelstyle: TextStyles.sf40020,
               controller: bloc.nameController,
             ),
@@ -59,7 +60,7 @@ class EditProfilePage extends StatelessWidget {
             CustomButton(
               onPressed: () {},
               child: Text(
-                AppText.save,
+                AppText.save.tr(),
                 style: TextStyles.sf40016.copyWith(
                   color: AppPalette.whitePrimary,
                 ),

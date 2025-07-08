@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -51,10 +52,10 @@ class CameraTestPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5),
-                Text(AppText.cameraRule, style: TextStyles.sf30016),
-                Text(AppText.micRule, style: TextStyles.sf30016),
+                Text(AppText.cameraRule.tr(), style: TextStyles.sf30016),
+                Text(AppText.micRule.tr(), style: TextStyles.sf30016),
                 SizedBox(height: 29),
-                Text(AppText.readRule, style: TextStyles.sf40016),
+                Text(AppText.readRule.tr(), style: TextStyles.sf40016),
                 SizedBox(height: 21),
                 TextTestWidget(),
                 SizedBox(height: 51),
@@ -63,7 +64,7 @@ class CameraTestPage extends StatelessWidget {
                     onPressed: () {
                       context.go('/assessmentResult');
                     },
-                    child: Text(AppText.startTest, style: TextStyles.sf70020),
+                    child: Text(AppText.startTest.tr(), style: TextStyles.sf70020),
                   ),
                 ),
               ],

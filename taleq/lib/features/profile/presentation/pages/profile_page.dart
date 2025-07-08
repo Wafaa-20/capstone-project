@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -33,7 +34,7 @@ class ProfilePage extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text(AppText.profileTitle),
+              title: const Text(AppText.profileTitle).tr(),
               centerTitle: true,
               leading: CustomIconButton(
                 icon: Icons.arrow_back_ios,

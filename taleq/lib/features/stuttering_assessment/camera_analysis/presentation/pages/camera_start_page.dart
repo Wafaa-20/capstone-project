@@ -54,7 +54,7 @@ class CameraStartPage extends StatelessWidget {
                 onPressed: () {
                   context.go('/cameraAnalysis');
                 },
-                child: Text(AppText.startNow, style: TextStyles.sf70020),
+                child: Text(AppText.startNow.tr(), style: TextStyles.sf70020),
               ),
             ],
           ),

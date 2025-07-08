@@ -30,9 +30,9 @@ class OtpBottomSheet extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             children: [
               const SizedBox(height: 20),
-              Text(AppText.otpTitle, style: TextStyles.sf60024),
+              Text(AppText.otpTitle.tr(), style: TextStyles.sf60024),
               const SizedBox(height: 12),
-              Text(AppText.otpSubTitle, style: TextStyles.sf40018),
+              Text(AppText.otpSubTitle.tr(), style: TextStyles.sf40018),
               const SizedBox(height: 20),
               VerifyOtpSheet(
                 emailOrPhone: email,

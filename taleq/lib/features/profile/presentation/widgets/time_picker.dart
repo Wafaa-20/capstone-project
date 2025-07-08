@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:taleq/core/text/text_styles.dart';
@@ -17,7 +18,7 @@ class TimePicker extends StatelessWidget {
         children: [
           CustomTextButton(
             onPressed: () {},
-            text: 'تم',
+            text: 'تم'.tr(),
             styles: TextStyles.sf60018.copyWith(color: AppPalette.iosBlue),
           ),
           SizedBox(height: 5),

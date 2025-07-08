@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/constants/list_constants.dart';
@@ -20,7 +21,7 @@ class ProfileOptionsBody extends StatelessWidget {
         final list = ListConstants.profileData[index];
         return InkWell(
           onTap: () {
-            if (list.title == AppText.language) {
+            if (list.title == AppText.language.tr()) {
               showDialog(
                 context: context,
                 barrierColor: Colors.transparent,
@@ -38,14 +39,14 @@ class ProfileOptionsBody extends StatelessWidget {
                   child: LanguageBody(),
                 ),
               );
-            } else if (list.title == AppText.logout) {
+            } else if (list.title == AppText.logout.tr()) {
               CustomCupertinoDialog.show(
                 context: context,
                 blocContext: context,
-                title: Text(AppText.logout),
-                content: Text(AppText.sure),
-                text: AppText.yes,
-                text2: AppText.cancel,
+                title: Text(AppText.logout.tr()),
+                content: Text(AppText.sure.tr()),
+                text: AppText.yes.tr(),
+                text2: AppText.cancel.tr(),
 
                 onPressed: () {
                   // context.read<ProfileBloc>().add(const SignOutEvent());

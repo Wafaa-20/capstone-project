@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
@@ -23,7 +24,7 @@ class JoinAsSpecialistWidget extends StatelessWidget {
             Image.asset("assets/image/specialist2.png"),
             SizedBox(width: 15),
             Text(
-              AppText.joinAsSpecialist,
+              AppText.joinAsSpecialist.tr(),
               style: TextStyles.sf40016.copyWith(
                 color: AppPalette.whitePrimary,
               ),

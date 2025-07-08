@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -69,7 +70,7 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppText.liveStream,
+                      AppText.liveStream.tr(),
                       style: TextStyles.sf40016.copyWith(
                         color: AppPalette.black,
                       ),
@@ -78,7 +79,7 @@ class HomePage extends StatelessWidget {
                     LiveStreamWidget(bloc: homeBloc),
 
                     Text(
-                      AppText.welcomeMessage,
+                      AppText.welcomeMessage.tr(),
                       style: TextStyles.sf40016.copyWith(
                         color: AppPalette.black,
                       ),
@@ -87,13 +88,13 @@ class HomePage extends StatelessWidget {
                     QuickSessionContainer(),
                     SizedBox(height: 45),
                     Text(
-                      AppText.topSpecialists,
+                      AppText.topSpecialists.tr(),
                       style: TextStyles.sf40016.copyWith(
                         color: AppPalette.black,
                       ),
                     ),
                     Text(
-                      AppText.inspiringStories,
+                      AppText.inspiringStories.tr(),
                       style: TextStyles.sf40016.copyWith(
                         color: AppPalette.black,
                       ),

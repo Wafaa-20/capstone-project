@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -19,10 +20,10 @@ class WordsExerciseStartPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(AppText.talkExrTitle, style: TextStyles.sf70020),
+              Text(AppText.talkExrTitle.tr(), style: TextStyles.sf70020),
               SizedBox(height: 16),
               Text(
-                AppText.talkExrSub,
+                AppText.talkExrSub.tr(),
                 style: TextStyles.sf50016.copyWith(
                   color: AppPalette.whitePrimary,
                 ),
@@ -36,7 +37,7 @@ class WordsExerciseStartPage extends StatelessWidget {
 
                   color: AppPalette.whiteLight,
                   sideColor: AppPalette.whiteLight,
-                  child: Text(AppText.start, style: TextStyles.sf70016),
+                  child: Text(AppText.start.tr(), style: TextStyles.sf70016),
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -21,10 +22,10 @@ class BottomSheetBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppText.selectPaymentMethod, style: TextStyles.sf70035),
+          Text(AppText.selectPaymentMethod.tr(), style: TextStyles.sf70035),
           SizedBox(height: 30),
           SelectPayment(
-            text: AppText.applePay,
+            text: AppText.applePay.tr(),
             image: 'assets/image/pay.png',
             onTap: () {
               log("APPLE PAY");
@@ -32,7 +33,7 @@ class BottomSheetBody extends StatelessWidget {
           ),
           SizedBox(height: 20),
           SelectPayment(
-            text: AppText.addNewCard,
+            text: AppText.addNewCard.tr(),
             textStyle: TextStyles.sf50018.copyWith(color: AppPalette.black),
             image: 'assets/image/add_card.png',
             withIcon: true,
@@ -42,7 +43,6 @@ class BottomSheetBody extends StatelessWidget {
                 height: context.getHeight() * 0.55,
                 AddNewCard(),
               );
-            
             },
           ),
 
@@ -54,7 +54,7 @@ class BottomSheetBody extends StatelessWidget {
             onPressed: () {},
 
             child: Text(
-              AppText.payNow,
+              AppText.payNow.tr(),
               style: TextStyles.sf60018.copyWith(
                 color: AppPalette.whitePrimary,
               ),

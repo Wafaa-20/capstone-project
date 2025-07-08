@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -26,14 +27,14 @@ class PaymentText extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppText.taskSuccessBilling,
+                AppText.taskSuccessBilling.tr(),
                 style: TextStyles.sf60018.copyWith(
                   color: AppPalette.whitePrimary,
                 ),
               ),
               SizedBox(height: 8),
               Text(
-                AppText.taskSuccessTrial,
+                AppText.taskSuccessTrial.tr(),
                 style: TextStyles.sf50014.copyWith(
                   color: AppPalette.whitePrimary,
                 ),
@@ -41,7 +42,7 @@ class PaymentText extends StatelessWidget {
             ],
           ),
           Text(
-            AppText.taskSuccessPrice,
+            AppText.taskSuccessPrice.tr(),
             style: TextStyles.sf60018.copyWith(color: AppPalette.whitePrimary),
           ),
         ],

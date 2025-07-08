@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
@@ -27,14 +28,14 @@ class CameraBottomSheet extends StatelessWidget {
         children: [
           Center(
             child: Text(
-              AppText.editProfilePicture,
+              AppText.editProfilePicture.tr(),
 
               style: TextStyles.sf70020.copyWith(color: AppPalette.black),
             ),
           ),
           SizedBox(height: 30),
           EditOption(
-            text: AppText.takePhoto,
+            text: AppText.takePhoto.tr(),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
@@ -51,7 +52,7 @@ class CameraBottomSheet extends StatelessWidget {
           Divider(thickness: 2, height: 2, color: AppPalette.whitePrimary),
 
           EditOption(
-            text: AppText.choosePhoto,
+            text: AppText.choosePhoto.tr(),
             icon: Icons.photo_library,
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(12),
@@ -67,7 +68,7 @@ class CameraBottomSheet extends StatelessWidget {
           ),
           SizedBox(height: 20),
           EditOption(
-            text: AppText.deletePhoto,
+            text: AppText.deletePhoto.tr(),
             icon: Icons.delete,
             style: TextStyles.sf50018.copyWith(color: AppPalette.deleteRed),
             color: AppPalette.deleteRed,

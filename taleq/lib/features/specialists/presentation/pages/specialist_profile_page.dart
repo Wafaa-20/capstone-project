@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -46,8 +47,8 @@ class SpecialistProfilePage extends StatelessWidget {
               const SizedBox(height: 32),
               TabBar(
                 tabs: [
-                  Tab(text: AppText.tabTitle),
-                  Tab(text: AppText.tabTitle2),
+                  Tab(text: AppText.tabTitle.tr()),
+                  Tab(text: AppText.tabTitle2.tr()),
                 ],
               ),
               Flexible(

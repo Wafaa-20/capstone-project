@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -27,10 +28,10 @@ class PaymentPage extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(10, 90, 40, 37),
                     child: Image.asset("assets/image/stars.png"),
                   ),
-                  Text(AppText.todayTaskTitle, style: TextStyles.sf70020),
+                  Text(AppText.todayTaskTitle.tr(), style: TextStyles.sf70020),
                   const SizedBox(height: 16),
                   Text(
-                    AppText.todayTaskSubtitle,
+                    AppText.todayTaskSubtitle.tr(),
                     style: TextStyles.sf50016.copyWith(
                       color: AppPalette.whitePrimary,
                     ),

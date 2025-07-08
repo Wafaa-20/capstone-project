@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -13,7 +14,7 @@ class LanguageBody extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          title: Text(AppText.ar, style: TextStyles.sf50016),
+          title: Text(AppText.ar.tr(), style: TextStyles.sf50016),
           leading: CircleAvatar(
             radius: 16,
             backgroundImage: AssetImage('assets/image/ar.png'),
@@ -25,7 +26,7 @@ class LanguageBody extends StatelessWidget {
         ),
         const Divider(height: 2, thickness: 2, color: AppPalette.bluePrimary),
         ListTile(
-          title: Text(AppText.en, style: TextStyles.sf50016),
+          title: Text(AppText.en.tr(), style: TextStyles.sf50016),
           leading: CircleAvatar(
             radius: 16,
             backgroundImage: AssetImage('assets/image/en.png'),

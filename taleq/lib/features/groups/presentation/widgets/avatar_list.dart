@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:taleq/core/text/text_styles.dart';
 
 class AvatarList extends StatelessWidget {
-  /// الصور الرمزية (روابط الصور أو المسارات).
   final List<String> avatars;
 
-  /// العدد الكلي للمستخدمين في المساحة.
   final int totalUsers;
 
   const AvatarList({
@@ -16,13 +14,10 @@ class AvatarList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // نعرض 3 صور كحد أقصى
     int displayCount = avatars.length > 2 ? 2 : avatars.length;
 
-    // عدد الأشخاص الباقين
     int remaining = totalUsers - displayCount;
 
-    // نحجز مساحة لثلاث صور + واحدة للأرقام إن وجدت
     double totalWidth = (displayCount + (remaining > 0 ? 1 : 0)) * 24.0;
 
     return SizedBox(

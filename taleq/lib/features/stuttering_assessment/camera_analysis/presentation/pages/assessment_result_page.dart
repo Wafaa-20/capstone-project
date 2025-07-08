@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -24,11 +25,11 @@ class AssessmentResultPage extends StatelessWidget {
                 },
               ),
               SizedBox(height: 29),
-              Text(AppText.testDoneTitle1, style: TextStyles.sf60036),
+              Text(AppText.testDoneTitle1.tr(), style: TextStyles.sf60036),
               SizedBox(height: 24),
               Text(
                 textAlign: TextAlign.center,
-                AppText.testDoneSubTitle1,
+                AppText.testDoneSubTitle1.tr(),
                 style: TextStyles.sf40018.copyWith(
                   color: AppPalette.blackPrimary,
                 ),
@@ -40,7 +41,7 @@ class AssessmentResultPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    AppText.testResultTitle,
+                    AppText.testResultTitle.tr(),
                     style: TextStyles.sf40018.copyWith(color: AppPalette.black),
                   ),
                   Container(
@@ -52,7 +53,7 @@ class AssessmentResultPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      AppText.testResult,
+                      AppText.testResult.tr(),
                       style: TextStyles.sf40018.copyWith(
                         color: AppPalette.iosBlue,
                       ),
@@ -66,7 +67,7 @@ class AssessmentResultPage extends StatelessWidget {
                 onPressed: () {
                   context.go('/plan');
                 },
-                child: Text(AppText.startExercises, style: TextStyles.sf70020),
+                child: Text(AppText.startExercises.tr(), style: TextStyles.sf70020),
               ),
               SizedBox(height: 13),
               CustomButton(
@@ -77,7 +78,7 @@ class AssessmentResultPage extends StatelessWidget {
                   context.go('/home');
                 },
                 child: Text(
-                  AppText.gotoHome,
+                  AppText.gotoHome.tr(),
                   style: TextStyles.sf70020.copyWith(
                     color: AppPalette.grayLight,
                   ),

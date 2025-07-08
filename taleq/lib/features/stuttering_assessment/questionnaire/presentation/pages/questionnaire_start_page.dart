@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
@@ -20,7 +21,10 @@ class QuestionnaireStartPage extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.centerRight,
-                child: CustomTextButton(onPressed: () {}, text: AppText.back),
+                child: CustomTextButton(
+                  onPressed: () {},
+                  text: AppText.back.tr(),
+                ),
               ),
               SizedBox(height: 50),
               Padding(
@@ -28,10 +32,13 @@ class QuestionnaireStartPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppText.questionnaireTitle, style: TextStyles.sf60036),
+                    Text(
+                      AppText.questionnaireTitle.tr(),
+                      style: TextStyles.sf60036,
+                    ),
                     SizedBox(height: 24),
                     Text(
-                      AppText.questionnaireSubTitle,
+                      AppText.questionnaireSubTitle.tr(),
                       style: TextStyles.sf40018.copyWith(
                         color: AppPalette.blackPrimary,
                       ),
@@ -46,7 +53,7 @@ class QuestionnaireStartPage extends StatelessWidget {
                 onPressed: () {
                   context.go('/questionnaire');
                 },
-                child: Text(AppText.startNow, style: TextStyles.sf70020),
+                child: Text(AppText.startNow.tr(), style: TextStyles.sf70020),
               ),
             ],
           ),

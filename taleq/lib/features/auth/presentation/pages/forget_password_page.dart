@@ -88,7 +88,7 @@ class ForgetPasswordPage extends StatelessWidget {
                                     height: context.getHeight() * 0.12,
                                   ),
                                   Text(
-                                    AppText.resetPassword,
+                                    AppText.resetPassword.tr(),
                                     style: TextStyles.sf70020.copyWith(
                                       color: AppPalette.blackPrimary,
                                       fontSize: 26,
@@ -96,7 +96,7 @@ class ForgetPasswordPage extends StatelessWidget {
                                   ),
                                   SizedBox(height: 5),
                                   Text(
-                                    AppText.resetPasswordInfo,
+                                    AppText.resetPasswordInfo.tr(),
                                     style: TextStyles.sf40018.copyWith(
                                       color: AppPalette.blackPrimary,
                                       fontSize: 22,
@@ -137,7 +137,7 @@ class ForgetPasswordPage extends StatelessWidget {
                                         }
                                       },
                                       child: Text(
-                                        AppText.resetPassword,
+                                        AppText.resetPassword.tr(),
                                         style: TextStyles.sf70016.copyWith(
                                           color: AppPalette.whitePrimary,
                                         ),

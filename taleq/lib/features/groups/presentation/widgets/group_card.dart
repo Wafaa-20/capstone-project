@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
@@ -181,7 +182,7 @@ class GroupCard extends StatelessWidget {
                     height: 8,
                     width: 100,
                     child: Text(
-                      AppText.join,
+                      AppText.join.tr(),
                       style: TextStyles.sf30016.copyWith(
                         color: AppPalette.whiteLight,
                       ),

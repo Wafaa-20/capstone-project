@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -74,10 +75,11 @@ class QuestionnairePage extends StatelessWidget {
                               isLastPage
                                   ? bloc.add(SubmitAnswersEvent())
                                   : bloc.add(NextPageEvent());
-                              
                             },
                             child: Text(
-                              isLastPage ? AppText.done : AppText.next,
+                              isLastPage
+                                  ? AppText.done.tr()
+                                  : AppText.next.tr(),
                               style: TextStyles.sf70020,
                             ),
                           ),

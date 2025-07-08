@@ -271,7 +271,14 @@ class AppText {
 
   //Story Page
   static const String title = "قصتك تهمنا! شارك تجربتك مع التأتأة الآن";
-   static const String hintTitle = "العنوان";
+  static const String hintTitle = "العنوان";
   static const String hintStory = " أكتب قصتك هنا";
   static const String shareStory2 = " شارك قصتك ";
+
+  //nav
+  static const String lable1 = "الرئيسية";
+  static const String lable2 = "المجموعات";
+  static const String lable3 = "خطتي";
+  static const String lable4 = "الأخصائيين";
+  static const String lable5 = "التمارين";
 }

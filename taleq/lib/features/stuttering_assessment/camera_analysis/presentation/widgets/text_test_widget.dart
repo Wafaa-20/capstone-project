@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/text/app_text.dart';
@@ -17,7 +18,7 @@ class TextTestWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         border: Border.all(color: AppPalette.bluePrimary, width: 2),
       ),
-      child: Text(AppText.reading, style: TextStyles.sf60020),
+      child: Text(AppText.reading.tr(), style: TextStyles.sf60020),
     );
   }
 }

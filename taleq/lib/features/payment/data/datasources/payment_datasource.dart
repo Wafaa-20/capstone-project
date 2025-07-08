@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:taleq/features/payment/data/models/payment_model.dart';
 
 abstract class PaymentDatasource {
@@ -10,8 +11,8 @@ class PaymentDatasourceImpl implements PaymentDatasource {
     
     // This is just a placeholder implementation
     return PaymentModel(
-      id: '1',
-      name: 'Payment Name',
+      id: '1'.tr(),
+      name: 'Payment Name'.tr(),
     );
   }
 }

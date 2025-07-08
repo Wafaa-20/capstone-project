@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
@@ -17,7 +18,7 @@ class StoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("قصتك"),
+        title: Text("قصتك").tr(),
         leading: CustomIconButton(
           icon: Icons.arrow_back_ios,
           size: 20,
@@ -34,7 +35,7 @@ class StoryPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppText.title,
+                AppText.title.tr(),
                 style: TextStyles.sf70018.copyWith(color: AppPalette.black),
               ),
               Padding(
@@ -44,12 +45,12 @@ class StoryPage extends StatelessWidget {
                     CustomTextField(
                       controller: bloc.titleController,
                       keyboardType: TextInputType.multiline,
-                      hintText: AppText.hintTitle,
+                      hintText: AppText.hintTitle.tr(),
                     ),
                     CustomTextField(
                       controller: bloc.storyController,
                       keyboardType: TextInputType.multiline,
-                      hintText: AppText.hintStory,
+                      hintText: AppText.hintStory.tr(),
                       minLines: 5,
                       maxLines: 10,
                     ),

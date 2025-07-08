@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/extension/navigation.dart';
@@ -31,10 +32,10 @@ class WordsPage extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(10, 90, 40, 37),
                     child: Image.asset("assets/image/stars.png"),
                   ),
-                  Text(AppText.readyToStart, style: TextStyles.sf70020),
+                  Text(AppText.readyToStart.tr(), style: TextStyles.sf70020),
                   const SizedBox(height: 8),
                   Text(
-                    AppText.readyToStartSub,
+                    AppText.readyToStartSub.tr(),
                     style: TextStyles.sf70016.copyWith(
                       fontWeight: FontWeight.w500,
                       color: AppPalette.whitePrimary,
@@ -57,7 +58,7 @@ class WordsPage extends StatelessWidget {
               onPressed: () {
                 context.customPush(SuccessPage());
               },
-              text: "text",
+              text: "text".tr(),
             ),
             Positioned(
               bottom: 0,

@@ -37,7 +37,7 @@ class ChangePasswordBody extends StatelessWidget {
                   height: context.getHeight() * 0.12,
                 ),
                 Text(
-                  AppText.resetPassword,
+                  AppText.resetPassword.tr(),
                   style: TextStyles.sf70020.copyWith(
                     color: AppPalette.blackPrimary,
                     fontSize: 26,
@@ -116,7 +116,7 @@ class ChangePasswordBody extends StatelessWidget {
                       bloc.add(ChangePasswordEvent(email: email));
                     },
                     child: Text(
-                      AppText.resetPassword,
+                      AppText.resetPassword.tr(),
                       style: TextStyles.sf70016.copyWith(
                         color: AppPalette.whitePrimary,
                       ),
