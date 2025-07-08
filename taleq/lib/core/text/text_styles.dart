@@ -99,7 +99,12 @@ class TextStyles {
     color: AppPalette.bluePrimary,
   );
   // SF400
-
+  static final sf40024 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 24,
+    color: AppPalette.black,
+  );
   static final sf40020 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AgoraService {
@@ -33,7 +32,6 @@ class AgoraService {
 
     _engine.registerEventHandler(
       RtcEngineEventHandler(
-        
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
           log("✅ انضم المستخدم المحلي: ${connection.localUid}");
           _localUserJoined = true;
@@ -54,7 +52,6 @@ class AgoraService {
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
           log('[⚠️ التوكن سينتهي قريباً] token: $token');
         },
-      
       ),
     );
     log('✅ تم تسجيل الـ EventHandler');

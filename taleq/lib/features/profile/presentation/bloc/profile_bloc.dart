@@ -43,10 +43,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final result = await pickImageUseCase(
       PickImageParams(source: event.params.source),
     );
-    result.fold(
-      (failure) => emit(ProfileFailure(message: failure.message)),
-      (image) => emit(SelectedImageProfile(image: image)),
-    );
+    result.fold((failure) => emit(ProfileFailure(message: failure.message)), (
+      image,
+    ) {
+      emit(SelectedImageProfile(image: image));
+      add(UploadAvatarEvent(imageFile: image));
+    });
   }
 
   //Get Profile Data
@@ -69,7 +71,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
     final result = await updateProfileUseCase(
       UpdateProfileParam(
-       
         fullName: event.fullName,
         email: event.email,
         password: event.password,
@@ -89,7 +90,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     emit(ProfileLoading());
     final result = await uploadAvatarUseCase(
-      UploadAvatarParam( imageFile: event.imageFile),
+      UploadAvatarParam(imageFile: event.imageFile),
     );
     result.fold(
       (failure) => emit(ProfileFailure(message: failure.message)),
@@ -97,6 +98,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     );
   }
 
+  //Change APP Language
   FutureOr<void> changeLanguage(
     ChangeLanguageEvent event,
     Emitter<ProfileState> emit,
@@ -109,6 +111,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     // );
   }
 
+ //Sign Out from the account
   FutureOr<void> signOut(SignOutEvent event, Emitter<ProfileState> emit) async {
     emit(ProfileLoading());
     final result = await signOutUseCase(SignOutParam());

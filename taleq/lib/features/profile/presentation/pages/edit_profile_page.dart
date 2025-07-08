@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
+import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/core/widget/button/custom_icon_button.dart';
 import 'package:taleq/core/widget/custom_text_field.dart';
@@ -31,28 +32,39 @@ class EditProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 56),
-            EditImageProfile(),
+            SizedBox(height: 70),
+            EditImageProfile(radius: 90),
             SizedBox(height: 7),
             CustomTextField(
               labelText: AppText.name,
-              labelstyle: TextStyles.sf50016,
+              hintText: AppText.hintName,
+              labelstyle: TextStyles.sf40020,
               controller: bloc.nameController,
             ),
             SizedBox(height: 20),
             CustomTextField(
               labelText: AppText.email,
-              labelstyle: TextStyles.sf50016,
+              hintText: AppText.hintEmail,
+              labelstyle: TextStyles.sf40020,
               controller: bloc.nameController,
             ),
             SizedBox(height: 20),
             CustomTextField(
               labelText: AppText.password,
-              labelstyle: TextStyles.sf50016,
+              hintText: AppText.hintPassword,
+              labelstyle: TextStyles.sf40020,
               controller: bloc.nameController,
             ),
             SizedBox(height: 42),
-            CustomButton(onPressed: () {}, child: Text(AppText.save)),
+            CustomButton(
+              onPressed: () {},
+              child: Text(
+                AppText.save,
+                style: TextStyles.sf40016.copyWith(
+                  color: AppPalette.whitePrimary,
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
+import 'package:taleq/core/widget/button/custom_icon_button.dart';
 import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:taleq/features/profile/presentation/bloc/profile_event.dart';
 import 'package:taleq/features/profile/presentation/bloc/profile_state.dart';
@@ -34,6 +35,10 @@ class ProfilePage extends StatelessWidget {
             appBar: AppBar(
               title: const Text(AppText.profileTitle),
               centerTitle: true,
+              leading: CustomIconButton(
+                icon: Icons.arrow_back_ios,
+                onPressed: () => context.push('/reminder'),
+              ),
             ),
             body: Column(
               children: [

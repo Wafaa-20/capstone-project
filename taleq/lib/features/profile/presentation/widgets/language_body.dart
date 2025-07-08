@@ -16,14 +16,14 @@ class LanguageBody extends StatelessWidget {
           title: Text(AppText.ar, style: TextStyles.sf50016),
           leading: CircleAvatar(
             radius: 16,
-            backgroundImage: AssetImage('assets/image/en.png'),
+            backgroundImage: AssetImage('assets/image/ar.png'),
           ),
           onTap: () {
             //   .add(const ChangeLanguageEvent(localeCode: 'ar'));
             context.customPop();
           },
         ),
-        const Divider(height: 1, color: AppPalette.greySurface),
+        const Divider(height: 2, thickness: 2, color: AppPalette.bluePrimary),
         ListTile(
           title: Text(AppText.en, style: TextStyles.sf50016),
           leading: CircleAvatar(

@@ -8,24 +8,41 @@ class EditOption extends StatelessWidget {
     required this.text,
     required this.icon,
     this.onTap,
+    this.borderRadius,
+    this.style,
+    this.color,
   });
   final String text;
   final IconData icon;
   final void Function()? onTap;
+  final BorderRadiusGeometry? borderRadius;
+  final TextStyle? style;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Row(
-        children: [
-          Icon(icon, size: 25),
-          SizedBox(width: 10),
-          Text(
-            text,
-            style: TextStyles.sf50018.copyWith(color: AppPalette.black),
-          ),
-        ],
+      child: Container(
+        height: 53,
+        padding: EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: AppPalette.whiteLight3,
+          borderRadius: borderRadius,
+        ),
+
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              text,
+              style:
+                  style ?? TextStyles.sf40016.copyWith(color: AppPalette.black),
+            ),
+
+            Icon(icon, size: 25, color: color ?? AppPalette.black),
+          ],
+        ),
       ),
     );
   }

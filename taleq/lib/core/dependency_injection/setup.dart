@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'
     show Supabase, SupabaseClient;
 import 'package:taleq/core/service/agora.dart';
-import 'package:taleq/core/service/local_storage.dart';
+import 'package:taleq/core/service/local_storage.dart' as storage;
 import 'package:taleq/features/auth/data/datasources/supabase_datasource.dart';
 import 'package:taleq/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:taleq/features/auth/domain/repositories/auth_repository.dart';
@@ -22,12 +22,11 @@ import 'package:taleq/features/groups/domain/usecases/get_space_details_use_case
 import 'package:taleq/features/groups/domain/usecases/get_spaces_use_case.dart';
 import 'package:taleq/features/groups/domain/usecases/join_space_use_case.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
-import 'package:taleq/features/space/data/datasources/space_datasource.dart';
-import 'package:taleq/features/space/data/repositories/space_repository_impl.dart';
-import 'package:taleq/features/space/domain/repositories/space_repository.dart';
-import 'package:taleq/features/space/domain/usecases/add_comment_use_case.dart';
-import 'package:taleq/features/space/domain/usecases/get_space.dart';
-import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
+import 'package:taleq/features/home/data/datasources/home_datasource.dart';
+import 'package:taleq/features/home/data/repositories/home_repository_impl.dart';
+import 'package:taleq/features/home/domain/repositories/home_repository.dart';
+import 'package:taleq/features/home/domain/usecases/specialist_use_case.dart';
+import 'package:taleq/features/home/presentation/bloc/home_bloc.dart';
 import 'package:taleq/features/profile/data/datasources/image_picker_datasource.dart';
 import 'package:taleq/features/profile/data/datasources/profile_datasource.dart';
 import 'package:taleq/features/profile/data/repositories/image_picker_repository_impl.dart';
@@ -40,6 +39,12 @@ import 'package:taleq/features/profile/domain/usecases/sign_out_use_case.dart';
 import 'package:taleq/features/profile/domain/usecases/update_profile_use_case.dart';
 import 'package:taleq/features/profile/domain/usecases/upload_avatar_use_case.dart';
 import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:taleq/features/space/data/datasources/space_datasource.dart';
+import 'package:taleq/features/space/data/repositories/space_repository_impl.dart';
+import 'package:taleq/features/space/domain/repositories/space_repository.dart';
+import 'package:taleq/features/space/domain/usecases/add_comment_use_case.dart';
+import 'package:taleq/features/space/domain/usecases/get_space.dart';
+import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
 import 'package:taleq/features/specialists/data/datasources/specialists_datasource.dart';
 import 'package:taleq/features/specialists/data/repositories/specialists_repository_impl.dart';
 import 'package:taleq/features/specialists/domain/repositories/specialists_repository.dart';
@@ -57,8 +62,8 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 
 Future<void> setup() async {
   // Core Services
-  GetIt.I.registerSingletonAsync<LocalStorage>(() async {
-    final localStorage = LocalStorage();
+  GetIt.I.registerSingletonAsync<storage.LocalStorage>(() async {
+    final localStorage = storage.LocalStorage();
     await localStorage.init();
     return localStorage;
   });
@@ -67,6 +72,9 @@ Future<void> setup() async {
   // Data Sources
   GetIt.I.registerLazySingleton<AuthRemoteDatasource>(
     () => SupabaseDatasource(supabase: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton<HomeDatasource>(
+    () => HomeDatasourceImpl(supabase: GetIt.I()),
   );
   GetIt.I.registerLazySingleton<QuestionnaireDatasource>(
     () => QuestionnaireDatasourceImpl(supabase: GetIt.I()),
@@ -88,6 +96,9 @@ Future<void> setup() async {
   // Repositories
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(datasource: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(datasource: GetIt.I()),
   );
   GetIt.I.registerLazySingleton<GroupsRemoteDatasource>(
     () => GroupsSupabaseDatasource(supabase: GetIt.I()),
@@ -120,6 +131,7 @@ Future<void> setup() async {
   );
 
   // UseCases
+  GetIt.I.registerLazySingleton(() => SpecialistUseCase(repository: GetIt.I()));
   GetIt.I.registerLazySingleton(() => SignupUseCase(repository: GetIt.I()));
   GetIt.I.registerLazySingleton(() => LoginUseCase(repository: GetIt.I()));
   GetIt.I.registerLazySingleton(
@@ -188,4 +200,6 @@ Future<void> setup() async {
   GetIt.I.registerFactory(
     () => ProfileBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
   );
+  GetIt.I.registerFactory(() => HomeBloc(GetIt.I()));
+  GetIt.I.registerFactory(() => SpecialistUseCase(repository: GetIt.I()));
 }

@@ -1,8 +1,8 @@
-import 'dart:collection';
+
 
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:taleq/features/groups/domain/entities/space_details.dart';
-import 'package:taleq/features/groups/domain/entities/spaces.dart';
+
 
 @MappableClass()
 class SpaceDetails {

@@ -12,8 +12,6 @@ class SessionBookingTab extends StatelessWidget {
     return Column(
       children: [
         Flexible(child: CalendarTimeline()),
-        SizedBox(height: 15),
-
         Text(AppText.time),
         SizedBox(height: 15),
         Container(

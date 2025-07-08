@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taleq/core/service/agora.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
 import 'package:taleq/features/space/presentation/bloc/space_event.dart';

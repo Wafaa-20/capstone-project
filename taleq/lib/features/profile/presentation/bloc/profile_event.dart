@@ -39,13 +39,12 @@ class UpdateProfileEvent extends ProfileEvent {
 }
 
 class UploadAvatarEvent extends ProfileEvent {
-  final String userId;
   final File imageFile;
 
-  const UploadAvatarEvent({required this.userId, required this.imageFile});
+  const UploadAvatarEvent({required this.imageFile});
 
   @override
-  List<Object> get props => [userId, imageFile];
+  List<Object> get props => [imageFile];
 }
 
 class ChangeLanguageEvent extends ProfileEvent {

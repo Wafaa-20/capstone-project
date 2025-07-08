@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taleq/features/groups/data/models/join_details.dart';
 import 'package:taleq/features/groups/data/models/space_details_model.dart';
 import 'package:taleq/features/groups/data/models/summary_spaces_model.dart';
-import 'package:taleq/features/groups/presentation/bloc/groups_event.dart';
+
 
 abstract class GroupsRemoteDatasource {
   Future<Map<String, List<SummarySpace>>> getSummerySpaces();
@@ -151,11 +151,7 @@ class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
     }
   }
 
-  int _convertUserAccountToInt(String uuid) {
-    final hash = uuid.hashCode & 0x7FFFFFFF;
-    log('🔢 تحويل userAccount إلى int: $uuid => $hash');
-    return hash;
-  }
+
 
   Future<String> _fetchAgoraTokenFromBackend(
     String channelName,

@@ -39,9 +39,8 @@ Future<void> handleAuthCallback(Uri? uri, BuildContext context) async {
       if (session != null) {
         context.go('/navigation');
       } else {
-        context.go('/login');
+        context.read<SplashBloc>().add(CheckFirstTimeUserEvent());
       }
-      context.read<SplashBloc>().add(CheckFirstTimeUserEvent());
     }
   }
 }

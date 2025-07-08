@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
+import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/features/profile/domain/repositories/profile_repository.dart';
 import 'package:taleq/features/profile/domain/usecases/pick_image_use_case.dart';
 import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
@@ -8,8 +9,13 @@ import 'package:taleq/features/profile/presentation/bloc/profile_event.dart';
 import 'package:taleq/features/profile/presentation/widgets/edit_option.dart';
 
 class CameraBottomSheet extends StatelessWidget {
-  const CameraBottomSheet({super.key, required this.bloc});
+  const CameraBottomSheet({
+    super.key,
+    required this.bloc,
+    this.isDelate = false,
+  });
   final ProfileBloc bloc;
+  final bool isDelate;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +25,20 @@ class CameraBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppText.editProfilePicture, style: TextStyles.sf70025),
+          Center(
+            child: Text(
+              AppText.editProfilePicture,
+
+              style: TextStyles.sf70020.copyWith(color: AppPalette.black),
+            ),
+          ),
           SizedBox(height: 30),
           EditOption(
             text: AppText.takePhoto,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(12),
+              topRight: Radius.circular(12),
+            ),
             icon: Icons.camera_alt_outlined,
             onTap: () {
               bloc.add(
@@ -32,10 +48,15 @@ class CameraBottomSheet extends StatelessWidget {
               );
             },
           ),
-          SizedBox(height: 20),
+          Divider(thickness: 2, height: 2, color: AppPalette.whitePrimary),
+
           EditOption(
             text: AppText.choosePhoto,
             icon: Icons.photo_library,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12),
+            ),
             onTap: () {
               bloc.add(
                 PickAvatarEvent(
@@ -48,6 +69,9 @@ class CameraBottomSheet extends StatelessWidget {
           EditOption(
             text: AppText.deletePhoto,
             icon: Icons.delete,
+            style: TextStyles.sf50018.copyWith(color: AppPalette.deleteRed),
+            color: AppPalette.deleteRed,
+            borderRadius: BorderRadius.circular(12),
             onTap: () {},
           ),
         ],

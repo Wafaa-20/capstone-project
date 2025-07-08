@@ -10,18 +10,24 @@ class CalendarTimeline extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime today = DateTime.now();
     return TableCalendar(
-      headerStyle: HeaderStyle(
-        formatButtonVisible: false,
-        titleCentered: true,
+      locale: 'ar',
 
-        titleTextStyle: TextStyles.sf60018,
-        leftChevronIcon: Icon(
-          Icons.chevron_left,
-          color: AppPalette.black,
+      headerStyle: HeaderStyle(
+        headerMargin: EdgeInsets.symmetric(vertical: 32.0),
+        headerPadding: EdgeInsets.zero,
+        formatButtonVisible: false,
+        decoration: BoxDecoration(
+          color: AppPalette.gray,
+          borderRadius: BorderRadius.circular(20),
         ),
+
+        titleCentered: true,
+        titleTextStyle: TextStyles.sf40016.copyWith(color: AppPalette.black),
+        leftChevronIcon: Icon(Icons.chevron_left, color: AppPalette.black),
         rightChevronIcon: Icon(Icons.chevron_right, color: AppPalette.black),
       ),
       availableGestures: AvailableGestures.all,
+      calendarStyle: CalendarStyle(),
       focusedDay: today,
       firstDay: DateTime(today.year),
       lastDay: DateTime(today.year + 100, 12, 31),

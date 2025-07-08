@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
-import 'package:taleq/core/extension/git_size_screen.dart';
+
 import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_event.dart';
-import 'package:taleq/features/groups/presentation/bloc/groups_state.dart';
-import 'package:taleq/features/groups/presentation/pages/available_group.dart';
+
 import 'package:taleq/features/groups/presentation/pages/group_suggestion_page.dart';
 import 'package:taleq/features/groups/presentation/widgets/group_card.dart';
 import 'package:taleq/features/groups/presentation/widgets/horzintal_spaces.dart';
