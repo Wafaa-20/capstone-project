@@ -13,13 +13,34 @@ final class SpaceInitial extends SpaceState {}
 class GetSpaceSuccess extends SpaceState {
   final SpaceEntity getSpaceinfo;
   final List<Map<String, dynamic>> getspaceusers;
-
+  final bool isMicEnabled;
+  final bool isAgoraInitialized;
   const GetSpaceSuccess({
     required this.getSpaceinfo,
     required this.getspaceusers,
+    required this.isMicEnabled,
+    required this.isAgoraInitialized,
   });
   @override
-  List<Object> get props => [getSpaceinfo, getspaceusers];
+  List<Object> get props => [
+    getSpaceinfo,
+    getspaceusers,
+    isMicEnabled,
+    isAgoraInitialized,
+  ];
+  GetSpaceSuccess copyWith({
+    SpaceEntity? getSpaceinfo,
+    List<Map<String, dynamic>>? getspaceusers,
+    bool? isMicEnabled,
+    bool? isAgoraInitialized,
+  }) {
+    return GetSpaceSuccess(
+      getSpaceinfo: getSpaceinfo ?? this.getSpaceinfo,
+      getspaceusers: getspaceusers ?? this.getspaceusers,
+      isMicEnabled: isMicEnabled ?? this.isMicEnabled,
+      isAgoraInitialized: isAgoraInitialized ?? this.isAgoraInitialized,
+    );
+  }
 }
 
 final class GetSpaceFiled extends SpaceState {

@@ -16,7 +16,13 @@ class AppText {
   static const String noAccount = "ليس لديك حساب؟ ";
   static const String signupNow = "سجل الان";
   static const String loginby = "الدخول من خلال ";
-
+  //training
+  static const String breath = "تنفس";
+  static const String read = "قراءة";
+  static const String control = "استراتيجيات التحكم";
+  static const String talk = "تحدث";
+  static const String relax = "الاسترخاء";
+  static const String acting = "المحاكاة والتمثيل";
   // Signup Screen
   static const String welcome = "أهلاً بك !";
   static const String createAccount = "إنشاء حساب";
@@ -112,6 +118,8 @@ class AppText {
   static const String talkExr3 = "السماء زرقاء ومليئة بالغيوم البيضاء";
 
   //Groups
+
+  static const String suggestionSuccess = "تم استلام الاقتراح بنجاح";
   static const String groupTitle = "مجموعات الدعم";
   static const String myGroup = "مجموعاتي";
   static const String avilableGroup = "المجموعات المتاحة";
@@ -132,6 +140,10 @@ class AppText {
   static const String join = "انضمام";
   static const String pepole = "أشخاص";
   static const String availableSeats = "مقاعد متبقية";
+  //spaces
+  static const String leaveComment = "اكتب تعليقاً...";
+  static const String anonymous = "مجهول";
+  static const String comments = "التعليقات";
 
   //Plan
 

@@ -139,7 +139,7 @@ class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
 
       final token = await _fetchAgoraTokenFromBackend(channelName, uid);
 
-      return JoinDetailsModel(userID: uid, token: token ,hostID:hostID);
+      return JoinDetailsModel(userID: uid, token: token, hostID: hostID);
     } on AuthException catch (e) {
       log(e.toString());
       log(e.message.toString());
@@ -151,10 +151,17 @@ class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
     }
   }
 
+  int _convertUserAccountToInt(String uuid) {
+    final hash = uuid.hashCode & 0x7FFFFFFF;
+    log('🔢 تحويل userAccount إلى int: $uuid => $hash');
+    return hash;
+  }
+
   Future<String> _fetchAgoraTokenFromBackend(
     String channelName,
     String uid,
   ) async {
+    log('🔢   $uid ');
     final url = Uri.parse('http://hsat.masar10.com/api/taleqapi/token.php');
     final response = await http.post(
       url,
@@ -173,7 +180,7 @@ class GroupsSupabaseDatasource implements GroupsRemoteDatasource {
     if (data['status'] != 'success') {
       throw FormatException('فشل إنشاء التوكن: ${data['message']}');
     }
-
+    log('token is : ${data['token']}');
     return data['token'];
   }
 }

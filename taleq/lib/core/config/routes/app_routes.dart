@@ -28,6 +28,7 @@ abstract class Routes {
   static const changePassword = _Paths.changePassword;
   static const space = _Paths.space;
   static const groups = _Paths.groups;
+  static const avilableGroup = _Paths.avilableGroup;
   Routes._();
 }
 
@@ -61,6 +62,7 @@ abstract class _Paths {
   static const changePassword = '/change_password';
   static const space = '/space';
   static const groups = '/groups';
+  static const avilableGroup = '/avilable_group';
   _Paths._();
 }
 
@@ -94,6 +96,7 @@ abstract class _Names {
   static const changePassword = 'change_password';
   static const space = 'space';
   static const groups = 'groups';
+  static const avilableGroup = 'avilable_group';
   _Names._();
 }
 
@@ -127,6 +130,6 @@ abstract class Names {
   static const changePassword = _Names.changePassword;
   static const space = _Names.space;
   static const groups = _Names.groups;
-
+  static const avilableGroup = _Names.avilableGroup;
   Names._();
 }

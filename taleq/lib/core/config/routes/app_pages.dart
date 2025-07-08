@@ -11,6 +11,7 @@ import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/word
 import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_start_page.dart';
 import 'package:taleq/features/exercises/Words_Excercise_start/presentation/page/intro_words_excercise_page.dart';
 import 'package:taleq/features/exercises/presentation/page/task_success_page.dart';
+import 'package:taleq/features/groups/presentation/pages/available_group.dart';
 import 'package:taleq/features/groups/presentation/pages/groups_page.dart';
 
 import 'package:taleq/features/home/presentation/pages/home_page.dart';
@@ -220,7 +221,14 @@ final router = GoRouter(
         );
       },
     ),
-
+    GoRoute(
+      name: Names.avilableGroup,
+      path: '/avilable_group',
+      builder: (context, state) {
+        final spaceID = state.uri.queryParameters['spaceID'] ?? '';
+        return AvailableGroup(spaceId: spaceID);
+      },
+    ),
     GoRoute(
       name: Names.groups,
       path: Routes.groups,

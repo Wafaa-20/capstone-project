@@ -12,7 +12,7 @@ class GroupsState extends Equatable {
 }
 
 class GroupsInitial extends GroupsState {
-  const GroupsInitial();
+  const GroupsInitial({required bool showButton});
 }
 
 class GetSuccees extends GroupsState {

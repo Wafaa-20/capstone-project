@@ -22,11 +22,19 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     this._getSpacesUseCase,
     this._getSpaceDetailsUseCase,
     this._joinSpaceUseCase,
-  ) : super(GroupsInitial()) {
+  ) : super(GroupsInitial(showButton: false)) {
     on<GetSpaces>(getSpaces);
     on<BringSpaceDetails>(getSpaceDetails);
     on<JoinSpace>(joinspace);
+    on<TitleChanged>(titleCheck);
   }
+  FutureOr<void> titleCheck(
+    TitleChanged event,
+    Emitter<GroupsState> emit,
+  ) async {
+    emit(GroupsInitial(showButton: event.text.trim().isNotEmpty));
+  }
+
   FutureOr<void> getSpaces(event, Emitter<GroupsState> emit) async {
     emit(SpacesLoading());
     final spaces = await _getSpacesUseCase(GetSpacesParams());

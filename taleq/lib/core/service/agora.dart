@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -14,27 +15,31 @@ class AgoraService {
     required String channelName,
     required String userAccount,
   }) async {
-    // اطلب صلاحية المايك
-    await Permission.microphone.request();
+    log('🔧 بدء تهيئة Agora');
 
-    // إنشاء المحرك
+    final micStatus = await Permission.microphone.request();
+    log('🎙 حالة إذن المايك: $micStatus');
+
     _engine = createAgoraRtcEngine();
+    log('✅ تم إنشاء RtcEngine');
+
     await _engine.initialize(
-       RtcEngineContext(
+      RtcEngineContext(
         appId: appId,
-        channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
+        channelProfile: ChannelProfileType.channelProfileCommunication,
       ),
     );
+    log('✅ تم تهيئة RtcEngine');
 
-    // تسجيل الأحداث
     _engine.registerEventHandler(
       RtcEngineEventHandler(
+        
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-          debugPrint("✅ انضم المستخدم المحلي: ${connection.localUid}");
+          log("✅ انضم المستخدم المحلي: ${connection.localUid}");
           _localUserJoined = true;
         },
         onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-          debugPrint("👤 انضم مستخدم: $remoteUid");
+          log("👤 انضم مستخدم: $remoteUid");
           _remoteUid = remoteUid;
         },
         onUserOffline:
@@ -43,64 +48,71 @@ class AgoraService {
               int remoteUid,
               UserOfflineReasonType reason,
             ) {
-              debugPrint("👤 غادر المستخدم: $remoteUid");
+              log("👤 غادر المستخدم: $remoteUid - السبب: $reason");
               _remoteUid = null;
             },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
-          debugPrint('[⚠️ التوكن سينتهي قريباً] token: $token');
+          log('[⚠️ التوكن سينتهي قريباً] token: $token');
         },
+      
       ),
     );
+    log('✅ تم تسجيل الـ EventHandler');
 
-    
     await _engine.setAudioProfile(
       profile: AudioProfileType.audioProfileMusicHighQuality,
       scenario: AudioScenarioType.audioScenarioGameStreaming,
     );
+    log('🎵 تم ضبط ملف تعريف الصوت');
 
-    
     await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+    log('🎤 تم تعيين الدور كمذيع (Broadcaster)');
 
-    
     await _engine.enableAudio();
+    log('🔊 تم تفعيل الصوت');
 
-    
     final int uid = _convertUserAccountToInt(userAccount);
+    log('🔑 UID المحسوب من userAccount: $uid');
 
-    
-    await _engine.joinChannel(
+    log('🚀 الانضمام إلى القناة: $channelName');
+    await _engine.joinChannelWithUserAccount(
       token: token,
       channelId: channelName,
-      uid: uid,
+      userAccount: userAccount,
       options: const ChannelMediaOptions(
-        publishMicrophoneTrack: true,
-        autoSubscribeAudio: true,
+        autoSubscribeAudio:
+            true, // Automatically subscribe to all audio streams
+        publishMicrophoneTrack: true, // Publish microphone-captured audio
+        // Use clientRoleBroadcaster to act as a host or clientRoleAudience for audience
+        clientRoleType: ClientRoleType.clientRoleBroadcaster,
       ),
     );
+    log('✅ طلب الانضمام إلى القناة مكتمل');
   }
 
-  
   Future<void> leave() async {
+    log('⬅️ مغادرة القناة');
     await _engine.leaveChannel();
     await _engine.release();
+    log('✅ تم تحرير الموارد');
   }
 
-  
   Future<void> muteLocalMic() async {
+    log('🔇 كتم المايك');
     await _engine.muteLocalAudioStream(true);
   }
 
- 
   Future<void> unmuteLocalMic() async {
+    log('🔊 إلغاء كتم المايك');
     await _engine.muteLocalAudioStream(false);
   }
 
   bool get isLocalUserJoined => _localUserJoined;
   int? get remoteUid => _remoteUid;
 
-
   int _convertUserAccountToInt(String uuid) {
-   
-    return uuid.hashCode & 0x7FFFFFFF; 
+    final hash = uuid.hashCode & 0x7FFFFFFF;
+    log('🔢 تحويل userAccount إلى int: $uuid => $hash');
+    return hash;
   }
 }

@@ -28,7 +28,6 @@ class SpaceSupabaseDatasource implements SpaceRemoteDatasource {
         throw const FormatException("User not authenticated");
       }
 
-     
       final spaceResponse = await supabase
           .from('spaces')
           .select('id, title,host_id, channel_name')
@@ -38,19 +37,24 @@ class SpaceSupabaseDatasource implements SpaceRemoteDatasource {
       final id = spaceResponse['id'] as String? ?? '';
       final name = spaceResponse['title'] as String? ?? '';
       final channelName = spaceResponse['channel_name'] as String? ?? '';
-            final hostID = spaceResponse['host_id'] as String? ?? '';
-
+      final hostID = spaceResponse['host_id'] as String? ?? '';
 
       final membersResponse = await supabase
           .from('space_members')
-          .select('user_profiles:user_id(avatar_url, full_name)')
+          .select(
+            'user_id, is_muted, user_profiles:user_id(avatar_url, full_name)',
+          )
           .eq('space_id', spaceID);
-
+      log(membersResponse.toString());
       final users = (membersResponse as List<dynamic>).map((item) {
         final profile = item['user_profiles'];
         return {
           'name': profile['full_name'] ?? '',
-          'avatar_url': profile['avatar_url'],
+          'avatar_url':
+              profile['avatar_url'] ??
+              'https://oqomrjnyzqjfaqgjjvhi.supabase.co/storage/v1/object/public/avatars//clipart--person-icon--cliparts-15.png',
+          'is_muted': item['is_muted'],
+          'user_id': item['user_id'],
         };
       }).toList();
 
@@ -73,7 +77,7 @@ class SpaceSupabaseDatasource implements SpaceRemoteDatasource {
         id: id,
         name: name,
         channelName: channelName,
-        hostID:hostID,
+        hostID: hostID,
         users: users,
         comments: comments,
       );

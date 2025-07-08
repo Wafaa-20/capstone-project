@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'
     show Supabase, SupabaseClient;
+import 'package:taleq/core/service/agora.dart';
 import 'package:taleq/core/service/local_storage.dart';
 import 'package:taleq/features/auth/data/datasources/supabase_datasource.dart';
 import 'package:taleq/features/auth/data/repositories/auth_repository_impl.dart';
@@ -163,6 +164,8 @@ Future<void> setup() async {
     () => GetSpaceListsUseCase(repository: GetIt.I()),
   );
   GetIt.I.registerLazySingleton(() => AddCommentUseCase(repository: GetIt.I()));
+  GetIt.I.registerLazySingleton(() => AgoraService());
+
   // Blocs
   GetIt.I.registerFactory(
     () => AuthBloc(
@@ -179,7 +182,9 @@ Future<void> setup() async {
   GetIt.I.registerFactory(() => QuestionnaireBloc(GetIt.I()));
   GetIt.I.registerFactory(() => GroupsBloc(GetIt.I(), GetIt.I(), GetIt.I()));
   GetIt.I.registerFactory(() => SpecialistsBloc(GetIt.I()));
-  GetIt.I.registerFactory(() => SpaceBloc(GetIt.I(), GetIt.I(), GetIt.I()));
+  GetIt.I.registerFactory(
+    () => SpaceBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
+  );
   GetIt.I.registerFactory(
     () => ProfileBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
   );

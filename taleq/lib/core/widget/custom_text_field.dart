@@ -16,9 +16,9 @@ class CustomTextField extends StatelessWidget {
     this.labelstyle,
     this.hintstyle,
     this.textstyle,
-
     this.fieldKey,
     this.keyboardType,
+    this.onSubmitted,
   });
   final ValueChanged<String>? onChanged;
   final TextEditingController controller;
@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? labelstyle;
   final TextStyle? hintstyle;
   final TextStyle? textstyle;
-
+  final ValueChanged<String>? onSubmitted;
   final Key? fieldKey;
   final TextInputType? keyboardType;
 
@@ -51,6 +51,7 @@ class CustomTextField extends StatelessWidget {
           obscureText: obscureText!,
           style: textstyle,
           key: fieldKey,
+          onFieldSubmitted: onSubmitted,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: hintstyle,

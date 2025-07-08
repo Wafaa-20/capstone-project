@@ -49,7 +49,7 @@ class AvailableGroup extends StatelessWidget {
                                       alignment: Alignment.centerRight,
                                       child: IconButton(
                                         onPressed: () {
-                                          context.customPop();
+                                          context.go('/navigation');
                                         },
                                         icon: const Icon(
                                           Icons.keyboard_arrow_right_rounded,
@@ -237,7 +237,7 @@ class AvailableGroup extends StatelessWidget {
                     );
                   } else if (state is JoinSuccees) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      context.push(
+                      context.go(
                         '/space?userID=${Uri.encodeComponent(state.userID)}'
                         '&token=${Uri.encodeComponent(state.token)}'
                         '&spaceID=${Uri.encodeComponent(spaceId)}'

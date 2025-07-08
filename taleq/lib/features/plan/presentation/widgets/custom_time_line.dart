@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/theme/app_theme.dart';
 import 'package:taleq/features/plan/data/models/plan_details/plan_details_model.dart';
@@ -65,10 +66,10 @@ class CustomTimeLine extends StatelessWidget {
                     color: AppPalette.whiteLight,
                   ),
                   onPressed: () {
-                    //    ctx.go(planDetails[index].route);
+                    ctx.go(planDetails[index].route);
                     bloc.add(SelectExerciseEvent(currentExercise: index));
                     bloc.controller.animateTo(
-                      index * 150, 
+                      index * 150,
                       duration: Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
                     );

@@ -1,14 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/service/agora.dart';
+import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
 import 'package:taleq/features/space/presentation/bloc/space_event.dart';
 import 'package:taleq/features/space/presentation/bloc/space_state.dart';
 import 'package:taleq/features/space/presentation/widgets/comments_bottom_sheet.dart';
 
-class SpacePage extends StatefulWidget {
+class SpacePage extends StatelessWidget {
   final String userID;
   final String token;
   final String spaceID;
@@ -23,71 +26,50 @@ class SpacePage extends StatefulWidget {
   });
 
   @override
-  State<SpacePage> createState() => _SpacePageState();
-}
-
-class _SpacePageState extends State<SpacePage> {
-  final agoraService = AgoraService();
-  bool isAgoraInitialized = false;
-  bool isMicEnabled = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    context.read<SpaceBloc>().add(
-      GetSpaceLists(
-        userID: widget.userID,
-        token: widget.token,
-        spaceID: widget.spaceID,
-      ),
-    );
-  }
-
-  Future<void> _initAgora(String channelName) async {
-    await agoraService.initWithUserAccount(
-      appId: '59fd63f1b8fa4761b7900a1d9bc8992b',
-      token: widget.token,
-      channelName: channelName,
-      userAccount: widget.userID,
-    );
-    setState(() => isAgoraInitialized = true);
-  }
-
-  void toggleMic() {
-    if (isMicEnabled) {
-      agoraService.muteLocalMic();
-    } else {
-      agoraService.unmuteLocalMic();
-    }
-    setState(() {
-      isMicEnabled = !isMicEnabled;
-    });
-  }
-
-  @override
-  void dispose() {
-    agoraService.leave();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SpaceBloc>().add(
+        GetSpaceLists(spaceID: spaceID, userID: userID, token: token),
+      );
+    });
     return BlocBuilder<SpaceBloc, SpaceState>(
       builder: (context, state) {
         if (state is SpaceLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is GetSpaceSuccess) {
-          final spaceInfo = state.getSpaceinfo;
-          final users = state.getspaceusers;
-
-          if (!isAgoraInitialized) {
-            _initAgora(spaceInfo.channelName);
+          if (!state.isAgoraInitialized) {
+            context.read<SpaceBloc>().add(
+              InitAgoraEvent(
+                channelName: state.getSpaceinfo.channelName,
+                token: token,
+              ),
+            );
           }
 
-          return buildSpaceUI(spaceInfo.name, users, spaceInfo.comments);
-        } else if (state is GetSpaceFiled) {
-          return Center(child: Text(state.message));
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(state.getSpaceinfo.name),
+              leading: IconButton(
+                onPressed: () {
+                  context.read<SpaceBloc>().add(
+                    LeaveSpaceEvent(userID: userID, spaceID: spaceID),
+                  );
+                  context.go('/navigation');
+                },
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  const SizedBox(height: 16),
+                  buildUsersGrid(context, state.getspaceusers),
+                  const Spacer(),
+                  buildBottomBar(context, state.getSpaceinfo.comments),
+                ],
+              ),
+            ),
+          );
         } else {
           return const SizedBox.shrink();
         }
@@ -95,33 +77,7 @@ class _SpacePageState extends State<SpacePage> {
     );
   }
 
-  Widget buildSpaceUI(
-    String spaceName,
-    List users,
-    List<Map<String, dynamic>> comments,
-  ) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(spaceName, style: const TextStyle(fontSize: 18)),
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(Icons.arrow_back),
-        ),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 16),
-            buildUsersGrid(users),
-            const Spacer(),
-            buildBottomBar(comments),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildUsersGrid(List users) {
+  Widget buildUsersGrid(BuildContext context, List users) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: GridView.builder(
@@ -138,8 +94,9 @@ class _SpacePageState extends State<SpacePage> {
           final user = users[index];
           final image = user['avatar_url'] ?? user['image'];
           final name = user['name'] ?? 'بدون اسم';
-          final isSpeaking = user['isSpeaking'] ?? false;
-          final isMuted = user['isMuted'] ?? false;
+          final isMuted = user['is_muted'] ?? true;
+          isMuted ? log('true mute') : log('false mute');
+          // final iconUserID = user['user_id'];
 
           return Column(
             children: [
@@ -156,24 +113,20 @@ class _SpacePageState extends State<SpacePage> {
                   Positioned(
                     bottom: 0,
                     left: 0,
-                    child: GestureDetector(
-                      onTap: toggleMic,
+                    child: CircleAvatar(
+                      radius: 13,
+                      backgroundColor: AppPalette.whiteLight,
                       child: Icon(
-                        isMicEnabled ? Icons.mic : Icons.mic_off,
-                        color: isMicEnabled ? Colors.blue : Colors.grey,
+                        isMuted ? Icons.mic_off : Icons.mic,
+                        color: isMuted ? Colors.grey : Colors.blue,
                         size: 18,
                       ),
                     ),
                   ),
                 ],
               ),
-
               const SizedBox(height: 6),
-              Text(
-                name,
-                style: const TextStyle(fontSize: 14),
-                overflow: TextOverflow.ellipsis,
-              ),
+              Text(name, overflow: TextOverflow.ellipsis),
             ],
           );
         },
@@ -181,52 +134,63 @@ class _SpacePageState extends State<SpacePage> {
     );
   }
 
-  Widget buildBottomBar(List<Map<String, dynamic>> comments) {
+  Widget buildBottomBar(
+    BuildContext context,
+    List<Map<String, dynamic>> comments,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          ElevatedButton.icon(
+            onPressed: () =>
+                context.read<SpaceBloc>().add(ToggleMicEvent(userID: userID)),
+            icon: const Icon(Icons.mic, color: Colors.white),
+            label: const Text("اضغط للتحدث"),
+            style: ElevatedButton.styleFrom(
+              foregroundColor: AppPalette.whitePrimary,
+              backgroundColor: AppPalette.bluePrimary,
+            ),
+          ),
           Row(
             children: [
-              Builder(
-                builder: (context) => IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      builder: (ctx) => BlocProvider.value(
-                        value: context.read<SpaceBloc>(),
-                        child: CommentsBottomSheet(
-                          currentUserId: widget.userID,
-                          currentSpaceId: widget.spaceID,
-                        ),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.chat_bubble_outline),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.share),
+                label: Text(""),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: AppPalette.black,
+                  backgroundColor: AppPalette.whiteLight,
                 ),
               ),
-              Text(comments.length.toString()),
               const SizedBox(width: 12),
-              const Icon(Icons.share),
-            ],
-          ),
-          ElevatedButton.icon(
-            onPressed: () {
-              agoraService.unmuteLocalMic();
-            },
-            icon: const Icon(Icons.mic, color: Colors.white),
-            label: const Text("طلب التحدث"),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+              ElevatedButton.icon(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    isScrollControlled: true,
+                    builder: (ctx) => BlocProvider.value(
+                      value: context.read<SpaceBloc>(),
+                      child: CommentsBottomSheet(
+                        currentUserId: userID,
+                        currentSpaceId: spaceID,
+                      ),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.chat_bubble_outline),
+                label: Text(comments.length.toString()),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: AppPalette.black,
+                  backgroundColor: AppPalette.whiteLight,
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

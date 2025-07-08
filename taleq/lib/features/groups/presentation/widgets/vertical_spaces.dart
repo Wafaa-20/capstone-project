@@ -1,7 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/extension/navigation.dart';
+import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_state.dart';
@@ -30,12 +33,10 @@ class VerticalSpaces extends StatelessWidget {
               itemBuilder: (context, index) {
                 final availableSpace = availableSpaces[index];
                 return Align(
-                  alignment: Alignment
-                      .centerRight,
+                  alignment: Alignment.centerRight,
                   child: GroupCard(
                     height: context.getHeight() * 0.15,
-                    width:
-                        context.getWidth() * 0.85, 
+                    width: context.getWidth() * 0.85,
                     title: availableSpace.title,
                     date: bloc.formatDate(
                       availableSpace.startDate,
@@ -45,8 +46,8 @@ class VerticalSpaces extends StatelessWidget {
                         ? Icons.wifi_tethering
                         : Icons.access_time,
                     onPressed: () {
-                      context.customPush(
-                        AvailableGroup(spaceId: availableSpace.id),
+                      context.go(
+                        '/avilable_group?spaceID=${availableSpace.id}',
                       );
                     },
                     showButton: availableSpace.isActive,
@@ -60,7 +61,7 @@ class VerticalSpaces extends StatelessWidget {
             ),
           );
         } else if (state is GetFalid) {
-          return Center(child: Text("Check Your Connetcion"));
+          return Center(child: Text(AppText.networkError.tr()));
         } else {
           return const SizedBox();
         }
