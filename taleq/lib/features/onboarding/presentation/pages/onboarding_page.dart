@@ -20,7 +20,7 @@ class OnboardingPage extends StatelessWidget {
       child: BlocConsumer<OnboardingBloc, OnboardingState>(
         listener: (context, state) {
           if (state is OnboardingCompleted) {
-            context.go('/auth');
+            context.go('/login');
           }
         },
         builder: (context, state) {

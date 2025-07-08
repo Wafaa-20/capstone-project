@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:taleq/features/splash/presentation/bloc/splash_event.dart';
-import 'package:app_links/app_links.dart';
 
 final AppLinks appLinks = AppLinks();
 
@@ -39,9 +39,8 @@ Future<void> handleAuthCallback(Uri? uri, BuildContext context) async {
       if (session != null) {
         context.go('/home');
       } else {
-        context.go('/login');
+        context.read<SplashBloc>().add(CheckFirstTimeUserEvent());
       }
-      context.read<SplashBloc>().add(CheckFirstTimeUserEvent());
     }
   }
 }

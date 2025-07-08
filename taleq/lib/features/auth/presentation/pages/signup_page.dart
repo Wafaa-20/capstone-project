@@ -35,7 +35,6 @@ class SignupPage extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   builder: (_) => OtpBottomSheet(email: otpEmail, bloc: bloc),
                 );
-                
               } else if (state is AuthFailure) {
                 ScaffoldMessenger.of(
                   context,
@@ -54,7 +53,7 @@ class SignupPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: SizedBox(
                       width: context.getWidth(),
-                      height: context.getHeight() - context.getSafeHeight(),
+                      height: context.getHeight(),
                       child: Stack(
                         clipBehavior: Clip.none,
                         children: [
@@ -78,7 +77,7 @@ class SignupPage extends StatelessWidget {
 
                                     TextButton(
                                       onPressed: () {
-                                        context.go('/home');
+                                        context.go('/navigation');
                                       },
                                       child: Text(
                                         AppText.continueAsGuest.tr(),

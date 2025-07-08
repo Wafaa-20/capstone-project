@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
+import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
+import 'package:taleq/core/widget/button/custom_icon_button.dart';
 import 'package:taleq/core/widget/custom_text_field.dart';
 
 class StoryPage extends StatelessWidget {
@@ -12,35 +15,61 @@ class StoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = TextEditingController();
     return Scaffold(
-      appBar: AppBar(title: Text("قصتك")),
-      body: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Column(
-          children: [
-            CustomTextField(controller: controller),
-            TextField(
-              // controller: _storyController,
-              decoration: InputDecoration(
-                hintText: 'اكتب قصتك هنا',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
+      appBar: AppBar(
+        title: Text("قصتك"),
+        leading: CustomIconButton(
+          icon: Icons.arrow_back_ios,
+          size: 20,
+          color: AppPalette.black,
+          onPressed: () {
+            context.pop();
+          },
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppText.title,
+                style: TextStyles.sf70018.copyWith(color: AppPalette.black),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      controller: controller,
+                      keyboardType: TextInputType.multiline,
+                      hintText: AppText.hintTitle,
+                    ),
+                    CustomTextField(
+                      controller: controller,
+                      keyboardType: TextInputType.multiline,
+                      hintText: AppText.hintStory,
+                      maxLines: null,
+                      minLines: 5,
+                    ),
+                  ],
                 ),
               ),
-              keyboardType: TextInputType.multiline,
-              maxLines: null, // يسمح بعدد أسطر غير محدود
-              minLines: 5, // يبدأ بخمس أسطر مثلاً
-            ),
-            CustomButton(
-              width: context.getWidth(),
-              onPressed: () {},
-              child: Text(
-                AppText.shareStory2,
-                style: TextStyles.sf70020.copyWith(
-                  // color: AppPalette.whitePrimary,
+              Spacer(),
+
+              CustomButton(
+                width: context.getWidth(),
+                onPressed: () {},
+                child: Text(
+                  AppText.shareStory2,
+                  style: TextStyles.sf70020.copyWith(
+                    // color: AppPalette.whitePrimary,
+                  ),
                 ),
               ),
-            ),
-          ],
+              // SizedBox(height: 50),
+            ],
+          ),
         ),
       ),
     );
