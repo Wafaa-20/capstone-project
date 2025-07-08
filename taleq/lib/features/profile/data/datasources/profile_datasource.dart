@@ -33,6 +33,8 @@ class ProfileDatasourceImpl implements ProfileDatasource {
           .single();
       final dataMap = (response);
       dataMap['email'] = user.email;
+      print("User: $response");
+      print("Data Map: $dataMap");
       return UserProfileModelMapper.fromMap(dataMap);
     } catch (e) {
       throw FormatException('Failed to load profile for: $e');
@@ -86,11 +88,14 @@ class ProfileDatasourceImpl implements ProfileDatasource {
 
       //Get The Public Url
       final publicUrl = supabase.storage.from('avatars').getPublicUrl(path);
+
       //Update Avatar Url in User Profile table
       final updateAvatarUrl = await supabase
           .from('user_profiles')
-          .update({'avatar_url': publicUrl})
-          .eq('user_id', user)
+          .upsert({
+            'user_id': user,
+            'avatar_url': publicUrl,
+          }, onConflict: 'user_id')
           .select()
           .single();
 

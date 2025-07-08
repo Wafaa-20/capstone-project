@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/constants/list_constants.dart';
+import 'package:taleq/core/extension/navigation.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
@@ -22,24 +23,33 @@ class ProfileOptionsBody extends StatelessWidget {
             if (list.title == AppText.language) {
               showDialog(
                 context: context,
+                barrierColor: Colors.transparent,
                 builder: (_) => Dialog(
+                  alignment: Alignment.lerp(
+                    Alignment.center,
+                    Alignment.bottomLeft,
+                    0.5,
+                  ),
                   backgroundColor: AppPalette.whitePrimary,
                   shape: RoundedRectangleBorder(
+                    side: BorderSide(color: AppPalette.bluePrimary, width: 2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: LanguageBody(),
                 ),
               );
             } else if (list.title == AppText.logout) {
-              CustomShowDialog.show(
+              CustomCupertinoDialog.show(
                 context: context,
                 blocContext: context,
                 title: Text(AppText.logout),
-                content: const Text('هل أنت متأكد؟'),
-                text: AppText.addGroup,
+                content: Text(AppText.sure),
+                text: AppText.yes,
+                text2: AppText.cancel,
+
                 onPressed: () {
                   // context.read<ProfileBloc>().add(const SignOutEvent());
-                  Navigator.of(context).pop(); // أو context.customPop()
+                  context.customPop(); // أو context.customPop()
                 },
               );
             } else {

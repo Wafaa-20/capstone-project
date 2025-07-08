@@ -20,6 +20,7 @@ class AppPalette {
   static const Color whiteLight = Color(0xFFF7F7F7);
   static const Color whiteLight2 = Color(0xFFE5E7EB);
   static const Color whiteTransparent20 = Color(0x33FFFFFF);
+  static const Color whiteLight3 = Color.fromARGB(255, 233, 232, 232);
 
   //gray
   static const Color grayPrimary = Color(0xff5A5A5A);
@@ -31,13 +32,18 @@ class AppPalette {
   static const Color greyNeutral = Color(0xFFD7D7D7);
   static const Color greyDeep = Color(0xff676767);
   static const Color navGray = Color(0xffAAAAAA);
+  static const Color gray = Color(0x42D9D9D9);
+
+  static const Color dialogGray = Color(0x8C808080);
 
   //black
   static const Color black = Colors.black;
   static const Color blackLight = Color(0xff1C1605);
+  static const Color blackLight2 = Color(0xff061119);
   static const Color blackPrimary = Color(0xff393938);
   //red
   static const Color iosRed = Color(0xFFFF7755);
+  static const Color deleteRed = Color(0xFFF94848);
   //orange
   static const Color iosOrange = Color(0xFFFF703D);
   static const Color orangePrimary = Color(0xFFF75F01);

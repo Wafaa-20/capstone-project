@@ -8,9 +8,16 @@ import 'package:taleq/features/profile/presentation/bloc/profile_state.dart';
 import 'package:taleq/features/profile/presentation/widgets/camera_bottom_sheet.dart';
 
 class EditImageProfile extends StatelessWidget {
-  const EditImageProfile({super.key, this.radius, this.isWithCamera = false, NetworkImage? imageProvider});
+  const EditImageProfile({
+    super.key,
+    this.radius,
+    this.isWithCamera = false,
+    NetworkImage? imageProvider,
+    this.onTap,
+  });
   final double? radius;
   final bool isWithCamera;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,6 @@ class EditImageProfile extends StatelessWidget {
 
         return SizedBox(
           height: 120,
-
           child: Stack(
             clipBehavior: Clip.none,
             children: [
@@ -43,13 +49,16 @@ class EditImageProfile extends StatelessWidget {
                           );
                         }
                       : null,
-                  child: CircleAvatar(
-                    radius: radius ?? 75,
-                    backgroundColor: AppPalette.greySurface,
-                    backgroundImage: hasPicked,
-                    child: imageState
-                        ? null
-                        : Image.asset("assets/image/profile.png"),
+                  child: InkWell(
+                    onTap: onTap,
+                    child: CircleAvatar(
+                      radius: radius ?? 75,
+                      backgroundColor: AppPalette.greySurface,
+                      backgroundImage: hasPicked,
+                      child: imageState
+                          ? null
+                          : Image.asset("assets/image/profile.png"),
+                    ),
                   ),
                 ),
               ),
@@ -68,6 +77,8 @@ class EditImageProfile extends StatelessWidget {
                         onPressed: () {
                           customBottomSheet(
                             context,
+                            height: 320,
+                            color: AppPalette.whiteLight,
                             CameraBottomSheet(bloc: bloc),
                           );
                         },

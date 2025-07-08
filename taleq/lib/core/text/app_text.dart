@@ -215,6 +215,9 @@ class AppText {
   //Edit Profile Page
   static const String editTitle = "تعديل الملف الشخصي";
   static const String name = "الأسم";
+  static const String hintName = "اسمك";
+  static const String hintEmail = "AbbberKhaled@domain.com ";
+  static const String hintPassword = "************";
   static const String save = "حفظ التعديلات";
 
   //Camera Bottom Sheet
@@ -233,4 +236,14 @@ class AppText {
       """تأكد من عدم تفويت أي جلسة , وابقَ على المسار الصحيح في رحلتك العلاجية.""";
   static const String reminder = "تمكين التذكير";
   static const String notNow = "ليس الان";
+
+  //LogOut Dialog
+  static const String sure = "هل أنت متأكد من تسجيل خروجك؟";
+  static const String cancel = "الغاء";
+  static const String yes = "نعم";
+  //Home Page
+  // static const String reminder = "تمكين التذكير";
+  // static const String notNow = "ليس الان";
+  // static const String reminder = "تمكين التذكير";
+  // static const String notNow = "ليس الان";
 }
