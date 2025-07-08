@@ -27,66 +27,63 @@ class EditImageProfile extends StatelessWidget {
         final imageState = state is SelectedImageProfile;
         final hasPicked = imageState ? FileImage(state.image) : null;
 
-        return SizedBox(
-          height: 120,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Center(
-                child: GestureDetector(
-                  onTap: imageState
-                      ? () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => Dialog(
-                              child: InteractiveViewer(
-                                child: Image(
-                                  image: hasPicked!,
-                                  fit: BoxFit.contain,
-                                ),
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Center(
+              child: GestureDetector(
+                onTap: imageState
+                    ? () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            child: InteractiveViewer(
+                              child: Image(
+                                image: hasPicked!,
+                                fit: BoxFit.contain,
                               ),
                             ),
-                          );
-                        }
-                      : null,
-                  child: InkWell(
-                    onTap: onTap,
-                    child: CircleAvatar(
-                      radius: radius ?? 75,
-                      backgroundColor: AppPalette.greySurface,
-                      backgroundImage: hasPicked,
-                      child: imageState
-                          ? null
-                          : Image.asset("assets/image/profile.png"),
-                    ),
+                          ),
+                        );
+                      }
+                    : null,
+                child: InkWell(
+                  onTap: onTap,
+                  child: CircleAvatar(
+                    radius: radius ?? 75,
+                    backgroundColor: AppPalette.greySurface,
+                    backgroundImage: hasPicked,
+                    child: imageState
+                        ? null
+                        : Image.asset("assets/image/profile.png"),
                   ),
                 ),
               ),
-              isWithCamera
-                  ? Positioned(
-                      bottom: -10,
-                      right: 140,
-                      child: CustomIconButton(
-                        icon: Icons.photo_camera_outlined,
-                        size: 22,
-                        height: 35,
-                        width: 35,
-                        containerColor: AppPalette.bluePrimary,
-                        color: AppPalette.whitePrimary,
-                        withContainer: true,
-                        onPressed: () {
-                          customBottomSheet(
-                            context,
-                            height: 320,
-                            color: AppPalette.whiteLight,
-                            CameraBottomSheet(bloc: bloc),
-                          );
-                        },
-                      ),
-                    )
-                  : SizedBox.shrink(),
-            ],
-          ),
+            ),
+            isWithCamera
+                ? Positioned(
+                    bottom: -10,
+                    right: 140,
+                    child: CustomIconButton(
+                      icon: Icons.photo_camera_outlined,
+                      size: 22,
+                      height: 35,
+                      width: 35,
+                      containerColor: AppPalette.bluePrimary,
+                      color: AppPalette.whitePrimary,
+                      withContainer: true,
+                      onPressed: () {
+                        customBottomSheet(
+                          context,
+                          height: 320,
+                          color: AppPalette.whiteLight,
+                          CameraBottomSheet(bloc: bloc),
+                        );
+                      },
+                    ),
+                  )
+                : SizedBox.shrink(),
+          ],
         );
       },
     );

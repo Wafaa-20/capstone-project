@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:taleq/core/extension/navigation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/widget/button/custom_icon_button.dart';
 import 'package:taleq/features/specialists/presentation/pages/overview_tab.dart';
 import 'package:taleq/features/specialists/presentation/pages/session_booking_tab.dart';
-import 'package:taleq/features/specialists/presentation/pages/specialists_page.dart';
 import 'package:taleq/features/specialists/presentation/widgets/specialists_body.dart';
 
 class SpecialistProfilePage extends StatelessWidget {
@@ -26,7 +25,7 @@ class SpecialistProfilePage extends StatelessWidget {
       appBar: AppBar(
         leading: CustomIconButton(
           icon: Icons.arrow_back_ios,
-          onPressed: () => context.customPush(SpecialistsPage()),
+          onPressed: () => context.pop(),
         ),
       ),
       body: DefaultTabController(
