@@ -201,5 +201,4 @@ Future<void> setup() async {
     () => ProfileBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
   );
   GetIt.I.registerFactory(() => HomeBloc(GetIt.I()));
-  GetIt.I.registerFactory(() => SpecialistUseCase(repository: GetIt.I()));
 }
