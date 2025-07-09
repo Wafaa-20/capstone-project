@@ -11,7 +11,7 @@ class LoadingWidget extends StatelessWidget {
       backgroundColor: AppPalette.whitePrimary,
       body: Center(
         child: Lottie.asset(
-          'assets/json/6McAS3f5rb (8).json',
+          'assets/json/loading2.json',
           width: 200,
           height: 200,
           fit: BoxFit.contain,
