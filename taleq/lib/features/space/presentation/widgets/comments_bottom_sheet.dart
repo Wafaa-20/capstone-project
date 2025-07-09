@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/widget/custom_text_field.dart';
+import 'package:taleq/core/widget/loading_widget.dart';
 import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
 import 'package:taleq/features/space/presentation/bloc/space_event.dart';
 import 'package:taleq/features/space/presentation/bloc/space_state.dart';
@@ -116,7 +117,7 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                         },
                       );
                     }
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: LoadingWidget());
                   },
                 ),
               ),

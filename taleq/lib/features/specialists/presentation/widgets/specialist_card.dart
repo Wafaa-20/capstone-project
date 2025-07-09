@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
 import 'package:skeletonizer/skeletonizer.dart';
+=======
+import 'package:taleq/core/extension/git_size_screen.dart';
+>>>>>>> be227b0a6b29566b0f4b972f7281c9bde30bbf96
 import 'package:taleq/core/extension/navigation.dart';
+import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/theme/app_palette.dart';
+import 'package:taleq/core/widget/custom_text_field2.dart';
 import 'package:taleq/features/specialists/presentation/bloc/specialists_bloc.dart';
 import 'package:taleq/features/specialists/presentation/bloc/specialists_event.dart';
 import 'package:taleq/features/specialists/presentation/bloc/specialists_state.dart';
@@ -18,6 +24,7 @@ class SpecialistCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<SpecialistsBloc>().state;
+<<<<<<< HEAD
     final loading = state is LoadSpecialists;
 
     if (state is SpecialistsSuccesses) {
@@ -71,19 +78,88 @@ class SpecialistCard extends StatelessWidget {
                           name: list.name,
                           subtitle: list.subtitle,
                         ),
+=======
+    final bloc = context.read<SpecialistsBloc>();
+    if (state is SpecialistsSuccesses) {
+      return Column(
+        children: [
+          state.showSearch
+              ? Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.getWidth() * 0.065,
+                  ),
+                  child: CustomTextField2(
+                    lefticon: Icon(Icons.search, size: 30),
+                    controller: bloc.searchController,
+                    onchange: (p0) => bloc.add(SearchEvent(search: p0)),
+                    text: AppText.search,
+                  ),
+                )
+              : SizedBox.shrink(),
+>>>>>>> be227b0a6b29566b0f4b972f7281c9bde30bbf96
 
-                        Align(
-                          alignment: Alignment.bottomLeft,
-                          child: RatingWidget(rating: list.rating),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: scrollDirection ?? Axis.vertical,
+              // physics: AlwaysScrollableScrollPhysics(),
+              itemCount: state.specialists.length,
+              itemBuilder: (BuildContext context, int index) {
+                final list = state.specialists[index];
+                return InkWell(
+                  onTap: () {
+                    context.customPush(
+                      SpecialistProfilePage(
+                        image: list.image,
+                        name: list.name,
+                        subtitle: list.subtitle,
+                        rating: list.rating,
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 2,
+                    ),
+                    child: SizedBox(
+                      height: 114,
+                      width: 361,
+                      child: Card(
+                        color: AppPalette.whiteLight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SpecialistsBody(
+                                image: list.image,
+                                name: list.name,
+                                subtitle: list.subtitle,
+                              ),
+
+                              Align(
+                                alignment: Alignment.bottomLeft,
+                                child: RatingWidget(rating: list.rating),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
+<<<<<<< HEAD
                 ),
               ),
             );
           },
         ),
+=======
+                );
+              },
+            ),
+          ),
+        ],
+>>>>>>> be227b0a6b29566b0f4b972f7281c9bde30bbf96
       );
     }
     return SizedBox.shrink();

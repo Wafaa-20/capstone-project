@@ -12,27 +12,21 @@ class PlanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PlanBloc(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppText.homeAppBar.tr()),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppText.homeAppBar.tr()),
 
-          leading: SizedBox(
-            width: 24,
-            height: 24,
-            child: SvgPicture.asset(
-              "assets/icon/Group.svg",
-              fit: BoxFit.contain,
-            ),
-          ),
+        leading: SizedBox(
+          width: 24,
+          height: 24,
+          child: SvgPicture.asset("assets/icon/Group.svg", fit: BoxFit.contain),
         ),
-        body: Column(
-          children: [
-            DayItemWidget(),
-            Flexible(child: CustomTimeLine()),
-          ],
-        ),
+      ),
+      body: Column(
+        children: [
+          DayItemWidget(),
+          Flexible(child: CustomTimeLine()),
+        ],
       ),
     );
   }

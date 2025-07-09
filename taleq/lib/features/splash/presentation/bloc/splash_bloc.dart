@@ -21,9 +21,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
     if (session?.user != null) {
       emit(AuthSuccess(user: session!.user));
-    } else {
-      emit(NotFirstTimeUseApp());
-    }
+    } 
   }
 
   FutureOr<void> checkApp(

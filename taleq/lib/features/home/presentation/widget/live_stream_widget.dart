@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/theme/app_palette.dart';
+<<<<<<< HEAD
+=======
+import 'package:taleq/core/widget/loading_widget.dart';
+import 'package:taleq/features/home/domain/entities/home_entity.dart';
+
+>>>>>>> be227b0a6b29566b0f4b972f7281c9bde30bbf96
 import 'package:taleq/features/home/presentation/bloc/home_bloc.dart';
+import 'package:taleq/features/home/presentation/bloc/home_event.dart';
 import 'package:taleq/features/home/presentation/bloc/home_state.dart';
 
 class LiveStreamWidget extends StatelessWidget {
@@ -17,8 +25,11 @@ class LiveStreamWidget extends StatelessWidget {
           if (state is GetSuccess) {
             return ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: state.specialistList.length,
+              itemCount: state.homeList.specialists.length,
               itemBuilder: (BuildContext context, int index) {
+                final bool isLive =
+                    state.homeList.specialists[index].id.isNotEmpty &&
+                    state.homeList.specialists[index].id != '';
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Container(
@@ -27,16 +38,31 @@ class LiveStreamWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppPalette.bluePrimary,
+                        color: isLive
+                            ? AppPalette.bluePrimary
+                            : Colors.transparent,
                         width: 3,
                       ),
                     ),
-                    child: Container(
-                      padding: EdgeInsets.all(2),
-                      height: 64,
-                      width: 64,
-                      decoration: BoxDecoration(shape: BoxShape.circle),
-                      child: Image.network(state.specialistList[index].image),
+                    child: GestureDetector(
+                      onTap: () {
+                        if (isLive) {
+                          bloc.add(
+                            GoLiveEvent(
+                              uid: state.homeList.specialists[index].id,
+                            ),
+                          );
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        height: 64,
+                        width: 64,
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: Image.network(
+                          state.homeList.specialists[index].image,
+                        ),
+                      ),
                     ),
 
                     // backgroundImage: NetworkImage("")
@@ -44,8 +70,21 @@ class LiveStreamWidget extends StatelessWidget {
                 );
               },
             );
+          } else if (state is GoLive) {
+            final isBrodcaster = state.live.hostID == state.live.userAccount;
+
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              context.go(
+                '/lives?userID=${Uri.encodeComponent(state.live.intUserAccount.toString())}'
+                '&token=${Uri.encodeComponent(state.live.token)}'
+                '&channelName=${Uri.encodeComponent(state.live.channelName)}'
+                '&isBrodcaster=${Uri.encodeComponent(isBrodcaster.toString())}'
+                '&hostID=${Uri.encodeComponent(state.live.hostID)}',
+              );
+            });
           }
-          return Center(child: CircularProgressIndicator());
+
+          return Center(child: LoadingWidget());
         },
       ),
     );

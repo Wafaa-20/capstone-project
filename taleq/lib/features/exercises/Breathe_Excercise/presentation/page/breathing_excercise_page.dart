@@ -47,10 +47,13 @@ class BreathingExercisePage extends StatelessWidget {
               return IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
+                  /*
                   if (state is BreathingRunningState ||
                       state is BreathingCompletedState) {
                     context.read<BreathingBloc>().add(StopBreathingEvent());
-                  }
+
+                  }*/
+                  context.go('/navigation');
                 },
               );
             },

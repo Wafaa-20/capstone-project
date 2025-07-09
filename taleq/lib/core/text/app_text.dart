@@ -219,7 +219,11 @@ class AppText {
   static const String ratings = "التقييمات";
   static const String time = "الأوقات المتاحة";
   static const String bookSession = "حجز الموعد";
+
   static const String assessment = "التقييمات";
+
+  static const String search = "بحث";
+
 
   //Profile Page
   static const String profileTitle = "الملف الشخصي";

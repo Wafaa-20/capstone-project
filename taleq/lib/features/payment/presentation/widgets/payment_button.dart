@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
@@ -27,7 +28,9 @@ class PaymentButton extends StatelessWidget {
         SizedBox(height: 16),
         CustomButton(
           sideColor: AppPalette.whiteLight,
-          onPressed: () {},
+          onPressed: () {
+            context.go('/navigation');
+          },
           child: Text(
             AppText.backHome,
             style: TextStyles.sf40016.copyWith(color: AppPalette.whitePrimary),

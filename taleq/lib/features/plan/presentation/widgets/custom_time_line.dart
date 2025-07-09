@@ -67,7 +67,7 @@ class CustomTimeLine extends StatelessWidget {
                   ),
                   onPressed: () {
                     ctx.go(planDetails[index].route);
-                    bloc.add(SelectExerciseEvent(currentExercise: index));
+                    bloc.add(SelectExerciseEvent(currentExercise: index + 1));
                     bloc.controller.animateTo(
                       index * 150,
                       duration: Duration(milliseconds: 500),
@@ -80,7 +80,6 @@ class CustomTimeLine extends StatelessWidget {
 
               nodePositionBuilder: (_, __) => 0.0,
             ),
-            //controller: _controller,
           ),
         );
       },

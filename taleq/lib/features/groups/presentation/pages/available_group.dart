@@ -11,6 +11,7 @@ import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
+import 'package:taleq/core/widget/loading_widget.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_event.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_state.dart';
@@ -32,7 +33,7 @@ class AvailableGroup extends StatelessWidget {
               child: BlocBuilder<GroupsBloc, GroupsState>(
                 builder: (context, state) {
                   if (state is SpacesLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(child: LoadingWidget());
                   } else if (state is SpaceDetailsFiled) {
                     return Center(child: Text(AppText.networkError.tr()));
                   } else if (state is SpaceDetailsSuccess) {

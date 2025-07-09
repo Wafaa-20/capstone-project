@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/constants/list_constants.dart';
 import 'package:taleq/core/extension/navigation.dart';
@@ -7,11 +8,13 @@ import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/custom_icon.dart';
 import 'package:taleq/core/widget/custom_show_dialog.dart';
+import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:taleq/features/profile/presentation/bloc/profile_event.dart';
 import 'package:taleq/features/profile/presentation/widgets/language_body.dart';
 
 class ProfileOptionsBody extends StatelessWidget {
-  const ProfileOptionsBody({super.key});
-
+  const ProfileOptionsBody({super.key, required this.bloc});
+  final ProfileBloc bloc;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -24,18 +27,21 @@ class ProfileOptionsBody extends StatelessWidget {
               showDialog(
                 context: context,
                 barrierColor: Colors.transparent,
-                builder: (_) => Dialog(
-                  alignment: Alignment.lerp(
-                    Alignment.center,
-                    Alignment.bottomLeft,
-                    0.5,
+                builder: (_) => BlocProvider.value(
+                  value: bloc,
+                  child: Dialog(
+                    alignment: Alignment.lerp(
+                      Alignment.center,
+                      Alignment.bottomLeft,
+                      0.5,
+                    ),
+                    backgroundColor: AppPalette.whitePrimary,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: AppPalette.bluePrimary, width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: LanguageBody(bloc: bloc),
                   ),
-                  backgroundColor: AppPalette.whitePrimary,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: AppPalette.bluePrimary, width: 2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: LanguageBody(),
                 ),
               );
             } else if (list.title == AppText.logout) {
@@ -48,7 +54,7 @@ class ProfileOptionsBody extends StatelessWidget {
                 text2: AppText.cancel,
 
                 onPressed: () {
-                  // context.read<ProfileBloc>().add(const SignOutEvent());
+                  context.read<ProfileBloc>().add(SignOutEvent());
                   context.customPop(); // أو context.customPop()
                 },
               );

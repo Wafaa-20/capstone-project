@@ -64,7 +64,7 @@ class AssessmentResultPage extends StatelessWidget {
               CustomButton(
                 width: 265,
                 onPressed: () {
-                  context.go('/plan');
+                  context.go('/navigation');
                 },
                 child: Text(AppText.startExercises, style: TextStyles.sf70020),
               ),
@@ -74,7 +74,7 @@ class AssessmentResultPage extends StatelessWidget {
                 color: AppPalette.whitePrimary,
                 sideColor: AppPalette.grayPrimary,
                 onPressed: () {
-                  context.go('/home');
+                  context.go('/navigation');
                 },
                 child: Text(
                   AppText.gotoHome,

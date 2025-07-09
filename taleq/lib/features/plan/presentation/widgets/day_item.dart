@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
+import 'package:taleq/features/plan/presentation/bloc/plan_bloc.dart';
+import 'package:taleq/features/plan/presentation/bloc/plan_state.dart';
 
 class DayItem extends StatelessWidget {
   const DayItem({
@@ -27,6 +30,7 @@ class DayItem extends StatelessWidget {
     final int diff = dateOnly
         .difference(DateTime(today.year, today.month, today.day))
         .inDays;
+    final bloc = context.read<PlanBloc>();
 
     final String dayLabel = diff == 0
         ? AppText.today.tr()
@@ -76,11 +80,31 @@ class DayItem extends StatelessWidget {
                 ? SizedBox(
                     height: 24,
                     width: 24,
-                    child: CircularProgressIndicator(
-                      value: 0.5,
-                      strokeWidth: 5,
-                      color: AppPalette.greenSuccess,
-                      backgroundColor: AppPalette.greyLight,
+                    child: BlocBuilder<PlanBloc, PlanState>(
+                      builder: (context, state) {
+                        if (state is NextExercise) {
+                          return CircularProgressIndicator(
+                            value: bloc.progress,
+                            strokeWidth: 5,
+                            color: AppPalette.greenSuccess,
+                            backgroundColor: AppPalette.greyLight,
+                          );
+                        } else if (state is ExerciseComplete) {
+                          return CircularProgressIndicator(
+                            value: bloc.progress,
+                            strokeWidth: 5,
+                            color: AppPalette.greenSuccess,
+                            backgroundColor: AppPalette.greyLight,
+                          );
+                        }
+
+                        return CircularProgressIndicator(
+                          value: bloc.progress,
+                          strokeWidth: 5,
+                          color: AppPalette.greenSuccess,
+                          backgroundColor: AppPalette.greyLight,
+                        );
+                      },
                     ),
                   )
                 : Icon(

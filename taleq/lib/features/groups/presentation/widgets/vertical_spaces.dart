@@ -6,6 +6,7 @@ import 'package:taleq/core/extension/git_size_screen.dart';
 
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/theme/app_palette.dart';
+import 'package:taleq/core/widget/loading_widget.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/groups/presentation/bloc/groups_state.dart';
 
@@ -19,7 +20,7 @@ class VerticalSpaces extends StatelessWidget {
     return BlocBuilder<GroupsBloc, GroupsState>(
       builder: (context, state) {
         if (state is SpacesLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: LoadingWidget());
         } else if (state is GetSuccees) {
           final availableSpaces = state.availableSpaces ?? [];
 

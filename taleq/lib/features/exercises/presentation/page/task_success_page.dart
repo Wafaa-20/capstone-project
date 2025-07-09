@@ -17,7 +17,7 @@ class TaskSuccessPage extends StatelessWidget {
       child: BlocConsumer<TaskSuccessCubit, TaskSuccessState>(
         listener: (context, state) {
           if (state is TaskSuccessNavigate) {
-            context.go('/plan');
+            context.go('/navigation');
           }
         },
         builder: (context, state) {

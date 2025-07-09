@@ -26,13 +26,15 @@ class SpecialistsPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          // final bloc = context.read<SpecialistsBloc>();
+          final bloc = context.read<SpecialistsBloc>();
+
           return Scaffold(
             appBar: AppBar(
               title: Text(AppText.specialist),
 
               leading: Image.asset("assets/image/specialist.png"),
               actions: [
+<<<<<<< HEAD
                 CustomIconButton(
                   icon: Icons.search,
                   size: 35,
@@ -42,6 +44,17 @@ class SpecialistsPage extends StatelessWidget {
               ],
             ),
             body: SafeArea(child: SpecialistCard()),
+=======
+                IconButton(
+                  icon: Icon(Icons.search, size: 30),
+                  onPressed: () {
+                    bloc.add(ShowSearch());
+                  },
+                ),
+              ],
+            ),
+            body: SpecialistCard(),
+>>>>>>> be227b0a6b29566b0f4b972f7281c9bde30bbf96
           );
         },
       ),

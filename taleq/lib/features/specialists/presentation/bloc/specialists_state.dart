@@ -14,10 +14,13 @@ final class SpecialistsLoading extends SpecialistsState {}
 
 final class SpecialistsSuccesses extends SpecialistsState {
   final List<SpecialistEntities> specialists;
-
-  const SpecialistsSuccesses({required this.specialists});
+  final bool showSearch;
+  const SpecialistsSuccesses({
+    required this.showSearch,
+    required this.specialists,
+  });
   @override
-  List<Object> get props => [specialists];
+  List<Object> get props => [specialists, showSearch];
 }
 
 final class SpecialistsFailure extends SpecialistsState {
