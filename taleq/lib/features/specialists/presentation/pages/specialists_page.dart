@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:taleq/core/text/app_text.dart';
+import 'package:taleq/core/theme/app_palette.dart';
+import 'package:taleq/core/widget/button/custom_icon_button.dart';
 import 'package:taleq/features/specialists/presentation/bloc/specialists_bloc.dart';
 import 'package:taleq/features/specialists/presentation/bloc/specialists_event.dart';
 import 'package:taleq/features/specialists/presentation/bloc/specialists_state.dart';
@@ -28,11 +30,18 @@ class SpecialistsPage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(AppText.specialist),
+
               leading: Image.asset("assets/image/specialist.png"),
-              actions: const [Icon(Icons.search, size: 30)],
+              actions: [
+                CustomIconButton(
+                  icon: Icons.search,
+                  size: 35,
+                  color: AppPalette.black,
+                  onPressed: () {},
+                ),
+              ],
             ),
-            body:SpecialistCard()
-               
+            body: SafeArea(child: SpecialistCard()),
           );
         },
       ),

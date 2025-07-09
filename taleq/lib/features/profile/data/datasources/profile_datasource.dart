@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:path/path.dart' as imgPath;
@@ -53,7 +54,6 @@ class ProfileDatasourceImpl implements ProfileDatasource {
       final updatedModel = UserProfileModel(
         fullName: fullName,
         email: email,
-        password: password,
         avatarUrl: avatarUrl,
       );
       //Convert Model To MAP With User ProfileModel Mapper
@@ -66,6 +66,7 @@ class ProfileDatasourceImpl implements ProfileDatasource {
           .eq('user_id', user)
           .select()
           .single();
+
       return UserProfileModelMapper.fromMap(update as Map<String, dynamic>);
     } catch (e) {
       throw FormatException('Failed to update profile: $e');
@@ -76,19 +77,20 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   @override
   Future<UserProfileModel> uploadAvatar({required File imageFile}) async {
     try {
-      //jpg ,png ,...
-      final imagePath = imgPath.extension(imageFile.path);
-      final user = supabase.auth.currentUser!.id;
-      //store in this path in supabase
-      final path = 'avatars/$user/avatar$imagePath';
+      final user = supabase.auth.currentSession!.user.id;
+      final extension = imgPath.extension(imageFile.path);
+      final fileName = 'avatar$extension';
+      final path = '$user/$fileName';
+
       //Upload Image to avatars Storage in Supabase
+
       await supabase.storage
           .from('avatars')
           .uploadBinary(path, await imageFile.readAsBytes());
 
       //Get The Public Url
       final publicUrl = supabase.storage.from('avatars').getPublicUrl(path);
-
+      final email = supabase.auth.currentUser!.email;
       //Update Avatar Url in User Profile table
       final updateAvatarUrl = await supabase
           .from('user_profiles')
@@ -98,9 +100,15 @@ class ProfileDatasourceImpl implements ProfileDatasource {
           }, onConflict: 'user_id')
           .select()
           .single();
+      log(updateAvatarUrl.toString());
+      final userProfile = UserProfileModelMapper.fromMap({
+        ...updateAvatarUrl,
+        'email': email,
+      });
 
-      return UserProfileModelMapper.fromMap(updateAvatarUrl);
+      return userProfile;
     } catch (e) {
+      log("here we go$e");
       throw FormatException('Failed to upload avatar: $e');
     }
   }

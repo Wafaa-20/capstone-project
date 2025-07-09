@@ -219,6 +219,7 @@ class AppText {
   static const String ratings = "التقييمات";
   static const String time = "الأوقات المتاحة";
   static const String bookSession = "حجز الموعد";
+  static const String assessment = "التقييمات";
 
   //Profile Page
   static const String profileTitle = "الملف الشخصي";
@@ -271,7 +272,7 @@ class AppText {
 
   //Story Page
   static const String title = "قصتك تهمنا! شارك تجربتك مع التأتأة الآن";
-   static const String hintTitle = "العنوان";
+  static const String hintTitle = "العنوان";
   static const String hintStory = " أكتب قصتك هنا";
   static const String shareStory2 = " شارك قصتك ";
 }

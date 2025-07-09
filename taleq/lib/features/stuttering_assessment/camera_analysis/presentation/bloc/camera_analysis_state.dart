@@ -1,22 +1,46 @@
 import 'package:equatable/equatable.dart';
+import 'package:camera/camera.dart';
 
-sealed class CameraAnalysisState extends Equatable {
-  const CameraAnalysisState();
-
+abstract class CameraAnalysisState extends Equatable {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-final class CameraAnalysisInitial extends CameraAnalysisState {}
+/// لم يبدأ شيء بعد
+class CameraInitial extends CameraAnalysisState {}
 
-final class CameraAnalysisLoading extends CameraAnalysisState {}
+/// الكاميرا جاهزة
+class CameraReady extends CameraAnalysisState {
+  final CameraController controller;
+  CameraReady(this.controller);
 
-final class CameraAnalysisFailure extends CameraAnalysisState {
-  final String message;
-
-  const CameraAnalysisFailure({required this.message});
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [controller];
 }
 
-final class CameraAnalysisSuccess extends CameraAnalysisState {}
+/// التسجيل جاري
+class RecordingInProgress extends CameraAnalysisState {}
+
+/// انتهاء التسجيل والفيديو جاهز للإرسال
+class RecordingCompleted extends CameraAnalysisState {
+  final XFile videoFile;
+  RecordingCompleted(this.videoFile);
+
+  @override
+  List<Object?> get props => [videoFile];
+}
+
+/// جاري إرسال الفيديو
+class UploadInProgress extends CameraAnalysisState {}
+
+/// إرسال ناجح
+class UploadSuccess extends CameraAnalysisState {}
+
+/// حدوث خطأ
+class UploadFailure extends CameraAnalysisState {
+  final String error;
+  UploadFailure(this.error);
+
+  @override
+  List<Object?> get props => [error];
+}

@@ -1,8 +1,6 @@
-
-
 class Constants {
-  static const String usernameRules = "على الاقل 4 أحرف تحتوي أحرف و ارقام فقط";
-  static RegExp usernameRegExp = RegExp(r'^[a-zA-Z0-9]{4,}$');
+  static const String usernameRules = "على الاقل 4 أحرف ";
+  static RegExp usernameRegExp = RegExp(r'^[a-zA-Z]{4,}$');
   static const String emailRules =
       "يجب أن يكون بريدًا إلكترونيًا صالحًا مثل example@domain.com";
   static RegExp emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');

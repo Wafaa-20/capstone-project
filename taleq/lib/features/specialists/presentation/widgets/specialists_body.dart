@@ -22,7 +22,11 @@ class SpecialistsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(radius: 45, backgroundImage: NetworkImage(image)),
+        CircleAvatar(
+          radius: 45,
+          backgroundColor: AppPalette.whitePrimary,
+          backgroundImage: NetworkImage(image),
+        ),
         SizedBox(width: 7),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

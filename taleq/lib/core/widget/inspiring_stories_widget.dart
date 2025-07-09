@@ -5,7 +5,17 @@ import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/features/profile/presentation/widgets/edit_image_profile.dart';
 
 class InspiringStoriesWidget extends StatelessWidget {
-  const InspiringStoriesWidget({super.key});
+  const InspiringStoriesWidget({
+    super.key,
+    required this.avatar,
+    required this.name,
+    required this.title,
+    required this.story,
+  });
+  final String avatar;
+  final String name;
+  final String title;
+  final String story;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +36,22 @@ class InspiringStoriesWidget extends StatelessWidget {
               children: [
                 EditImageProfile(radius: 15),
                 SizedBox(width: 9),
-                Text("أحمد صالح", style: TextStyles.sf60014),
+                Text(name, style: TextStyles.sf60014),
 
                 Spacer(),
-                Image.asset("assets/image/comment.png"),
+                Image.asset(avatar),
               ],
             ),
             SizedBox(height: 10),
             Text(
-              '"التأتأة ليست نهاية الطريق"',
+              '"$title"',
               style: TextStyles.sf60014.copyWith(color: AppPalette.black),
               textAlign: TextAlign.right,
             ),
 
             SizedBox(height: 3),
             Text(
-              """
-      منذ صغري كنت أخشى التحدث بسبب التأتأة. لكن قررت أتدرب كل يوم، بفضل الله، أصبحت أكثر شجاعة. اليوم، تعلمت أن التأتأة جزء مني، لكنها ما تحدد من أكون.""",
+              story,
               style: TextStyles.sf40014.copyWith(color: AppPalette.blackLight),
               textAlign: TextAlign.right,
             ),

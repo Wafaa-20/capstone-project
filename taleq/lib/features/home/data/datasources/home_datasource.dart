@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taleq/features/home/data/models/specialist_model.dart';
 
@@ -14,7 +16,7 @@ class HomeDatasourceImpl implements HomeDatasource {
       final response = await supabase.from('specialist').select('uid, image');
 
       final specialists = (response as List<dynamic>).map((item) {
-        return SpecialistModel(id: item['uid'] ?? ' ', image: item['image']);
+        return SpecialistModel(id: item['uid'] ?? '', image: item['image']);
       }).toList();
 
       return specialists;

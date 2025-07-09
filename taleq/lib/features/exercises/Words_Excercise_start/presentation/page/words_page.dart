@@ -17,6 +17,7 @@ class WordsPage extends StatelessWidget {
     final double bottomPadding = mediaQueryData.padding.bottom;
 
     return Scaffold(
+      
       backgroundColor: AppPalette.bluePrimary,
       body: SafeArea(
         bottom: false,
