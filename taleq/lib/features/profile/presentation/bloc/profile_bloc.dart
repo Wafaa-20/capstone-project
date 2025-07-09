@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taleq/features/profile/domain/usecases/get_profile_use_case.dart';
@@ -111,12 +111,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     ChangeLanguageEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(ProfileLoading());
-    //  final result = await;
-    //  result.fold(
-    //   (failure) => emit(ProfileFailure(message: failure.message)),
-    //   (profile) => emit(ProfileUpdateSuccess(profile: profile)),
-    // );
+    final momentcontext = event.context;
+    await momentcontext.setLocale(Locale(event.localeCode));
   }
 
   //Sign Out from the account

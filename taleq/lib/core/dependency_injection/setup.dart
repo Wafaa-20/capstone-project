@@ -25,6 +25,7 @@ import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/home/data/datasources/home_datasource.dart';
 import 'package:taleq/features/home/data/repositories/home_repository_impl.dart';
 import 'package:taleq/features/home/domain/repositories/home_repository.dart';
+import 'package:taleq/features/home/domain/usecases/insert_story_use_case.dart';
 import 'package:taleq/features/home/domain/usecases/specialist_use_case.dart';
 import 'package:taleq/features/home/presentation/bloc/home_bloc.dart';
 import 'package:taleq/features/profile/data/datasources/image_picker_datasource.dart';
@@ -177,6 +178,9 @@ Future<void> setup() async {
   );
   GetIt.I.registerLazySingleton(() => AddCommentUseCase(repository: GetIt.I()));
   GetIt.I.registerLazySingleton(() => AgoraService());
+  GetIt.I.registerLazySingleton(
+    () => InsertStoryUseCase(repository: GetIt.I()),
+  );
 
   // Blocs
   GetIt.I.registerFactory(
@@ -200,5 +204,5 @@ Future<void> setup() async {
   GetIt.I.registerFactory(
     () => ProfileBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
   );
-  GetIt.I.registerFactory(() => HomeBloc(GetIt.I()));
+  GetIt.I.registerFactory(() => HomeBloc(GetIt.I(), GetIt.I()));
 }

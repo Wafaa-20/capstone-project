@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/theme/app_palette.dart';
+import 'package:taleq/core/widget/loading_widget.dart';
 import 'package:taleq/features/space/presentation/bloc/space_bloc.dart';
 import 'package:taleq/features/space/presentation/bloc/space_event.dart';
 import 'package:taleq/features/space/presentation/bloc/space_state.dart';
@@ -33,7 +34,7 @@ class SpacePage extends StatelessWidget {
     return BlocBuilder<SpaceBloc, SpaceState>(
       builder: (context, state) {
         if (state is SpaceLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: LoadingWidget());
         } else if (state is GetSpaceSuccess) {
           if (!state.isAgoraInitialized) {
             context.read<SpaceBloc>().add(

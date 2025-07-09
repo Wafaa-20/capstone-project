@@ -24,15 +24,22 @@ class SpecialistsPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          // final bloc = context.read<SpecialistsBloc>();
+          final bloc = context.read<SpecialistsBloc>();
+
           return Scaffold(
             appBar: AppBar(
               title: Text(AppText.specialist),
               leading: Image.asset("assets/image/specialist.png"),
-              actions: const [Icon(Icons.search, size: 30)],
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.search, size: 30),
+                  onPressed: () {
+                    bloc.add(ShowSearch());
+                  },
+                ),
+              ],
             ),
-            body:SpecialistCard()
-               
+            body: SpecialistCard(),
           );
         },
       ),

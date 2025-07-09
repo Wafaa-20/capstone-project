@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
@@ -36,17 +37,31 @@ class TrainningPage extends StatelessWidget {
                   Align(
                     alignment: card.imageAligment,
                     child: isSvg
-                        ? SvgPicture.asset(
-                            card.image,
-                            height: card.imageHeight,
-                            width: card.imageWidth,
-                            fit: BoxFit.fill,
+                        ? GestureDetector(
+                            onTap: () {
+                              if (card.route != null && card.route.isNotEmpty) {
+                                context.go('/${card.route}');
+                              }
+                            },
+                            child: SvgPicture.asset(
+                              card.image,
+                              height: card.imageHeight,
+                              width: card.imageWidth,
+                              fit: BoxFit.fill,
+                            ),
                           )
-                        : Image.asset(
-                            card.image,
-                            height: card.imageHeight,
-                            width: card.imageWidth,
-                            fit: BoxFit.fill,
+                        : GestureDetector(
+                            onTap: () {
+                              if (card.route != null && card.route.isNotEmpty) {
+                                context.go('/${card.route}');
+                              }
+                            },
+                            child: Image.asset(
+                              card.image,
+                              height: card.imageHeight,
+                              width: card.imageWidth,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                   ),
                   Center(

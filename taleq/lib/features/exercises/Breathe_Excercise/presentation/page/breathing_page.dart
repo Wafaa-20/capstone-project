@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/bloc/breath_bloc.dart';
@@ -46,10 +47,13 @@ class BreathingPage extends StatelessWidget {
               return IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
+                  /*
                   if (state is BreathingRunningState ||
                       state is BreathingCompletedState) {
                     context.read<BreathingBloc>().add(StopBreathingEvent());
-                  }
+
+                  }*/
+                  context.go('/navigation');
                 },
               );
             },

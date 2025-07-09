@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:taleq/core/error/failures.dart';
-import 'package:taleq/features/home/domain/entities/specialist_entity.dart';
+import 'package:taleq/features/home/domain/entities/home_entity.dart';
+import 'package:taleq/features/home/presentation/bloc/home_event.dart';
 
 abstract class HomeRepository {
-  Future<Either<Failure, List<SpecialistEntity>>> getSpecialistData();
+  Future<Either<Failure, HomeEntity>> getSpecialistAndStories();
+  Future<Either<Failure, String>> insertStory(title,story);
 }

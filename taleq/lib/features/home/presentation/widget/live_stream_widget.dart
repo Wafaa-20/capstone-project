@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taleq/core/theme/app_palette.dart';
-import 'package:taleq/features/home/domain/entities/specialist_entity.dart';
+import 'package:taleq/core/widget/loading_widget.dart';
+import 'package:taleq/features/home/domain/entities/home_entity.dart';
 
 import 'package:taleq/features/home/presentation/bloc/home_bloc.dart';
 import 'package:taleq/features/home/presentation/bloc/home_state.dart';
@@ -19,7 +20,7 @@ class LiveStreamWidget extends StatelessWidget {
           if (state is GetSuccess) {
             return ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: state.specialistList.length,
+              itemCount: state.homeList.specialists.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -38,7 +39,9 @@ class LiveStreamWidget extends StatelessWidget {
                       height: 64,
                       width: 64,
                       decoration: BoxDecoration(shape: BoxShape.circle),
-                      child: Image.network(state.specialistList[index].image),
+                      child: Image.network(
+                        state.homeList.specialists[index].image,
+                      ),
                     ),
 
                     // backgroundImage: NetworkImage("")
@@ -47,7 +50,7 @@ class LiveStreamWidget extends StatelessWidget {
               },
             );
           }
-          return Center(child: CircularProgressIndicator());
+          return Center(child: LoadingWidget());
         },
       ),
     );

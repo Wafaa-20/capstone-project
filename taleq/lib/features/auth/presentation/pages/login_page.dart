@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
           return BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is MoveState) {
-                context.go('/navigation');
+                context.go('/startQuestionnaire');
               } else if (state is AuthFailure) {
                 ScaffoldMessenger.of(
                   context,

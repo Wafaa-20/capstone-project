@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:taleq/core/error/failures.dart';
 import 'package:taleq/features/home/data/datasources/home_datasource.dart';
+import 'package:taleq/features/home/data/models/home_data_model.dart';
 import 'package:taleq/features/home/data/models/specialist_model.dart';
-import 'package:taleq/features/home/domain/entities/specialist_entity.dart';
+import 'package:taleq/features/home/domain/entities/home_entity.dart';
 import 'package:taleq/features/home/domain/repositories/home_repository.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
@@ -11,10 +12,21 @@ class HomeRepositoryImpl implements HomeRepository {
   HomeRepositoryImpl({required this.datasource});
 
   @override
-  Future<Either<Failure, List<SpecialistEntity>>> getSpecialistData() async {
+  Future<Either<Failure, HomeEntity>> getSpecialistAndStories() async {
     try {
-      final result = await datasource.getSpecialistData();
-      return Right(result.map((model) => model.toEntity()).toList());
+      final result = await datasource.getSpecialistAndStories();
+      final entity = result.toEntity();
+      return Right(entity);
+    } on Exception {
+      return Left(ServerFailure(message: "Something went wrong!"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> insertStory(title, story) async {
+    try {
+      final result = await datasource.insertStory(title, story);
+      return Right(result);
     } on Exception {
       return Left(ServerFailure(message: "Something went wrong!"));
     }

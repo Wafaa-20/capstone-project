@@ -11,6 +11,7 @@ import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/core/widget/button/custom_icon_button.dart';
+import 'package:taleq/core/widget/loading_widget.dart';
 import 'package:taleq/features/home/presentation/bloc/home_bloc.dart';
 import 'package:taleq/features/home/presentation/bloc/home_event.dart';
 import 'package:taleq/features/home/presentation/bloc/home_state.dart';
@@ -71,7 +72,7 @@ class HomePage extends StatelessWidget {
             body: BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
                 if (state is HomeLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(child: LoadingWidget());
                 } else if (state is GetFailure) {
                   return Center(
                     child: Text(
@@ -80,8 +81,8 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 } else if (state is GetSuccess) {
-                  log(state.specialistList.toString());
-                  if (state.specialistList.isEmpty) {
+                  
+                  if (state.homeList.specialists.isEmpty) {
                     return const Center(child: Text("لا يوجد متخصصين حالياً"));
                   }
                 }
@@ -134,7 +135,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 25),
-                          InspiringStoriesWidget(),
+                          InspiringStoriesWidget(bloc: homeBloc,),
                           SizedBox(height: 21),
                           Align(
                             alignment: Alignment.center,
@@ -142,7 +143,7 @@ class HomePage extends StatelessWidget {
                               height: 33,
                               width: 124,
                               onPressed: () {
-                                context.customPush(StoryPage(bloc: homeBloc));
+                                context.customPush(StoryPage());
                               },
                               child: Text(
                                 AppText.shareStory,

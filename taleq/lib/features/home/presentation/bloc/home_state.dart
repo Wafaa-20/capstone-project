@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:taleq/features/home/domain/entities/specialist_entity.dart';
+import 'package:taleq/features/home/domain/entities/home_entity.dart';
 
 sealed class HomeState extends Equatable {
   const HomeState();
@@ -20,6 +20,10 @@ class GetFailure extends HomeState {
 }
 
 class GetSuccess extends HomeState {
-  final List<SpecialistEntity> specialistList;
-  const GetSuccess({required this.specialistList});
+  final HomeEntity homeList;
+  const GetSuccess({required this.homeList});
+}
+
+class SendSuccess extends HomeState {
+  const SendSuccess();
 }
