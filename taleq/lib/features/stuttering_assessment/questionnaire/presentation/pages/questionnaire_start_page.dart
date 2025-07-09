@@ -45,6 +45,7 @@ class QuestionnaireStartPage extends StatelessWidget {
               CustomButton(
                 onPressed: () {
                   context.go('/questionnaire');
+                  
                 },
                 child: Text(AppText.startNow, style: TextStyles.sf70020),
               ),
