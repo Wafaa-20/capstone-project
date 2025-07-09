@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taleq/features/home/domain/usecases/go_live_use_case.dart';
 import 'package:taleq/features/home/domain/usecases/insert_story_use_case.dart';
 import 'package:taleq/features/home/domain/usecases/specialist_use_case.dart';
 import 'package:taleq/features/home/presentation/bloc/home_event.dart';
@@ -12,13 +13,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final InsertStoryUseCase _insertStorageUseCase;
   final titleController = TextEditingController();
   final storyController = TextEditingController();
+  final GoLiveUseCase _goLiveUseCase;
 
-  HomeBloc(this._dateOfSpecialistUseCase, this._insertStorageUseCase)
+  HomeBloc(this._dateOfSpecialistUseCase, this._insertStorageUseCase, this._goLiveUseCase)
     : super(HomeInitial()) {
     on<GetSpecialistData>(getData);
     on<InsertStory>(insertStory);
+    on<GoLiveEvent>(goLive);
   }
 
+ FutureOr<void> goLive(GoLiveEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoading());
+
+    final result = await _goLiveUseCase(GoLiveParams(uid: event.uid));
+    result.fold(
+      (failure) => emit(GetFailure(message: failure.message)),
+      (success) => emit(GoLive(live: success)),
+    );
+  }
   FutureOr<void> getData(event, Emitter<HomeState> emit) async {
     emit(HomeLoading());
 

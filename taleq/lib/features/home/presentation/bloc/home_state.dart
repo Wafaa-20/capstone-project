@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:taleq/features/home/domain/entities/go_live_entity.dart';
 import 'package:taleq/features/home/domain/entities/home_entity.dart';
 
 sealed class HomeState extends Equatable {
@@ -26,4 +27,9 @@ class GetSuccess extends HomeState {
 
 class SendSuccess extends HomeState {
   const SendSuccess();
+}
+
+class GoLive extends HomeState {
+  final GoLiveEntity live;
+  const GoLive({required this.live});
 }

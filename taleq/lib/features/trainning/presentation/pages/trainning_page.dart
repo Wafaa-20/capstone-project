@@ -12,7 +12,7 @@ class TrainningPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Trainning')),
+      appBar: AppBar(title: const Text('التمارين')),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: GridView.builder(

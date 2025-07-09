@@ -16,3 +16,8 @@ class InsertStory extends HomeEvent {
   final String text;
   const InsertStory({required this.title, required this.text});
 }
+
+class GoLiveEvent extends HomeEvent {
+  final String uid;
+  const GoLiveEvent({required this.uid});
+}
