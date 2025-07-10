@@ -41,132 +41,137 @@ class BreathingPage extends StatelessWidget {
 
     return BlocProvider(
       create: (_) => BreathingBloc(),
-      child: Scaffold(
-        backgroundColor: AppPalette.iosBlue,
-        appBar: AppBar(
+      child: BlocListener<BreathingBloc, BreathingState>(
+        listener: (context, state) {
+          if (state is BreathingCompletedState) {
+            // عدّ التمرين مكتمل، انتقل للصفحة التالية:
+            context.go(
+              '/success',
+            ); // غيّر '/nextPage' بالمسار الفعلي الذي تريده
+          }
+        },
+        child: Scaffold(
           backgroundColor: AppPalette.iosBlue,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-            onPressed: () => context.go('/navigation'),
+          appBar: AppBar(
+            backgroundColor: AppPalette.iosBlue,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+              onPressed: () => context.go('/navigation'),
+            ),
           ),
-        ),
-        body: BlocBuilder<BreathingBloc, BreathingState>(
-          builder: (context, state) {
-            final isRunning = state is BreathingRunningState;
+          body: BlocBuilder<BreathingBloc, BreathingState>(
+            builder: (context, state) {
+              final isRunning = state is BreathingRunningState;
 
-            // بدل القيمة الافتراضية هنا
-            final scaleValue = isRunning
-                ? (state).scaleValue
-                : 0.9; // أولي: حجم أكبر
-            final opacityValue = isRunning
-                ? (state).opacityValue
-                : 1.0; // أولي: شفافية كاملة
+              final scaleValue = isRunning ? (state).scaleValue : 0.9;
+              final opacityValue = isRunning ? (state).opacityValue : 1.0;
 
-            final remaining = isRunning ? (state).remainingSeconds : 0;
-            final phase = isRunning ? (state).phase : BreathingPhase.initial;
-            final text = isRunning ? _getBreathingText(phase) : '';
-            final selected = state is BreathingInitialState
-                ? state.selectedDurationIndex
-                : 0;
+              final remaining = isRunning ? (state).remainingSeconds : 0;
+              final phase = isRunning ? (state).phase : BreathingPhase.initial;
+              final text = isRunning ? _getBreathingText(phase) : '';
+              final selected = state is BreathingInitialState
+                  ? (state).selectedDurationIndex
+                  : 0;
 
-            return Column(
-              children: [
-                SizedBox(height: context.getHeight() * 0.06),
+              return Column(
+                children: [
+                  SizedBox(height: context.getHeight() * 0.06),
 
-                if (isRunning) ...[
-                  Text(
-                    text,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    _formatTime(remaining),
-                    style: TextStyles.sf40016.copyWith(
-                      color: AppPalette.whitePrimary,
-                    ),
-                  ),
-                ],
-
-                if (!isRunning && state is BreathingInitialState) ...[
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(durations.length, (i) {
-                      final sel = i == selected;
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: TextButton(
-                          onPressed: () => context.read<BreathingBloc>().add(
-                            SetDurationEvent(i),
-                          ),
-                          child: Text(
-                            durations[i],
-                            style: TextStyles.sf40018.copyWith(
-                              color: sel
-                                  ? Colors.white
-                                  : Colors.white.withOpacity(0.6),
-                              fontWeight: sel
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ],
-
-                SizedBox(height: context.getHeight() * 0.10),
-
-                // هنا الدائرة الآن أكبر في البداية
-                BreathingCircle(
-                  scaleValue: scaleValue,
-                  opacityValue: opacityValue,
-                ),
-                SizedBox(height: context.getHeight() * 0.15),
-
-                if (!isRunning)
-                  CustomButton(
-                    color: AppPalette.whitePrimary,
-                    sideColor: AppPalette.whitePrimary,
-                    onPressed: () => context.read<BreathingBloc>().add(
-                      StartBreathingEvent(selected + 1),
-                    ),
-                    child: Text(
-                      AppText.startExercise,
-                      style: TextStyles.sf40016.copyWith(
-                        color: AppPalette.black,
+                  if (isRunning) ...[
+                    Text(
+                      text,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-
-                if (isRunning) ...[
-                  const SizedBox(height: 16),
-                  CustomButton(
-                    color: AppPalette.iosBlue,
-                    sideColor: AppPalette.whitePrimary,
-                    onPressed: () =>
-                        context.read<BreathingBloc>().add(StopBreathingEvent()),
-                    child: Text(
-                      AppText.endExercise,
+                    const SizedBox(height: 8),
+                    Text(
+                      _formatTime(remaining),
                       style: TextStyles.sf40016.copyWith(
                         color: AppPalette.whitePrimary,
                       ),
                     ),
-                  ),
-                ],
+                  ],
 
-                const SizedBox(height: 24),
-              ],
-            );
-          },
+                  if (!isRunning && state is BreathingInitialState) ...[
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(durations.length, (i) {
+                        final sel = i == selected;
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: TextButton(
+                            onPressed: () => context.read<BreathingBloc>().add(
+                              SetDurationEvent(i),
+                            ),
+                            child: Text(
+                              durations[i],
+                              style: TextStyles.sf40018.copyWith(
+                                color: sel
+                                    ? Colors.white
+                                    : Colors.white.withOpacity(0.6),
+                                fontWeight: sel
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
+
+                  SizedBox(height: context.getHeight() * 0.10),
+
+                  BreathingCircle(
+                    scaleValue: scaleValue,
+                    opacityValue: opacityValue,
+                  ),
+                  SizedBox(height: context.getHeight() * 0.15),
+
+                  if (!isRunning)
+                    CustomButton(
+                      color: AppPalette.whitePrimary,
+                      sideColor: AppPalette.whitePrimary,
+                      onPressed: () => context.read<BreathingBloc>().add(
+                        StartBreathingEvent(selected + 1),
+                      ),
+                      child: Text(
+                        AppText.startExercise,
+                        style: TextStyles.sf40016.copyWith(
+                          color: AppPalette.black,
+                        ),
+                      ),
+                    ),
+
+                  if (isRunning) ...[
+                    const SizedBox(height: 16),
+                    CustomButton(
+                      color: AppPalette.iosBlue,
+                      sideColor: AppPalette.whitePrimary,
+                      onPressed: () => context.read<BreathingBloc>().add(
+                        StopBreathingEvent(),
+                      ),
+                      child: Text(
+                        AppText.endExercise,
+                        style: TextStyles.sf40016.copyWith(
+                          color: AppPalette.whitePrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+
+                  const SizedBox(height: 24),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
