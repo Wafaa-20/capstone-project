@@ -38,7 +38,7 @@ class AgoraService {
     await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
     await _engine.enableAudio();
 
-    final int uid = _convertUserAccountToInt(userAccount);
+    _convertUserAccountToInt(userAccount);
 
     await _engine.joinChannelWithUserAccount(
       token: token,

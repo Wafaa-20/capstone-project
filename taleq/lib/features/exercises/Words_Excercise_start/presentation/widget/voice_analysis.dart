@@ -21,7 +21,7 @@ class VoiceAnalysis extends StatelessWidget {
                 icon: (Icons.stop),
                 size: 68,
                 onPressed: () {
-                  context.go('/success');
+                  context.go('/navigation');
                 },
               ),
       ],

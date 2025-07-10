@@ -21,10 +21,10 @@ class CameraStartPage extends StatelessWidget {
             children: [
               TopNavActions(
                 onPressedSkip: () {
-                  context.go('/');
+                  context.go('/navigation');
                 },
                 onPressedBack: () {
-                  context.go('/');
+                  context.go('/cameraAnalysis');
                 },
               ),
               SizedBox(height: 50),

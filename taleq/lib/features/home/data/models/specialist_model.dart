@@ -12,3 +12,4 @@ class SpecialistModel with SpecialistModelMappable   {
 
 }
 
+

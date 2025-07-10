@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -16,16 +15,11 @@ class ImagePickerRepositoryImpl implements ImagePickerRepository {
     required ImageSourceType source,
   }) async {
     try {
-      
       File? file;
       if (source == ImageSourceType.camera) {
-        
         file = await datasource.pickImageFromCamera();
-        
       } else {
-        
         file = await datasource.pickImageFromGallery();
-        
       }
       if (file == null) {
         return Left(ServerFailure(message: 'No image selected'));

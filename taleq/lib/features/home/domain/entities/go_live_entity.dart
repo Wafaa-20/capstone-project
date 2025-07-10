@@ -1,6 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:taleq/features/home/data/models/specialist_model.dart';
-import 'package:taleq/features/home/data/models/story_model.dart';
 
 class GoLiveEntity extends Equatable {
   final String userAccount;

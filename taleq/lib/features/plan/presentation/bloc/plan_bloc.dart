@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taleq/features/plan/data/models/plan_details/plan_details_model.dart';
 import 'package:taleq/features/plan/presentation/bloc/plan_event.dart';
 import 'package:taleq/features/plan/presentation/bloc/plan_state.dart';
@@ -17,10 +18,18 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
     on<SelectExerciseEvent>(selectExercise);
   }
 
-  FutureOr<void> selectExercise(
+  Future<void> selectExercise(
     SelectExerciseEvent event,
     Emitter<PlanState> emit,
-  ) {
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final bool? questunereDone = prefs.getBool('questunereDone');
+
+    if (questunereDone == true) {
+      emit(QuestnereState());
+      return;
+    }
     final newIndex = event.currentExercise;
     //back to Previous Exercise
     if (newIndex < currentIndex) {

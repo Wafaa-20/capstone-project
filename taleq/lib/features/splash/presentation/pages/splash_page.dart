@@ -45,7 +45,7 @@ class _SplashPageState extends State<SplashPage> {
         if (state is FirstTimeUseApp) {
           context.go('/onboarding');
         } else if (state is NotFirstTimeUseApp) {
-          context.go('/signup');
+          context.go('/login');
         } else if (state is AuthSuccess) {
           context.go('/navigation');
         }

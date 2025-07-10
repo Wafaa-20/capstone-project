@@ -34,3 +34,4 @@ final class NextExercise extends PlanState {
 }
 
 final class ExerciseComplete extends PlanState {}
+class QuestnereState extends PlanState {}

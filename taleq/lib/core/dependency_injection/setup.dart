@@ -62,6 +62,7 @@ import 'package:taleq/features/stuttering_assessment/camera_analysis/data/dataso
 import 'package:taleq/features/stuttering_assessment/camera_analysis/data/repositories/camera_analysis_repository_impl.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/domain/repositories/camera_analysis_repository.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/domain/usecases/get_camera_analysis.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/presentation/bloc/camera_analysis_bloc.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/data/datasources/questionnaire_datasource.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/data/repositories/questionnaire_repository_impl.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/domain/repositories/questionnaire_repository.dart';
@@ -197,6 +198,7 @@ Future<void> setup() async {
     () => InsertStoryUseCase(repository: GetIt.I()),
   );
   GetIt.I.registerLazySingleton(() => GoLiveUseCase(repository: GetIt.I()));
+
   // Blocs
   GetIt.I.registerFactory(
     () => AuthBloc(
@@ -219,6 +221,8 @@ Future<void> setup() async {
   GetIt.I.registerFactory(
     () => ProfileBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
   );
+  GetIt.I.registerFactory(() => CameraAnalysisBloc());
+
   GetIt.I.registerFactory(() => HomeBloc(GetIt.I(), GetIt.I(), GetIt.I()));
   GetIt.I.registerFactory(() => LivesBloc(GetIt.I()));
 }

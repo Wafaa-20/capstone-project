@@ -149,7 +149,7 @@ final router = GoRouter(
     GoRoute(
       name: Names.breathing,
       path: Routes.breathing,
-      builder: (context, state) => const BreathingExercisePage(),
+      builder: (context, state) => const BreathingPage(),
     ),
 
     GoRoute(

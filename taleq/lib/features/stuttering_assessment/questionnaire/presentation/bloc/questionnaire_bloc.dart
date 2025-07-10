@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taleq/core/constants/list_constants.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/domain/usecases/save_answers_use_case.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/bloc/questionnaire_event.dart';
@@ -65,18 +66,14 @@ class QuestionnaireBloc extends Bloc<QuestionnaireEvent, QuestionnaireState> {
     Emitter<QuestionnaireState> emit,
   ) async {
     emit(SubmitLoadingState());
-    final result = await saveAnswersUseCase(
-       AnswerParams(answer: userAnswers),
-    );
+    final result = await saveAnswersUseCase(AnswerParams(answer: userAnswers));
     result.fold(
       (failure) => emit(SubmitFailureState(message: failure.message)),
-      (success) => emit(SubmitSuccessState()),
+      (success) async{
+        emit(SubmitSuccessState());
+        final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('questunereDone', true);
+      },
     );
   }
-
- 
-
-  
-
- 
 }

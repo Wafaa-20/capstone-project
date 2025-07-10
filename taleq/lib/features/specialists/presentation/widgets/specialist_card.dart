@@ -13,8 +13,9 @@ import 'package:taleq/features/specialists/presentation/widgets/rating_widget.da
 import 'package:taleq/features/specialists/presentation/widgets/specialists_body.dart';
 
 class SpecialistCard extends StatelessWidget {
-  const SpecialistCard({super.key, this.scrollDirection});
+  const SpecialistCard({super.key, this.scrollDirection,this.color});
   final Axis? scrollDirection;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,6 @@ import 'package:taleq/core/error/failures.dart';
 import 'package:taleq/features/home/data/datasources/home_datasource.dart';
 import 'package:taleq/features/home/data/models/go_live_model.dart';
 import 'package:taleq/features/home/data/models/home_data_model.dart';
-import 'package:taleq/features/home/data/models/specialist_model.dart';
 import 'package:taleq/features/home/domain/entities/go_live_entity.dart';
 import 'package:taleq/features/home/domain/entities/home_entity.dart';
 import 'package:taleq/features/home/domain/repositories/home_repository.dart';

@@ -1,17 +1,11 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:dartz/dartz.dart';
-import 'package:taleq/features/home/data/models/home_data_model.mapper.dart';
 import 'package:taleq/features/home/data/models/home_profile_model.dart';
 import 'package:taleq/features/home/data/models/specialist_model.dart';
-
 import 'package:taleq/features/home/data/models/story_model.dart';
-
 import 'package:taleq/features/home/domain/entities/home_entity.dart';
 
-
-
 @MappableClass()
-class HomeDataModel  {
+class HomeDataModel {
   final List<SpecialistModel> specialists;
   final List<StoryModel> stories;
   final HomeProfileModel profile;
