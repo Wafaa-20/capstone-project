@@ -58,7 +58,7 @@ class BreathingPage extends StatelessWidget {
             // بدل القيمة الافتراضية هنا
             final scaleValue = isRunning
                 ? (state).scaleValue
-                : 1.2; // أولي: حجم أكبر
+                : 0.9; // أولي: حجم أكبر
             final opacityValue = isRunning
                 ? (state).opacityValue
                 : 1.0; // أولي: شفافية كاملة
@@ -123,15 +123,14 @@ class BreathingPage extends StatelessWidget {
                   ),
                 ],
 
-                const SizedBox(height: 32),
+                SizedBox(height: context.getHeight() * 0.10),
 
                 // هنا الدائرة الآن أكبر في البداية
                 BreathingCircle(
                   scaleValue: scaleValue,
                   opacityValue: opacityValue,
                 ),
-
-                const SizedBox(height: 32),
+                SizedBox(height: context.getHeight() * 0.15),
 
                 if (!isRunning)
                   CustomButton(
