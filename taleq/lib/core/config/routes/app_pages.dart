@@ -38,9 +38,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/plan',
-
-
+  initialLocation: '/srartexercise',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     //Profile Page
@@ -151,7 +149,7 @@ final router = GoRouter(
     GoRoute(
       name: Names.breathing,
       path: Routes.breathing,
-      builder: (context, state) => const BreathingExercisePage(),
+      builder: (context, state) => const BreathingPage(),
     ),
 
     GoRoute(

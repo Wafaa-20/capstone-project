@@ -9,7 +9,6 @@ class AgoraService {
   bool _localUserJoined = false;
   int? _remoteUid;
 
-
   Future<void> initWithUserAccount({
     required String appId,
     required String token,
@@ -39,7 +38,7 @@ class AgoraService {
     await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
     await _engine.enableAudio();
 
-    final int uid = _convertUserAccountToInt(userAccount);
+    _convertUserAccountToInt(userAccount);
 
     await _engine.joinChannelWithUserAccount(
       token: token,
@@ -52,7 +51,6 @@ class AgoraService {
       ),
     );
   }
-
 
   Future<void> initVideoSession({
     required String appId,
@@ -105,13 +103,11 @@ class AgoraService {
     );
   }
 
-
   Future<void> leaveChannel() async {
     log('⬅️ مغادرة القناة');
     await _engine.leaveChannel();
     await _engine.release();
   }
-
 
   Future<void> muteLocalMic() async {
     log('🔇 كتم المايك');
@@ -123,7 +119,6 @@ class AgoraService {
     await _engine.muteLocalAudioStream(false);
   }
 
-
   Future<void> muteLocalVideo() async {
     log('📷 إيقاف الفيديو المحلي');
     await _engine.muteLocalVideoStream(true);
@@ -134,8 +129,7 @@ class AgoraService {
     await _engine.muteLocalVideoStream(false);
   }
 
-  
-   localView() {
+  localView() {
     return AgoraVideoView(
       controller: VideoViewController(
         rtcEngine: _engine,
@@ -144,16 +138,15 @@ class AgoraService {
     );
   }
 
-   remoteView(String remoteUid,channelName) {
+  remoteView(String remoteUid, channelName) {
     return AgoraVideoView(
       controller: VideoViewController.remote(
         rtcEngine: _engine,
         canvas: VideoCanvas(uid: _convertUserAccountToInt(remoteUid)),
-        connection: RtcConnection(channelId:channelName), 
+        connection: RtcConnection(channelId: channelName),
       ),
     );
   }
-
 
   RtcEngineEventHandler _buildEventHandler() {
     return RtcEngineEventHandler(
@@ -165,16 +158,20 @@ class AgoraService {
         log("👤 انضم مستخدم: $remoteUid");
         _remoteUid = remoteUid;
       },
-      onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
-        log("👤 غادر المستخدم: $remoteUid - السبب: $reason");
-        _remoteUid = null;
-      },
+      onUserOffline:
+          (
+            RtcConnection connection,
+            int remoteUid,
+            UserOfflineReasonType reason,
+          ) {
+            log("👤 غادر المستخدم: $remoteUid - السبب: $reason");
+            _remoteUid = null;
+          },
       onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
         log('[⚠️ التوكن سينتهي قريباً] token: $token');
       },
     );
   }
-
 
   bool get isLocalUserJoined => _localUserJoined;
   int? get remoteUid => _remoteUid;

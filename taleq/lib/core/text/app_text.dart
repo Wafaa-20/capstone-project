@@ -179,6 +179,14 @@ class AppText {
   static const String phrase2 = 'السماء زرقاء';
   static const String phrase3 = 'السماء زرقاء ومليئة بالغيوم البيضاء';
 
+  //Brithing Exercise Page
+  static const String endExercise = 'إنهاء التمرين';
+  static const String startExercise = 'ابدأ التمرين';
+  static const String restAndBreathe = 'استرح وخذ نفساً عميقاً';
+  static const String minute = 'دقيقة';
+  static const String twoMinutes = 'دقيقتان';
+  static const String threeMinutes = '3 دقائق';
+
   //Task Success Page
   static const String taskSuccessTitle = "أتممت التمرين بنجاح!";
 
@@ -219,11 +227,8 @@ class AppText {
   static const String ratings = "التقييمات";
   static const String time = "الأوقات المتاحة";
   static const String bookSession = "حجز الموعد";
-
-  static const String assessment = "التقييمات";
-
   static const String search = "بحث";
-
+  static const String assessment = "التقييمات";
 
   //Profile Page
   static const String profileTitle = "الملف الشخصي";

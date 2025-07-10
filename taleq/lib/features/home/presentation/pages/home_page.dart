@@ -11,15 +11,12 @@ import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/core/widget/button/custom_icon_button.dart';
-<<<<<<< HEAD
-import 'package:taleq/core/widget/inspiring_stories_widget.dart';
-=======
 import 'package:taleq/core/widget/loading_widget.dart';
->>>>>>> be227b0a6b29566b0f4b972f7281c9bde30bbf96
 import 'package:taleq/features/home/presentation/bloc/home_bloc.dart';
 import 'package:taleq/features/home/presentation/bloc/home_event.dart';
 import 'package:taleq/features/home/presentation/bloc/home_state.dart';
 import 'package:taleq/features/home/presentation/pages/story_page.dart';
+import 'package:taleq/features/home/presentation/widget/inspiring_stories_widget.dart';
 import 'package:taleq/features/home/presentation/widget/live_stream_widget.dart';
 import 'package:taleq/features/home/presentation/widget/quick_session_container.dart';
 import 'package:taleq/features/profile/presentation/bloc/profile_bloc.dart';
@@ -87,81 +84,6 @@ class HomePage extends StatelessWidget {
                   
                   if (state.homeList.specialists.isEmpty) {
                     return const Center(child: Text("لا يوجد متخصصين حالياً"));
-                  } else {
-                    return SingleChildScrollView(
-                      child: SizedBox(
-                        height: context.getHeight(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              AppText.liveStream,
-                              style: TextStyles.sf40016.copyWith(
-                                color: AppPalette.black,
-                              ),
-                            ),
-
-                            LiveStreamWidget(bloc: homeBloc),
-
-                            Text(
-                              AppText.welcomeMessage,
-                              style: TextStyles.sf40016.copyWith(
-                                color: AppPalette.black,
-                              ),
-                            ),
-                            SizedBox(height: 19),
-                            QuickSessionContainer(),
-                            SizedBox(height: 45),
-                            Text(
-                              AppText.topSpecialists,
-                              style: TextStyles.sf40016.copyWith(
-                                color: AppPalette.black,
-                              ),
-                            ),
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxHeight: 114,
-                                maxWidth: 361,
-                              ),
-                              child: SpecialistCard(
-                                scrollDirection: Axis.horizontal,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              AppText.inspiringStories,
-                              style: TextStyles.sf40016.copyWith(
-                                color: AppPalette.black,
-                              ),
-                            ),
-                            SizedBox(height: 25),
-                            InspiringStoriesWidget(
-                              avatar: '',
-                              name: '',
-                              title: '',
-                              story: '',
-                            ),
-                            SizedBox(height: 21),
-                            Align(
-                              alignment: Alignment.center,
-                              child: CustomButton(
-                                height: 33,
-                                width: 124,
-                                onPressed: () {
-                                  context.customPush(StoryPage(bloc: homeBloc));
-                                },
-                                child: Text(
-                                  AppText.shareStory,
-                                  style: TextStyles.sf40016.copyWith(
-                                    color: AppPalette.whitePrimary,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
                   }
                 }
                 return SingleChildScrollView(
@@ -213,16 +135,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 25),
-<<<<<<< HEAD
-                          InspiringStoriesWidget(
-                            avatar: '',
-                            name: '',
-                            title: '',
-                            story: '',
-                          ),
-=======
                           InspiringStoriesWidget(bloc: homeBloc,),
->>>>>>> be227b0a6b29566b0f4b972f7281c9bde30bbf96
                           SizedBox(height: 21),
                           Align(
                             alignment: Alignment.center,

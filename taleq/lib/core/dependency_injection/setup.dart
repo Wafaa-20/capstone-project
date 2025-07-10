@@ -194,6 +194,7 @@ Future<void> setup() async {
     () => InsertStoryUseCase(repository: GetIt.I()),
   );
   GetIt.I.registerLazySingleton(() => GoLiveUseCase(repository: GetIt.I()));
+
   // Blocs
   GetIt.I.registerFactory(
     () => AuthBloc(
@@ -216,7 +217,8 @@ Future<void> setup() async {
   GetIt.I.registerFactory(
     () => ProfileBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
   );
-  GetIt.I.registerFactory(() => HomeBloc(GetIt.I(),GetIt.I(),GetIt.I()));
   GetIt.I.registerFactory(() => CameraAnalysisBloc());
+
+  GetIt.I.registerFactory(() => HomeBloc(GetIt.I(), GetIt.I(), GetIt.I()));
   GetIt.I.registerFactory(() => LivesBloc(GetIt.I()));
 }

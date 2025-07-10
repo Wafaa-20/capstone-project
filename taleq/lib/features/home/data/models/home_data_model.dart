@@ -1,5 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:dartz/dartz.dart';
 import 'package:taleq/features/home/data/models/specialist_model.dart';
 import 'package:taleq/features/home/data/models/specialist_model.mapper.dart';
 import 'package:taleq/features/home/data/models/story_model.dart';

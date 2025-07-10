@@ -34,17 +34,6 @@ class SpecialistsPage extends StatelessWidget {
 
               leading: Image.asset("assets/image/specialist.png"),
               actions: [
-<<<<<<< HEAD
-                CustomIconButton(
-                  icon: Icons.search,
-                  size: 35,
-                  color: AppPalette.black,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            body: SafeArea(child: SpecialistCard()),
-=======
                 IconButton(
                   icon: Icon(Icons.search, size: 30),
                   onPressed: () {
@@ -54,7 +43,6 @@ class SpecialistsPage extends StatelessWidget {
               ],
             ),
             body: SpecialistCard(),
->>>>>>> be227b0a6b29566b0f4b972f7281c9bde30bbf96
           );
         },
       ),

@@ -82,7 +82,7 @@ class HomeDatasourceImpl implements HomeDatasource {
   Future<String> insertStory(String title, String story) async {
     try {
       final String uid = supabase.auth.currentUser!.id;
-      final response = await supabase.from('inspirational_stories').insert({
+      await supabase.from('inspirational_stories').insert({
         'title': title,
         'content': story,
         'uid': uid,

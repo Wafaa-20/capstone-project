@@ -23,7 +23,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-     namespace "dev.dormidontov.record_android"
+     namespace "com.llfbandit.record"
     compileSdkVersion 33
 
     defaultConfig {
