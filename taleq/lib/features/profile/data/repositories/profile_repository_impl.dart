@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -47,6 +48,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }) async {
     try {
       final result = await datasource.uploadAvatar(imageFile: imageFile);
+      
       return Right(result);
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));

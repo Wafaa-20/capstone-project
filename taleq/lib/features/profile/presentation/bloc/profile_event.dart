@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:taleq/features/profile/domain/usecases/pick_image_use_case.dart';
 
 sealed class ProfileEvent extends Equatable {
@@ -49,8 +50,8 @@ class UploadAvatarEvent extends ProfileEvent {
 
 class ChangeLanguageEvent extends ProfileEvent {
   final String localeCode;
-
-  const ChangeLanguageEvent({required this.localeCode});
+  final BuildContext context;
+  const ChangeLanguageEvent({required this.context, required this.localeCode});
   @override
   List<Object> get props => [localeCode];
 }

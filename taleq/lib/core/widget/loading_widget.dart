@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({super.key});
+  const LoadingWidget({super.key});      
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class LoadingWidget extends StatelessWidget {
       backgroundColor: AppPalette.whitePrimary,
       body: Center(
         child: Lottie.asset(
-          'assets/json/6McAS3f5rb (8).json',
+          'assets/json/cf28sulcSg.json',
           width: 200,
           height: 200,
           fit: BoxFit.contain,

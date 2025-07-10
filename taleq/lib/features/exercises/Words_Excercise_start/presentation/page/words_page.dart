@@ -6,16 +6,15 @@ import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_text_button.dart';
 import 'package:taleq/features/exercises/Words_Excercise/presentation/pages/words_excercise_2_page.dart';
-import 'package:taleq/features/exercises/presentation/pages/exercises_done_page.dart';
+import 'package:taleq/features/exercises/presentation/page/exercises_done_page.dart';
+
+
 
 class WordsPage extends StatelessWidget {
   const WordsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final mediaQueryData = MediaQuery.of(context);
-    final double bottomPadding = mediaQueryData.padding.bottom;
-
     return Scaffold(
       backgroundColor: AppPalette.bluePrimary,
       body: SafeArea(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/app_text.dart';
+import 'package:taleq/core/text/text_styles.dart';
+import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_icon_button.dart';
 import 'package:taleq/features/specialists/presentation/pages/overview_tab.dart';
 import 'package:taleq/features/specialists/presentation/pages/session_booking_tab.dart';
@@ -44,6 +46,12 @@ class SpecialistProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               TabBar(
+                labelStyle: TextStyles.sf70020.copyWith(
+                  color: AppPalette.bluePrimary,
+                ),
+                unselectedLabelStyle: TextStyles.sf40020.copyWith(
+                  color: AppPalette.grayPrimary,
+                ),
                 tabs: [
                   Tab(text: AppText.tabTitle),
                   Tab(text: AppText.tabTitle2),

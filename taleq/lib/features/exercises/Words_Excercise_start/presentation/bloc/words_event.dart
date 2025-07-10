@@ -1,8 +1,13 @@
-part of 'words_bloc.dart';
+import 'package:equatable/equatable.dart';
 
-sealed class WordsEvent extends Equatable {
-  const WordsEvent();
-
+/// --------- Events ---------
+abstract class AudioEvent extends Equatable {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
+
+/// حدث لبدء التسجيل
+class StartRecording extends AudioEvent {}
+
+/// حدث لإيقاف التسجيل
+class StopRecording extends AudioEvent {}

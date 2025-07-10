@@ -26,9 +26,6 @@ class UserProfileModelMapper extends ClassMapperBase<UserProfileModel> {
   static String _$email(UserProfileModel v) => v.email;
   static const Field<UserProfileModel, String> _f$email =
       Field('email', _$email);
-  static String? _$password(UserProfileModel v) => v.password;
-  static const Field<UserProfileModel, String> _f$password =
-      Field('password', _$password);
   static String? _$avatarUrl(UserProfileModel v) => v.avatarUrl;
   static const Field<UserProfileModel, String> _f$avatarUrl =
       Field('avatarUrl', _$avatarUrl, key: r'avatar_url');
@@ -37,7 +34,6 @@ class UserProfileModelMapper extends ClassMapperBase<UserProfileModel> {
   final MappableFields<UserProfileModel> fields = const {
     #fullName: _f$fullName,
     #email: _f$email,
-    #password: _f$password,
     #avatarUrl: _f$avatarUrl,
   };
 
@@ -45,7 +41,6 @@ class UserProfileModelMapper extends ClassMapperBase<UserProfileModel> {
     return UserProfileModel(
         fullName: data.dec(_f$fullName),
         email: data.dec(_f$email),
-        password: data.dec(_f$password),
         avatarUrl: data.dec(_f$avatarUrl));
   }
 
@@ -104,8 +99,7 @@ extension UserProfileModelValueCopy<$R, $Out>
 
 abstract class UserProfileModelCopyWith<$R, $In extends UserProfileModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call(
-      {String? fullName, String? email, String? password, String? avatarUrl});
+  $R call({String? fullName, String? email, String? avatarUrl});
   UserProfileModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -119,22 +113,16 @@ class _UserProfileModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<UserProfileModel> $mapper =
       UserProfileModelMapper.ensureInitialized();
   @override
-  $R call(
-          {String? fullName,
-          String? email,
-          Object? password = $none,
-          Object? avatarUrl = $none}) =>
+  $R call({String? fullName, String? email, Object? avatarUrl = $none}) =>
       $apply(FieldCopyWithData({
         if (fullName != null) #fullName: fullName,
         if (email != null) #email: email,
-        if (password != $none) #password: password,
         if (avatarUrl != $none) #avatarUrl: avatarUrl
       }));
   @override
   UserProfileModel $make(CopyWithData data) => UserProfileModel(
       fullName: data.get(#fullName, or: $value.fullName),
       email: data.get(#email, or: $value.email),
-      password: data.get(#password, or: $value.password),
       avatarUrl: data.get(#avatarUrl, or: $value.avatarUrl));
 
   @override

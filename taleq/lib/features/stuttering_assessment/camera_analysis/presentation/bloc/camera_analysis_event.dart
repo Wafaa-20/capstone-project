@@ -1,10 +1,25 @@
 import 'package:equatable/equatable.dart';
+import 'package:camera/camera.dart';
 
-sealed class CameraAnalysisEvent extends Equatable {
-  const CameraAnalysisEvent();
-
+abstract class CameraAnalysisEvent extends Equatable {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-class StartCameraAnalysis extends CameraAnalysisEvent {}
+/// ابدأ تهيئة الكاميرا
+class InitCamera extends CameraAnalysisEvent {}
+
+/// ابدأ التسجيل
+class StartVideoRecording extends CameraAnalysisEvent {}
+
+/// أوقف التسجيل
+class StopVideoRecording extends CameraAnalysisEvent {}
+
+/// أرسل الفيديو بعد الانتهاء
+class UploadVideo extends CameraAnalysisEvent {
+  final XFile videoFile;
+  UploadVideo(this.videoFile);
+
+  @override
+  List<Object?> get props => [videoFile];
+}

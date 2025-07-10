@@ -44,7 +44,7 @@ List<CardTrainingModel> cardData = [
     background: AppPalette.iosBlue,
     image: "assets/icon/Group 40952.svg",
     title: AppText.breath.tr(),
-    route: '',
+    route: 'breathing',
     imageWidth: 700,
     imageHeight: 90,
     // containerWidth: 175,

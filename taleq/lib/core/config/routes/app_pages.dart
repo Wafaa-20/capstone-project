@@ -14,6 +14,8 @@ import 'package:taleq/features/exercises/presentation/page/task_success_page.dar
 import 'package:taleq/features/groups/presentation/pages/available_group.dart';
 import 'package:taleq/features/groups/presentation/pages/groups_page.dart';
 import 'package:taleq/features/home/presentation/pages/home_page.dart';
+import 'package:taleq/features/lives/presentation/bloc/lives_bloc.dart';
+import 'package:taleq/features/lives/presentation/pages/lives_page.dart';
 import 'package:taleq/features/navigation/presentation/pages/navigation_page.dart';
 import 'package:taleq/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:taleq/features/payment/presentation/pages/payment_page.dart';
@@ -36,7 +38,7 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/
 import 'app_routes.dart';
 
 final router = GoRouter(
-  initialLocation: '/navigation',
+  initialLocation: '/srartexercise',
   navigatorKey: GlobalNavigation.instance.navigatorKey,
   routes: [
     //Profile Page
@@ -147,7 +149,7 @@ final router = GoRouter(
     GoRoute(
       name: Names.breathing,
       path: Routes.breathing,
-      builder: (context, state) => const BreathingExercisePage(),
+      builder: (context, state) => const BreathingPage(),
     ),
 
     GoRoute(
@@ -215,6 +217,31 @@ final router = GoRouter(
             userID: userID,
             token: token,
             spaceID: spaceID,
+            hostID: hostID,
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/lives',
+      builder: (context, state) {
+        final token = state.uri.queryParameters['token'] ?? '';
+        final userID =
+            int.tryParse(state.uri.queryParameters['userID'] ?? '0') ?? 0;
+        final channelName = state.uri.queryParameters['channelName'] ?? '';
+        final hostID = state.uri.queryParameters['hostID'] ?? '';
+        final isBrodcaster =
+            (state.uri.queryParameters['isBrodcaster'] ?? 'false')
+                .toLowerCase() ==
+            'true';
+
+        return BlocProvider(
+          create: (_) => GetIt.I<LivesBloc>(),
+          child: LivesPage(
+            userID: userID,
+            token: token,
+            channelName: channelName,
+            isBrodcaster: isBrodcaster,
             hostID: hostID,
           ),
         );

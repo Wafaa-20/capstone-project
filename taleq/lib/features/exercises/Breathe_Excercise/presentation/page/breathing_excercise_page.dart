@@ -1,21 +1,25 @@
+// lib/breathing_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:taleq/core/extension/git_size_screen.dart';
+import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
+import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/bloc/breath_bloc.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/bloc/breath_event.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/bloc/breath_state.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/widget/breathing_circle.dart';
 import 'package:taleq/features/exercises/Breathe_Excercise/presentation/widget/enum.dart';
 
-class BreathingExercisePage extends StatelessWidget {
-  const BreathingExercisePage({super.key});
+class BreathingPage extends StatelessWidget {
+  const BreathingPage({Key? key}) : super(key: key);
 
   String _formatTime(int totalSeconds) {
-    int minutes = totalSeconds ~/ 60;
-    int seconds = totalSeconds % 60;
-    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+    final m = totalSeconds ~/ 60;
+    final s = totalSeconds % 60;
+    return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
   }
 
   String _getBreathingText(BreathingPhase phase) {
@@ -27,200 +31,147 @@ class BreathingExercisePage extends StatelessWidget {
       case BreathingPhase.exhale:
         return 'أزفر ببطء';
       case BreathingPhase.initial:
-        return "";
+        return '';
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<String> durations = ['دقيقة', 'دقيقتان', '3 دقائق'];
+    final durations = ['دقيقة', 'دقيقتان', '3 دقائق'];
 
     return BlocProvider(
-      create: (context) => BreathingBloc(),
-      child: Scaffold(
-        backgroundColor: AppPalette.iosBlue,
-        appBar: AppBar(
+      create: (_) => BreathingBloc(),
+      child: BlocListener<BreathingBloc, BreathingState>(
+        listener: (context, state) {
+          if (state is BreathingCompletedState) {
+            // عدّ التمرين مكتمل، انتقل للصفحة التالية:
+            context.go(
+              '/success',
+            ); // غيّر '/nextPage' بالمسار الفعلي الذي تريده
+          }
+        },
+        child: Scaffold(
           backgroundColor: AppPalette.iosBlue,
-          elevation: 0,
-          leading: BlocBuilder<BreathingBloc, BreathingState>(
+          appBar: AppBar(
+            backgroundColor: AppPalette.iosBlue,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+              onPressed: () => context.go('/navigation'),
+            ),
+          ),
+          body: BlocBuilder<BreathingBloc, BreathingState>(
             builder: (context, state) {
-              return IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  if (state is BreathingRunningState ||
-                      state is BreathingCompletedState) {
-                    context.read<BreathingBloc>().add(StopBreathingEvent());
-                  }
-                },
+              final isRunning = state is BreathingRunningState;
+
+              final scaleValue = isRunning ? (state).scaleValue : 0.9;
+              final opacityValue = isRunning ? (state).opacityValue : 1.0;
+
+              final remaining = isRunning ? (state).remainingSeconds : 0;
+              final phase = isRunning ? (state).phase : BreathingPhase.initial;
+              final text = isRunning ? _getBreathingText(phase) : '';
+              final selected = state is BreathingInitialState
+                  ? (state).selectedDurationIndex
+                  : 0;
+
+              return Column(
+                children: [
+                  SizedBox(height: context.getHeight() * 0.06),
+
+                  if (isRunning) ...[
+                    Text(
+                      text,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _formatTime(remaining),
+                      style: TextStyles.sf40016.copyWith(
+                        color: AppPalette.whitePrimary,
+                      ),
+                    ),
+                  ],
+
+                  if (!isRunning && state is BreathingInitialState) ...[
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(durations.length, (i) {
+                        final sel = i == selected;
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: TextButton(
+                            onPressed: () => context.read<BreathingBloc>().add(
+                              SetDurationEvent(i),
+                            ),
+                            child: Text(
+                              durations[i],
+                              style: TextStyles.sf40018.copyWith(
+                                color: sel
+                                    ? Colors.white
+                                    : Colors.white.withOpacity(0.6),
+                                fontWeight: sel
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
+
+                  SizedBox(height: context.getHeight() * 0.10),
+
+                  BreathingCircle(
+                    scaleValue: scaleValue,
+                    opacityValue: opacityValue,
+                  ),
+                  SizedBox(height: context.getHeight() * 0.15),
+
+                  if (!isRunning)
+                    CustomButton(
+                      color: AppPalette.whitePrimary,
+                      sideColor: AppPalette.whitePrimary,
+                      onPressed: () => context.read<BreathingBloc>().add(
+                        StartBreathingEvent(selected + 1),
+                      ),
+                      child: Text(
+                        AppText.startExercise,
+                        style: TextStyles.sf40016.copyWith(
+                          color: AppPalette.black,
+                        ),
+                      ),
+                    ),
+
+                  if (isRunning) ...[
+                    const SizedBox(height: 16),
+                    CustomButton(
+                      color: AppPalette.iosBlue,
+                      sideColor: AppPalette.whitePrimary,
+                      onPressed: () => context.read<BreathingBloc>().add(
+                        StopBreathingEvent(),
+                      ),
+                      child: Text(
+                        AppText.endExercise,
+                        style: TextStyles.sf40016.copyWith(
+                          color: AppPalette.whitePrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+
+                  const SizedBox(height: 24),
+                ],
               );
             },
           ),
-        ),
-        body: BlocBuilder<BreathingBloc, BreathingState>(
-          builder: (context, state) {
-            bool isExerciseActive = state is BreathingRunningState;
-            String currentBreathingText = '';
-            int remainingSeconds = 0;
-            double scaleValue = 0.5;
-            double opacityValue = 0.2;
-            int selectedDurationIndexFromBloc = 0;
-
-            if (state is BreathingRunningState) {
-              currentBreathingText = _getBreathingText(state.phase);
-              remainingSeconds = state.remainingSeconds;
-              scaleValue = state.scaleValue;
-              opacityValue = state.opacityValue;
-            } else if (state is BreathingInitialState) {
-              currentBreathingText = _getBreathingText(BreathingPhase.initial);
-              selectedDurationIndexFromBloc = state.selectedDurationIndex;
-            } else if (state is BreathingCompletedState) {
-              currentBreathingText = 'اكتمل التمرين! أحسنت.';
-            }
-
-            return Column(
-              children: [
-                if (isExerciseActive)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Text(
-                      _formatTime(remainingSeconds),
-                      style: const TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.deepOrangeAccent,
-                      ),
-                    ),
-                  ),
-
-                if (!isExerciseActive && state is BreathingInitialState)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 30),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(durations.length, (index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 19,
-                              ),
-                              child: TextButton(
-                                onPressed: () {
-                                  context.read<BreathingBloc>().add(
-                                    SetDurationEvent(index),
-                                  );
-                                },
-                                child: selectedDurationIndexFromBloc == index
-                                    ? Text(
-                                        durations[index],
-                                        style: TextStyles.sf40018.copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                        ),
-                                      )
-                                    : Opacity(
-                                        opacity: 0.6,
-                                        child: Text(
-                                          durations[index],
-                                          style: TextStyles.sf40018.copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                      ),
-                              ),
-                            );
-                          }),
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () {
-                            context.read<BreathingBloc>().add(
-                              StartBreathingEvent(
-                                selectedDurationIndexFromBloc + 1,
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.blue.shade900,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 60,
-                              vertical: 12,
-                            ),
-                          ),
-                          child: const Text(
-                            'ابدأ التمرين',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ),
-
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        currentBreathingText,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 50),
-                      BreathingCircle(
-                        scaleValue: scaleValue,
-                        opacityValue: opacityValue,
-                      ),
-                    ],
-                  ),
-                ),
-
-                if (isExerciseActive)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 40.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        context.read<BreathingBloc>().add(StopBreathingEvent());
-                        context.go('/success');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.blue.shade900,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 80,
-                          vertical: 15,
-                        ),
-                      ),
-                      child: const Text(
-                        'إنهاء التمرين',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            );
-          },
         ),
       ),
     );

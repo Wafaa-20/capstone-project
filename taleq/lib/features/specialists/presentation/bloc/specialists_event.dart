@@ -8,3 +8,14 @@ sealed class SpecialistsEvent extends Equatable {
 }
 
 class LoadSpecialists extends SpecialistsEvent {}
+
+class SearchEvent extends SpecialistsEvent {
+  final String search;
+
+  const SearchEvent({required this.search});
+
+  @override
+  List<Object> get props => [search];
+}
+
+class ShowSearch extends SpecialistsEvent {}

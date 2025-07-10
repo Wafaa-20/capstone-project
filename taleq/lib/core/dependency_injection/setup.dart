@@ -25,8 +25,14 @@ import 'package:taleq/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:taleq/features/home/data/datasources/home_datasource.dart';
 import 'package:taleq/features/home/data/repositories/home_repository_impl.dart';
 import 'package:taleq/features/home/domain/repositories/home_repository.dart';
+import 'package:taleq/features/home/domain/usecases/go_live_use_case.dart';
+import 'package:taleq/features/home/domain/usecases/insert_story_use_case.dart';
 import 'package:taleq/features/home/domain/usecases/specialist_use_case.dart';
 import 'package:taleq/features/home/presentation/bloc/home_bloc.dart';
+import 'package:taleq/features/lives/data/datasources/lives_datasource.dart';
+import 'package:taleq/features/lives/data/repositories/lives_repository_impl.dart';
+import 'package:taleq/features/lives/domain/repositories/lives_repository.dart';
+import 'package:taleq/features/lives/presentation/bloc/lives_bloc.dart';
 import 'package:taleq/features/profile/data/datasources/image_picker_datasource.dart';
 import 'package:taleq/features/profile/data/datasources/profile_datasource.dart';
 import 'package:taleq/features/profile/data/repositories/image_picker_repository_impl.dart';
@@ -54,6 +60,7 @@ import 'package:taleq/features/stuttering_assessment/camera_analysis/data/dataso
 import 'package:taleq/features/stuttering_assessment/camera_analysis/data/repositories/camera_analysis_repository_impl.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/domain/repositories/camera_analysis_repository.dart';
 import 'package:taleq/features/stuttering_assessment/camera_analysis/domain/usecases/get_camera_analysis.dart';
+import 'package:taleq/features/stuttering_assessment/camera_analysis/presentation/bloc/camera_analysis_bloc.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/data/datasources/questionnaire_datasource.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/data/repositories/questionnaire_repository_impl.dart';
 import 'package:taleq/features/stuttering_assessment/questionnaire/domain/repositories/questionnaire_repository.dart';
@@ -72,6 +79,9 @@ Future<void> setup() async {
   // Data Sources
   GetIt.I.registerLazySingleton<AuthRemoteDatasource>(
     () => SupabaseDatasource(supabase: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton<LivesDatasource>(
+    () => LivesDatasourceImpl(supabase: GetIt.I()),
   );
   GetIt.I.registerLazySingleton<HomeDatasource>(
     () => HomeDatasourceImpl(supabase: GetIt.I()),
@@ -96,6 +106,9 @@ Future<void> setup() async {
   // Repositories
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(datasource: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton<LivesRepository>(
+    () => LivesRepositoryImpl(datasource: GetIt.I()),
   );
   GetIt.I.registerLazySingleton<HomeRepository>(
     () => HomeRepositoryImpl(datasource: GetIt.I()),
@@ -177,6 +190,10 @@ Future<void> setup() async {
   );
   GetIt.I.registerLazySingleton(() => AddCommentUseCase(repository: GetIt.I()));
   GetIt.I.registerLazySingleton(() => AgoraService());
+  GetIt.I.registerLazySingleton(
+    () => InsertStoryUseCase(repository: GetIt.I()),
+  );
+  GetIt.I.registerLazySingleton(() => GoLiveUseCase(repository: GetIt.I()));
 
   // Blocs
   GetIt.I.registerFactory(
@@ -200,5 +217,8 @@ Future<void> setup() async {
   GetIt.I.registerFactory(
     () => ProfileBloc(GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I(), GetIt.I()),
   );
-  GetIt.I.registerFactory(() => HomeBloc(GetIt.I()));
+  GetIt.I.registerFactory(() => CameraAnalysisBloc());
+
+  GetIt.I.registerFactory(() => HomeBloc(GetIt.I(), GetIt.I(), GetIt.I()));
+  GetIt.I.registerFactory(() => LivesBloc(GetIt.I()));
 }

@@ -8,7 +8,6 @@ class UserProfileModel extends ProfileEntity with UserProfileModelMappable {
   const UserProfileModel({
     @MappableField(key: 'full_name') required super.fullName,
     required super.email,
-    required super.password,
     @MappableField(key: 'avatar_url') required super.avatarUrl,
   });
 }

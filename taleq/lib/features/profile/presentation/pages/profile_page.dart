@@ -20,49 +20,55 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => GetIt.I<ProfileBloc>()..add(LoadProfileEvent()),
-      child: BlocConsumer<ProfileBloc, ProfileState>(
-        listener: (context, state) {
-          if (state is SignOutSuccess) {
-            context.go('/login');
-          } else if (state is ProfileFailure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text(AppText.profileTitle),
-              centerTitle: true,
-              leading: CustomIconButton(
-                icon: Icons.arrow_back_ios,
-                onPressed: () => context.push('/navigation'),
-              ),
-            ),
-            body: Column(
-              children: [
-                SizedBox(height: 24),
-                EditImageProfile(radius: 80, isWithCamera: true),
-                SizedBox(height: 27),
-                Text("fullName", style: TextStyles.sf40020),
-                SizedBox(height: 10),
-                Text(
-                  "email",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: AppPalette.blueLight,
+      child: Builder(
+        builder: (context) {
+          final bloc = context.read<ProfileBloc>();
+          return BlocConsumer<ProfileBloc, ProfileState>(
+            listener: (context, state) {
+              
+              if (state is SignOutSuccess) {
+                context.go('/login');
+              } else if (state is ProfileFailure) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.message)));
+              }
+            },
+            builder: (context, state) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: const Text(AppText.profileTitle),
+                  centerTitle: true,
+                  leading: CustomIconButton(
+                    icon: Icons.arrow_back_ios,
+                    onPressed: () => context.push('/navigation'),
                   ),
                 ),
-                SizedBox(height: 27),
-                Flexible(child: ProfileOptionsBody()),
-                JoinAsSpecialistWidget(),
-                SizedBox(height: 75),
-              ],
-            ),
+                body: Column(
+                  children: [
+                    SizedBox(height: 24),
+                    EditImageProfile(radius: 80, isWithCamera: true),
+                    SizedBox(height: 27),
+                    Text("fullName", style: TextStyles.sf40020),
+                    SizedBox(height: 10),
+                    Text(
+                      "email",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: AppPalette.blueLight,
+                      ),
+                    ),
+                    SizedBox(height: 27),
+                    Flexible(child: ProfileOptionsBody(bloc: bloc )),
+                    JoinAsSpecialistWidget(),
+                    SizedBox(height: 75),
+                  ],
+                ),
+              );
+            },
           );
-        },
+        }
       ),
     );
   }
