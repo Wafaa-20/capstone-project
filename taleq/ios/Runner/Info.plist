@@ -14,6 +14,8 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>taleq</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Add your own description.</string>
 	<key>NSCameraUsageDescription</key>
     <string>your usage description here</string>
     <key>NSMicrophoneUsageDescription</key>
