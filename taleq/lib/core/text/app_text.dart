@@ -220,6 +220,7 @@ class AppText {
   static const String time = "الأوقات المتاحة";
   static const String bookSession = "حجز الموعد";
   static const String search = "بحث";
+  static const String assessment = "التقييمات";
 
   //Profile Page
   static const String profileTitle = "الملف الشخصي";

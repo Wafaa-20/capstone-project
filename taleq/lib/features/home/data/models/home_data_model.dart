@@ -1,23 +1,34 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:dartz/dartz.dart';
+import 'package:taleq/features/home/data/models/home_data_model.mapper.dart';
+import 'package:taleq/features/home/data/models/home_profile_model.dart';
 import 'package:taleq/features/home/data/models/specialist_model.dart';
-import 'package:taleq/features/home/data/models/specialist_model.mapper.dart';
+
 import 'package:taleq/features/home/data/models/story_model.dart';
-import 'package:taleq/features/home/data/models/story_model.mapper.dart';
+
 import 'package:taleq/features/home/domain/entities/home_entity.dart';
 
-part 'home_data_model.mapper.dart';
+
 
 @MappableClass()
-class HomeDataModel with HomeDataModelMappable {
+class HomeDataModel  {
   final List<SpecialistModel> specialists;
   final List<StoryModel> stories;
+  final HomeProfileModel profile;
 
-  HomeDataModel({required this.specialists, required this.stories});
+  HomeDataModel({
+    required this.specialists,
+    required this.stories,
+    required this.profile,
+  });
 }
 
 extension HomeDataModelToEntityMapper on HomeDataModel {
   HomeEntity toEntity() {
-    return HomeEntity(specialists: specialists, stories: stories);
+    return HomeEntity(
+      specialists: specialists,
+      stories: stories,
+      profile: profile,
+    );
   }
 }

@@ -1,12 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taleq/core/extension/git_size_screen.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/core/widget/custom_bottom_sheet.dart';
+import 'package:taleq/features/payment/presentation/bloc/payment_bloc.dart';
 import 'package:taleq/features/payment/presentation/widgets/add_new_card.dart';
 import 'package:taleq/features/payment/presentation/widgets/select_payment.dart';
 
@@ -15,6 +17,7 @@ class BottomSheetBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PaymentBloc bloc = context.read<PaymentBloc>();
     return Padding(
       padding: const EdgeInsets.all(25.0),
       child: Column(
@@ -42,7 +45,6 @@ class BottomSheetBody extends StatelessWidget {
                 height: context.getHeight() * 0.55,
                 AddNewCard(),
               );
-            
             },
           ),
 

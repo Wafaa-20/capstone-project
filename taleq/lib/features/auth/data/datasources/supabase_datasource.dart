@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taleq/features/auth/data/models/auth_model.dart';
 import 'package:taleq/features/auth/data/models/otp_model.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 abstract class AuthRemoteDatasource {
   Future<AuthModel> signUp({
@@ -9,7 +10,7 @@ abstract class AuthRemoteDatasource {
     required String email,
     required String password,
   });
-  
+
   Future<AuthModel> login({required String email, required String password});
   Future signupWithGoogleAuth();
   Future signupWithAppleAuth();
@@ -45,7 +46,7 @@ class SupabaseDatasource implements AuthRemoteDatasource {
       if (user == null) {
         throw FormatException("Invalid email or password");
       }
-
+      addExternalIDOneSignal(user.id);
       final userInfo = await supabase
           .from('user_profiles')
           .select('full_name')
@@ -84,7 +85,6 @@ class SupabaseDatasource implements AuthRemoteDatasource {
         throw const FormatException("لم يتم إنشاء المستخدم.");
       }
 
-   
       await supabase.from('user_profiles').insert({
         'user_id': user.id,
         'full_name': name,
@@ -200,5 +200,9 @@ class SupabaseDatasource implements AuthRemoteDatasource {
     } catch (e) {
       throw const FormatException("حدث خطأ أثناء تغيير كلمة المرور.");
     }
+  }
+
+  Future<void> addExternalIDOneSignal(String externalUserId) async {
+    OneSignal.login(externalUserId);
   }
 }

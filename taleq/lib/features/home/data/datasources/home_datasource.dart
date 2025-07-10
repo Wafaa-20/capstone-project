@@ -5,8 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taleq/features/home/data/models/go_live_model.dart';
 import 'package:taleq/features/home/data/models/home_data_model.dart';
+import 'package:taleq/features/home/data/models/home_profile_model.dart';
 import 'package:taleq/features/home/data/models/specialist_model.dart';
 import 'package:taleq/features/home/data/models/story_model.dart';
+
 
 abstract class HomeDatasource {
   Future<HomeDataModel> getSpecialistAndStories();
@@ -20,6 +22,21 @@ class HomeDatasourceImpl implements HomeDatasource {
   @override
   Future<HomeDataModel> getSpecialistAndStories() async {
     try {
+      final uid = supabase.auth.currentUser!.id;
+      final profileResponse = await supabase
+          .from('user_profiles')
+          .select('*')
+          .eq('user_id', uid)
+          .single(); 
+
+      
+      final profile = HomeProfileModel(
+        userID: profileResponse['user_id'],
+        fullName: profileResponse['full_name'],
+        
+        avatar: profileResponse['avatar_url'],
+      );
+
       final specialistResponse = await supabase
           .from('specialist')
           .select('uid, image');
@@ -72,7 +89,7 @@ class HomeDatasourceImpl implements HomeDatasource {
         );
       }).toList();
 
-      return HomeDataModel(specialists: specialists, stories: stories);
+      return HomeDataModel(specialists: specialists, stories: stories,profile:profile);
     } catch (e) {
       throw Exception('Error fetching home data: $e');
     }

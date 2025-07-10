@@ -14,3 +14,7 @@ class PaymentMethodEvent extends PaymentEvent {
   @override
   List<Object> get props => [amount];
 }
+
+class SendNotification extends PaymentEvent {
+  const SendNotification();
+}

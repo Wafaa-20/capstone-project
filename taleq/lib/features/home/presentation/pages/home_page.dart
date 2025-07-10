@@ -51,7 +51,21 @@ class HomePage extends StatelessWidget {
                 radius: 20,
                 onTap: () => context.go('/profile'),
               ),
-              title: Text("أهلاً عبير"),
+              title: BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  if (state is HomeLoading) {
+                    return SizedBox.shrink();
+                  } else if (state is GetFailure) {
+                    return Text(
+                      state.message,
+                      style: TextStyles.sf40016.copyWith(color: Colors.red),
+                    );
+                  } else if (state is GetSuccess) {
+                    return Text(state.homeList.profile.fullName);
+                  }
+                  return Text('');
+                },
+              ),
               actions: [
                 CustomIconButton(
                   icon: Icons.notifications_active_outlined,
@@ -81,7 +95,6 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 } else if (state is GetSuccess) {
-                  
                   if (state.homeList.specialists.isEmpty) {
                     return const Center(child: Text("لا يوجد متخصصين حالياً"));
                   }
@@ -135,7 +148,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 25),
-                          InspiringStoriesWidget(bloc: homeBloc,),
+                          InspiringStoriesWidget(bloc: homeBloc),
                           SizedBox(height: 21),
                           Align(
                             alignment: Alignment.center,

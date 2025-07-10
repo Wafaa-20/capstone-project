@@ -37,7 +37,7 @@ class LiveStreamWidget extends StatelessWidget {
                       border: Border.all(
                         color: isLive
                             ? AppPalette.bluePrimary
-                            : Colors.transparent,
+                            : AppPalette.grayPrimary,
                         width: 3,
                       ),
                     ),

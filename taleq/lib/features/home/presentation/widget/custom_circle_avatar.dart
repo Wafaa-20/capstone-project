@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 
 class CustomCircleAvatar extends StatelessWidget {
-  final String imagePath; // مسار الصورة
+  final String imagePath; 
 
   const CustomCircleAvatar({super.key, required this.imagePath});
 

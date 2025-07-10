@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:taleq/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:taleq/features/navigation/presentation/bloc/navigation_bloc.dart';
+import 'package:taleq/features/payment/presentation/bloc/payment_bloc.dart';
 import 'package:taleq/features/plan/presentation/bloc/plan_bloc.dart';
 import 'core/config/routes/app_pages.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => PlanBloc()),BlocProvider(create: (_) => NavigationBloc())],
+      providers: [BlocProvider(create: (_) => PlanBloc()),BlocProvider(create: (_) => NavigationBloc()),BlocProvider(create: (_) => PaymentBloc())],
       child: MaterialApp.router(
         title: 'Flutter App',
         debugShowCheckedModeBanner: false,

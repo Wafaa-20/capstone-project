@@ -1,8 +1,10 @@
 import 'package:get_it/get_it.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'
     show Supabase, SupabaseClient;
 import 'package:taleq/core/service/agora.dart';
 import 'package:taleq/core/service/local_storage.dart' as storage;
+import 'package:taleq/core/service/notification_service.dart';
 import 'package:taleq/features/auth/data/datasources/supabase_datasource.dart';
 import 'package:taleq/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:taleq/features/auth/domain/repositories/auth_repository.dart';
@@ -67,6 +69,8 @@ import 'package:taleq/features/stuttering_assessment/questionnaire/domain/usecas
 import 'package:taleq/features/stuttering_assessment/questionnaire/presentation/bloc/questionnaire_bloc.dart';
 
 Future<void> setup() async {
+  NotificationService.initialize();
+
   // Core Services
   GetIt.I.registerSingletonAsync<storage.LocalStorage>(() async {
     final localStorage = storage.LocalStorage();

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1002084984258",
+    "project_id": "taleq-ec083",
+    "storage_bucket": "taleq-ec083.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002084984258:android:49b39d961b9edda610a25b",
+        "android_client_info": {
+          "package_name": "com.example.taleq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ3xdpAQoWBhP4hrWYVhfQ6Td74KOPuyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taleq/core/text/app_text.dart';
 import 'package:taleq/core/text/text_styles.dart';
 import 'package:taleq/core/theme/app_palette.dart';
 import 'package:taleq/core/widget/button/custom_button.dart';
 import 'package:taleq/core/widget/custom_bottom_sheet.dart';
+import 'package:taleq/features/payment/presentation/bloc/payment_bloc.dart';
 import 'package:taleq/features/payment/presentation/widgets/bottom_sheet_body.dart'
     show BottomSheetBody;
 
 class PaymentButton extends StatelessWidget {
+  
   const PaymentButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+            final PaymentBloc bloc = context.read<PaymentBloc>();
     return Column(
       children: [
         CustomButton(

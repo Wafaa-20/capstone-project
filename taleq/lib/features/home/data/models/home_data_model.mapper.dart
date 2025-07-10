@@ -4,7 +4,16 @@
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
-part of 'home_data_model.dart';
+
+
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:taleq/features/home/data/models/home_data_model.dart';
+import 'package:taleq/features/home/data/models/home_profile_model.dart';
+import 'package:taleq/features/home/data/models/home_profile_model.mapper.dart';
+import 'package:taleq/features/home/data/models/specialist_model.dart';
+import 'package:taleq/features/home/data/models/specialist_model.mapper.dart';
+import 'package:taleq/features/home/data/models/story_model.dart';
+import 'package:taleq/features/home/data/models/story_model.mapper.dart';
 
 class HomeDataModelMapper extends ClassMapperBase<HomeDataModel> {
   HomeDataModelMapper._();
@@ -15,6 +24,7 @@ class HomeDataModelMapper extends ClassMapperBase<HomeDataModel> {
       MapperContainer.globals.use(_instance = HomeDataModelMapper._());
       SpecialistModelMapper.ensureInitialized();
       StoryModelMapper.ensureInitialized();
+      HomeProfileModelMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -28,16 +38,22 @@ class HomeDataModelMapper extends ClassMapperBase<HomeDataModel> {
   static List<StoryModel> _$stories(HomeDataModel v) => v.stories;
   static const Field<HomeDataModel, List<StoryModel>> _f$stories =
       Field('stories', _$stories);
+  static HomeProfileModel _$profile(HomeDataModel v) => v.profile;
+  static const Field<HomeDataModel, HomeProfileModel> _f$profile =
+      Field('profile', _$profile);
 
   @override
   final MappableFields<HomeDataModel> fields = const {
     #specialists: _f$specialists,
     #stories: _f$stories,
+    #profile: _f$profile,
   };
 
   static HomeDataModel _instantiate(DecodingData data) {
     return HomeDataModel(
-        specialists: data.dec(_f$specialists), stories: data.dec(_f$stories));
+        specialists: data.dec(_f$specialists),
+        stories: data.dec(_f$stories),
+        profile: data.dec(_f$profile));
   }
 
   @override
@@ -98,7 +114,11 @@ abstract class HomeDataModelCopyWith<$R, $In extends HomeDataModel, $Out>
       get specialists;
   ListCopyWith<$R, StoryModel, StoryModelCopyWith<$R, StoryModel, StoryModel>>
       get stories;
-  $R call({List<SpecialistModel>? specialists, List<StoryModel>? stories});
+  HomeProfileModelCopyWith<$R, HomeProfileModel, HomeProfileModel> get profile;
+  $R call(
+      {List<SpecialistModel>? specialists,
+      List<StoryModel>? stories,
+      HomeProfileModel? profile});
   HomeDataModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -120,15 +140,23 @@ class _HomeDataModelCopyWithImpl<$R, $Out>
       get stories => ListCopyWith($value.stories,
           (v, t) => v.copyWith.$chain(t), (v) => call(stories: v));
   @override
-  $R call({List<SpecialistModel>? specialists, List<StoryModel>? stories}) =>
+  HomeProfileModelCopyWith<$R, HomeProfileModel, HomeProfileModel>
+      get profile => $value.profile.copyWith.$chain((v) => call(profile: v));
+  @override
+  $R call(
+          {List<SpecialistModel>? specialists,
+          List<StoryModel>? stories,
+          HomeProfileModel? profile}) =>
       $apply(FieldCopyWithData({
         if (specialists != null) #specialists: specialists,
-        if (stories != null) #stories: stories
+        if (stories != null) #stories: stories,
+        if (profile != null) #profile: profile
       }));
   @override
   HomeDataModel $make(CopyWithData data) => HomeDataModel(
       specialists: data.get(#specialists, or: $value.specialists),
-      stories: data.get(#stories, or: $value.stories));
+      stories: data.get(#stories, or: $value.stories),
+      profile: data.get(#profile, or: $value.profile));
 
   @override
   HomeDataModelCopyWith<$R2, HomeDataModel, $Out2> $chain<$R2, $Out2>(

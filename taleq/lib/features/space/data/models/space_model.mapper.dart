@@ -5,6 +5,7 @@
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
 
+
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:taleq/features/space/data/models/space_model.dart';
 
