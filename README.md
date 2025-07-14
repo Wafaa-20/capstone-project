@@ -1,100 +1,44 @@
+![Taleq App Logo](2.jpg)
 
-## 📱 Project Summary
+# ![Taleq App Logo](3.jpg) Taleq App
 
-The capstone project will be a mobile application developed using **Flutter** and **Dart** to address *[briefly describe the problem or value the app provides]*. It aims to offer *[key features or functionalities of the app]*.
+"Taleq" is an innovative application designed to help individuals who stutter practice effective daily exercises, aiding them in improving their fluency and regaining confidence in social communication. Through specialized techniques and interactive methods, users can train in a smooth manner and achieve tangible progress over time.
 
----
 
-## 🧠 Problem Solving
+## ⚙️ Taleq Application Features
+# ![Taleq App UI](1.jpg) 
+- **Stuttering Level Assessment**: Users begin with an initial test to assess the severity of their stuttering.
+- **Daily Treatment Plan**: A customized daily plan is generated to help users improve their speech fluency.
+- **Supportive Community Access**: Join a community group to share experiences, challenges, and solutions with others facing similar situations.
+- **Specialist Appointment Booking**: Schedule appointments with speech therapists to follow up on progress and receive expert guidance.
+- **Interactive Exercises**: Perform daily interactive exercises based on proven therapeutic techniques.
+- **Optional Notifications**: Get personalized notifications for daily exercises and upcoming specialist sessions.
+- **Flexible Exercise Access**: Users can browse and choose speech exercises at any time and start practicing instantly, outside the daily treatment plan.
 
-*[Explain how your app addresses the identified problem or provides value to its users]*
+## 🏗️ Technologies Used
 
----
-
-## 📝 Project Description
-
-The capstone project is an exciting opportunity for you to design and develop a real-world mobile application using the **Flutter** framework. You have the freedom to choose any app idea that interests you, be it a:
-
-- Social networking app  
-- Productivity tool  
-- Educational platform  
-- E-commerce solution  
-- Health tracker  
-
-...or anything else that demonstrates your creativity and technical abilities.
-
-Your project should:
-- Address a specific problem
-- Provide value to users
-- Explore innovative ideas
-- Have a polished and user-friendly UI
+- 📱**Frontend**: Flutter, Dart.
+- 🎨**Design**: Figma
+- 📑**State Management**: Bloc (for robust and predictable state management).
+- 💾**Supabase**: As the database system.
+- 🎥**Lottie**: For animations.
+- 🧼**Architecture**: Clean Architecture (for scalable, maintainable, and testable code).
 
 ---
 
-## 🔧 Project Properties
+## 💡Usage Instructions
 
-- **Name**: *[Project Name]*
-- **Platform**: Mobile (Android and iOS)
-- **Language**: Dart
-- **Framework**: Flutter
-
----
-
-## 🖼️ Pictures to Apply
-
-*[Include relevant pictures or sketches that demonstrate the app's design and layout]*
+1. Install all necessary packages with `flutter pub get`.
+2. Set up the database in Supabase and integrate it with the app.
+3. Run the application using `flutter run`.
 
 ---
 
-## ✅ Features That Will Be Added
+## 🎨 Figma Design
+Check out the complete design of the Taleq app on Figma:
+[Taleq App Figma](https://www.figma.com/design/3YkN5WVeYaMgaz3aoIuWXd/Taleq-Flutter?node-id=721-6031&t=lf2rm8V7pwdSpwE1-1)
 
-- *[Feature 1]*
-- *[Feature 2]*
-- *[Feature 3]*
-
----
-
-## 🚀 Features That Will Be Added in the Future
-
-- *[Future Feature 1]*
-- *[Future Feature 2]*
-- *[Future Feature 3]*
-
----
-
-## 👥 Tasks or Division of Members in the Project
-
-*[Outline how the project tasks are divided among team members, including specific responsibilities for each member]*
-
----
-
-## 📌 Minimum Requirements
-
-*[Include the minimum requirements for the project, as mentioned in the earlier section]*
-
----
-
-## 👤 Project Members
-
-- **[Member 1 Name]** - *[Role/Responsibility]*
-- **[Member 2 Name]** - *[Role/Responsibility]*
-- **[Member 3 Name]** - *[Role/Responsibility]*
-- **[Member 4 Name]** - *[Role/Responsibility]*
-- **[Member 5 Name]** - *[Role/Responsibility]*
-
----
-
-## 🔗 Project Member Accounts in GitHub
-
-- **[Member 1 GitHub Username]**: [GitHub Profile URL]  
-- **[Member 2 GitHub Username]**: [GitHub Profile URL]  
-- **[Member 3 GitHub Username]**: [GitHub Profile URL]  
-- **[Member 4 GitHub Username]**: [GitHub Profile URL]  
-- **[Member 5 GitHub Username]**: [GitHub Profile URL]
-
----
-
-> 💡 Remember, this is an opportunity to showcase your skills and creativity, so feel free to explore innovative ideas and push your limits in creating a remarkable Flutter application!
-
-**Good luck with your capstone project!**  
-Don't hesitate to seek guidance from your bootcamp instructors if needed.
+## 🚀 Team
+- 👦🏻 Ahmed almansour - [Flutter Developer,Backend Developer]
+- 👧🏻 Lojain Maged - [UI/UX Designer,Flutter Developer]
+- 👩🏻 Wafaa Ali - [Flutter Developer,Backend Developer]
